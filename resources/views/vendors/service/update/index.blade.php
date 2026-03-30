@@ -219,7 +219,11 @@
 @stop
 @php
 
-    $base_path = 'public/vendor/spondonit';
+    $documentRoot = realpath(request()->server('DOCUMENT_ROOT', ''));
+    $publicRoot = realpath(public_path());
+    $base_path = ($documentRoot && $publicRoot && $documentRoot === $publicRoot)
+        ? 'vendor/spondonit'
+        : ((config('app.has_public_folder')) ? 'public/vendor/spondonit' : 'vendor/spondonit');
 
 @endphp
 @push('scripts')
