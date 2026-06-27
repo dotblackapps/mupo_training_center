@@ -164,13 +164,21 @@
                                 <div class="content">
                                     <span
                                         class="fw-bold fs-14 text-uppercase d-block">{{__('frontend.Call Us 24/7')}}</span>
-                                    <a href="tel:{{Settings('phone')}}" class="currentColor">{{Settings('phone')}}</a>
+                                    <a href="tel:+27847507013" 
+   class="currentColor" 
+   style="font-size:18px; white-space:nowrap; display:inline-block;">
+   (+27) 84 750 7013
+</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                            <span class="d-block fs-14 fw-500">{{Settings('address')}}</span>
-                            <a href="mailto:{{Settings('email')}}" class="currentColor fs-20">{{Settings('email')}}</a>
+                           <span class="d-block fs-14 fw-500">
+    Office 0005, Jardown 1, 377 Johannes Ramokhoase St, Pretoria, 0002
+</span>
+<a href="mailto:admin@mupotrainingcenter.co.za" class="currentColor fs-20">
+    admin@mupotrainingcenter.co.za
+</a>
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="ps-lg-5">
@@ -210,7 +218,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <p>{!! function_exists('footerSettings')?footerSettings('footer_copy_right'):''  !!}</p>
+                    <p>Copyright © 2026 Mupo Training Center. All rights reserved | Developed By DotBlack</p>
                 </div>
             </div>
         </div>

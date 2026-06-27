@@ -243,23 +243,24 @@
 
     <form action="{{ route('search') }}">
         <div class="banner-area">
-            <div class="banner-img">
-                <img src="{{ assetPath('frontend/infixlmstheme/img/banner/banner-v1.jpg') }}" alt="">
-            </div>
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-end">
-                    <div class="col-xl-6 col-lg-7 col-md-8">
-                        <div class="banner-wrap">
-                            <div class="banner-text">
-                                <h1>{{ @$homeContent->slider_title }}</h1>
-                                <p>{{ @$homeContent->slider_text }}</p>
-                                <a href="{{route('courses')}}" class="theme-btn text-capitalize">View All Courses</a>
-                                <a href="{{route('quizzes')}}" class="theme-btn text-capitalize bg-white">View All Quizzes</a>
-                            </div>
-                        </div>
+    <div class="banner-img">
+        <img src="{{ asset('uploads/banner/bulb.jpg') }}" alt="MUPO Insurance">
+    </div>
+
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-end">
+            <div class="col-xl-6 col-lg-7 col-md-8">
+                <div class="banner-wrap">
+                    <div class="banner-text">
+                        <h1>{{ @$homeContent->slider_title }}</h1>
+                        <p>{{ @$homeContent->slider_text }}</p>
+                        <a href="{{route('courses')}}" class="theme-btn text-capitalize">View All Courses</a>
+                        <a href="{{route('quizzes')}}" class="theme-btn text-capitalize bg-white">View All Quizzes</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
     </form>
 </div>

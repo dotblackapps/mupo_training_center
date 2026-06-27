@@ -1,6 +1,6 @@
 @extends(theme('layouts.master'))
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('assignment.Assignment')}}
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{__('assignment.Assignment')}}
 @endsection
 @section('css')
     <link href="{{assetPath('backend/css/summernote-bs5.min.css/')}}" rel="stylesheet">

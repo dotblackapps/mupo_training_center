@@ -95,7 +95,10 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center gap-3">
                         <a href="{{url('/')}}" class="heading-logo d-block">
-                            <img src="{{getLogoImage(Settings('logo') )}}" class="home d-block" alt="{{ Settings('site_name')  }}">
+                            <img src="{{ url('public/uploads/settings/mupo-logo_1.jpeg') }}"
+     class="home d-block"
+     alt="MUPO Training Center"
+     style="height:43px; width:auto;">
                         </a>
                         @if(Settings('category_show'))
                             <div class="heading-category">
@@ -539,7 +542,7 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header d-flex justify-content-between">
         <a href="{{url('/')}}" class="heading-logo d-block">
-            <img src="{{getLogoImage(Settings('logo') )}}" alt="Infix LMS">
+            <img src="{{getLogoImage(Settings('logo') )}}" alt="MUPO Training Center">
         </a>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>

@@ -1,5 +1,5 @@
 @extends(theme('layouts.master'))
-@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('frontend.Courses')}} @endsection
+@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{__('frontend.Courses')}} @endsection
 @section('css') @endsection
 @section('js')
     <script src="{{ assetPath('frontend/infixlmstheme/js/classes.js') }}"></script>

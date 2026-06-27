@@ -70,20 +70,15 @@ class WebsiteController extends Controller
 
 
     public function aboutData()
-    {
-        try {
-            if (hasDynamicPage()) {
-                $row = FrontPage::where('slug', '/about-us')->first();
-                $details = dynamicContentAppend($row->details);
-                return view('aorapagebuilder::pages.show', compact('row', 'details'));
-            } else {
-                $about = AboutPage::first();
-                return view(theme('pages.about'), compact('about'));
-            }
-        } catch (Exception $e) {
-            GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
-        }
+{
+    try {
+        $about = AboutPage::first();
+
+        return view(theme('pages.about'), compact('about'));
+    } catch (Exception $e) {
+        GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
     }
+}
 
 
     public function ajaxCounterCity(Request $request)
@@ -1600,18 +1595,39 @@ class WebsiteController extends Controller
         return ['hasResult' => $hasResult, 'output' => $output];
     }
 
-    public function contact()
+   public function contact()
+{
+    try {
+        return view(theme('pages.contact'));
+    } catch (\Exception $e) {
+        GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
+    }
+}
+
+
+    public function services()
     {
         try {
-            if (hasDynamicPage()) {
-                $row = FrontPage::where('slug', '/contact-us')->first();
-                $details = dynamicContentAppend($row->details);
-                return view('aorapagebuilder::pages.show', compact('row', 'details'));
-            } else {
-                $page_content = app('getHomeContent');
-                return view(theme('pages.contact'), compact('page_content'));
-            }
-        } catch (Exception $e) {
+            return view(theme('pages.services'));
+        } catch (\Exception $e) {
+            GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
+        }
+    }
+
+    public function corporateTraining()
+    {
+        try {
+            return view(theme('pages.corporate-training'));
+        } catch (\Exception $e) {
+            GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
+        }
+    }
+
+    public function accreditation()
+    {
+        try {
+            return view(theme('pages.accreditation'));
+        } catch (\Exception $e) {
             GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
         }
     }

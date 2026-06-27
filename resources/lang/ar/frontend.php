@@ -211,7 +211,7 @@
   'to your account' => 'الى الحساب الخاص بك',
   'Welcome back. Please login' => 'أهلا بكم من الخلف برجاء بدء الاتصال',
   'Don’t have an account' => 'ليس لديك حساب',
-  'Welcome to Infix LMS' => 'مرحبا بك في Infix LMS',
+  'Welcome to MUPO Training Center' => 'مرحبا بك في MUPO Training Center',
   'Learning Management System' => 'نظام إدارة التعلم',
   'Excellence' => 'التميز',
   'Community' => 'المجتمع',

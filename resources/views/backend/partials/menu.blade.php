@@ -20,8 +20,12 @@
                 <input type="hidden" id="logo_img" value="{{base64_encode($data)}}">
                 <input type="hidden" id="logo_title" value="{{Settings('company_name')}}">
                 <div class="small_logo_crm d-lg-none">
-                    <a href="{{url('/')}}"> <img src="{{assetPath(Settings('logo'))}}" alt=""></a>
-                </div>
+    <a href="{{url('/')}}">
+        <img src="{{ asset('public/uploads/settings/mupo-logo_1.jpeg') }}"
+             alt="MUPO Logo"
+             style="max-height:50px;width:auto;">
+    </a>
+</div>
                 <div id="sidebarCollapse" class="sidebar_icon  d-lg-none">
                     <i class="ti-menu"></i>
                 </div>
@@ -39,11 +43,13 @@
                 @endif
 
                 <div class="d-flex align-items-center">
-                    @if($user->sidebar!=1)
-                        <a class="large_logo   header_logo_area" href="{{ url('/') }}">
-                            <img src="{{ getLogoImage(Settings('logo')) }}" alt="">
-                        </a>
-                    @endif
+                   @if($user->sidebar!=1)
+    <a class="large_logo header_logo_area" href="{{ url('/') }}">
+        <img src="{{ asset('public/uploads/settings/mupo-logo_1.jpeg') }}"
+             alt="MUPO Logo"
+             style="max-height:60px;width:auto;">
+    </a>
+@endif
                     <div class="serach_field-area ml-30">
                         <div class="search_inner">
                             <form action="#">

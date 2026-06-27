@@ -1,28 +1,5 @@
-@extends(theme('layouts.master'))
-@section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('common.About')}}
-@endsection
-@section('css') @endsection
-@section('js') @endsection
-
+@extends(theme('layouts.mupo'))
+@section('title', (Settings('site_title') ?: 'Mupo Training Center') . ' | About Us')
 @section('mainContent')
-
-    <x-breadcrumb :banner="$frontendContent->about_page_banner" :title="trans('frontend.Learn More About Us')"
-                  :subTitle="trans('frontend.About US')"/>
-
-    <x-about-page-who-we-are :whoWeAre="$about->who_we_are" :bannerTitle="$about->banner_title"/>
-
-    <x-about-page-gallery :about="$about"/>
-
-    <x-about-page-counter :about="$about"/>
-
-    @if($about->show_testimonial)
-        <x-about-page-testimonial :frontendContent="$frontendContent"/>
-    @endif
-    @if($about->show_brand)
-        <x-about-page-brand/>
-    @endif
-    @if($about->show_become_instructor)
-        <x-about-page-become-instructor :frontendContent="$frontendContent"/>
-    @endif
+<section class="page-hero"><div><small>About Mupo Training Center</small><h1>About Us</h1><p>Developing skills, transforming lives, and supporting workplace readiness through practical accredited learning.</p></div></section><section class="section white split"><div><p class="eyebrow">About Mupo Training Center</p><h2>Developing Skills. Transforming Lives.</h2><p>Mupo Training Center is a professional skills development and training institution delivering high-quality, industry-relevant training programmes. We support individuals, businesses and government institutions through practical, accredited and competency-based learning solutions.</p><a href="{{ route('contact') }}" class="btn">Speak to an Advisor</a></div><div class="feature-grid"><article class="card"><h3>Mission</h3><p>Deliver practical and affordable training that improves skills, productivity and professional growth.</p></article><article class="card"><h3>Vision</h3><p>To be recognised for excellence, innovation and impact in professional education.</p></article><article class="card"><h3>Methodology</h3><p>Instructor-led sessions, hands-on training, case studies, blended learning and workplace assessments.</p></article><article class="card"><h3>Values</h3><p>Excellence, integrity, innovation, empowerment, accessibility and learner support.</p></article></div></section><section class="section"><div class="section-title"><small>Why Choose Mupo</small><h2>A practical training partner for learners and organisations</h2></div><div class="grid"><div class="card"><div class="card-icon"><i class="fa-solid fa-certificate"></i></div><h3>Accredited Programmes</h3><p>Programmes aligned to recognised standards and practical industry requirements.</p></div><div class="card"><div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div><h3>Expert Trainers</h3><p>Experienced trainers focused on workplace readiness and learner success.</p></div><div class="card"><div class="card-icon"><i class="fa-solid fa-headset"></i></div><h3>Ongoing Support</h3><p>Guidance before, during and after the learning journey.</p></div></div></section><section class="cta"><div><h2>Ready to Start Your Learning Journey?</h2><p>Speak to our team and choose the right training path.</p></div><a class="btn" href="{{ route('contact') }}">Contact Us</a></section>
 @endsection

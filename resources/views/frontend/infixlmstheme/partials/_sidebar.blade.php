@@ -5,13 +5,16 @@
 @else
     <nav class="sidebar">
         <div class="logo d-flex">
-            <a href="{{url('/')}}"><img
-                    src="{{getCourseImage(Settings('logo3')?Settings('logo3'):'public/uploads/settings/logo1.png')}}"
-                    alt=""></a>
-            <div class="sidebar_close_icon d-lg-none">
-                <i class="ti-close"></i>
-            </div>
-        </div>
+    <a href="{{ url('/') }}">
+        <img src="{{ getCourseImage('public/uploads/settings/mupo-logo_1.jpeg') }}"
+             alt="MUPO Logo"
+             style="max-height:70px;width:auto;">
+    </a>
+
+    <div class="sidebar_close_icon d-lg-none">
+        <i class="ti-close"></i>
+    </div>
+</div>
         <div class="sidebar_iner">
             <div class="sidebar-user text-center">
                 <div class="sidebar-profile mx-auto">

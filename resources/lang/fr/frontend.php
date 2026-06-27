@@ -212,7 +212,7 @@ return [
 "to your account" => "à votre compte",
 "Welcome back. Please login" => "Je vous souhaite la bienvenue. Veuillez vous connecter",
 "Don’t have an account" => "Ne pas avoir de compte",
-"Welcome to Infix LMS" => "Bienvenue dans Infix LMS",
+"Welcome to MUPO Training Center" => "Bienvenue dans MUPO Training Center",
 "Learning Management System" => "Système de gestion de l'apprentissage",
 "Excellence" => "Excellence",
 "Community" => "Communauté",

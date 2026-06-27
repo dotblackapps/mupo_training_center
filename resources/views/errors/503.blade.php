@@ -1,5 +1,5 @@
 @extends('errors.layout')
-@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{  __('Service Unavailable')}} @endsection
+@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{  __('Service Unavailable')}} @endsection
 @section('css') @endsection
 @section('js') @endsection
 

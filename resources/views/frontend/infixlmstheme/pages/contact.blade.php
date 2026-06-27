@@ -1,29 +1,6 @@
-@extends(theme('layouts.master'))
-@section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('frontend.Contact Us')}}
-@endsection
-@section('css') @endsection
-
+@extends(theme('layouts.mupo'))
+@section('title', (Settings('site_title') ?: 'Mupo Training Center') . ' | Contact Us')
 @section('mainContent')
-
-
-    <x-breadcrumb :banner="$frontendContent->contact_page_banner" :title="trans('frontend.We’re here with you every step way')"
-                  :subTitle="trans('frontend.Contact Us')"/>
-
-
-    <x-contact-page-section/>
-
-    @if(@$frontendContent->show_map==1)
-        <x-contact-page-map/>
-    @endif
-
-
-    <input type="hidden" name="lat" class="lat" value="{{Settings('lat') }}">
-    <input type="hidden" name="lng" class="lng" value="{{Settings('lng') }}">
-    <input type="hidden" name="zoom" class="zoom" value="{{Settings('zoom_level')}}">
-@endsection
-@section('js')
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{Settings('gmap_key') }}"></script>
-    <script src="{{ assetPath('frontend/infixlmstheme') }}/js/map.js"></script>
-    <script src="{{assetPath('frontend/infixlmstheme/js/contact.js')}}"></script>
+<section class="page-hero"><div><small>Contact Us</small><h1>Ready to Start Your Learning Journey?</h1><p>Complete the enquiry form and our team will contact you.</p></div></section><section class="section contact-layout"><div><p class="eyebrow">Contact Us</p><h2>Ready to Start Your Learning Journey?</h2><p>Complete the enquiry form and our team will contact you.</p><ul class="contact-list"><li><i class="fa-solid fa-phone"></i> 012 004 2004 / 084 750 7013</li><li><i class="fa-solid fa-envelope"></i> admin@mupotrainingcenter.co.za</li><li><i class="fa-solid fa-globe"></i> www.mupotrainingcenter.co.za</li><li><i class="fa-solid fa-location-dot"></i> 377 Johannes Ramokhoase Street, Pretoria Central 0002</li></ul></div><form class="contact-form" method="POST" action="{{ route('contactMsgSubmit') }}">
+@csrf<input type="text" placeholder="Full Name" required><input type="email" placeholder="Email Address" required><input type="tel" placeholder="Phone Number"><input type="text" placeholder="Organisation"><select required><option value="">Select Course Interest</option><option>Security & Protection</option><option>Firearm & Competency</option><option>Office Administration</option><option>Data Science</option><option>Project Management</option><option>Corporate Training</option></select><textarea placeholder="Message"></textarea><button class="btn" type="submit">Submit Enquiry</button></form></section><section class="section white"><div class="map-placeholder">Map Placeholder - Pretoria Central</div></section>
 @endsection

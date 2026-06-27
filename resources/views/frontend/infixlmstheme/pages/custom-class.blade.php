@@ -1,6 +1,6 @@
 @extends(theme('layouts.full_screen_master'))
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{ $course->title}}
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{ $course->title}}
 @endsection
 @section('css')
     <link href="{{assetPath('frontend/infixlmstheme/css/full_screen.css')}}{{assetVersion()}}" rel="stylesheet"/>

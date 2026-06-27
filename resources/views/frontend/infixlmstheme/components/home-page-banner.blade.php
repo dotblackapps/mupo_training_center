@@ -5,7 +5,7 @@
         <form action="{{route('search')}}">
             <div class="banner_area"
                  @if(isset($homeContent->slider_banner) && !empty($homeContent->slider_banner))
-                     style="background-image: url('{{assetPath(@$homeContent->slider_banner)}}')"
+                     style="background-image: url('{{ asset('uploads/banner/bulb.jpg') }}')"
                 @endif>
                 <div class="container">
                     <div class="row d-flex align-items-center">
@@ -35,7 +35,7 @@
         <div class="owl-carousel" id="bannerSlider">
             @if($sliders)
                 @foreach($sliders as $key=>$slider)
-                    <div class="banner_area" style="background-image: url({{assetPath(@$slider->image)}})">
+                    <div class="banner_area" style="background-image: url('{{ asset('uploads/banner/bulb.jpg') }}')">
                         <div class="container">
                             <div class="row d-flex align-items-center">
                                 <div class="col-lg-9 offset-lg-1">

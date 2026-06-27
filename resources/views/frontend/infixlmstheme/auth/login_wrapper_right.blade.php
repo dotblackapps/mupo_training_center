@@ -28,10 +28,12 @@
     <div class="login_main_info">
         <h4>
 
-            {{$title??'Welcome to Infix Learning Management System'}}
+            {{$title??'Welcome to MUPO Learning Management System'}}
         </h4>
         <div class="thumb">
-            <img src="{{assetPath($banner??assetPath('frontend/infixlmstheme/img/banner/global.png'))}}" alt="">
+           <img src="{{ assetPath('uploads/banner/bulb.jpg') }}" 
+     style="width:100%; max-width:400px; height:auto;" 
+     alt="MUPO Insurance">
         </div>
         <div class="other_links">
             <span>{{$slogans1?? 'Excellence.'}} </span>

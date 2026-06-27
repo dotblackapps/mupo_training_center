@@ -213,7 +213,7 @@
     <form action="{{ route('search') }}">
         <div class="banner-area">
             <div class="banner-img d-none d-md-block">
-                <img src="{{ assetPath('frontend/infixlmstheme/img/banner/banner-v4.png') }}" alt="">
+               <img src="{{ asset('uploads/banner/bulb.jpg') }}" alt="MUPO Insurance">
             </div>
             <div class="container">
                 <div class="row align-items-center">

@@ -8,7 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{getCourseImage(Settings('favicon') )}}{{assetVersion()}}">
+   <link rel="icon" type="image/png" href="{{ assetPath('uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
+<link rel="shortcut icon" type="image/png" href="{{ assetPath('uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
 
     <x-frontend-dynamic-style-color/>
     <x-backend-dynamic-color/>

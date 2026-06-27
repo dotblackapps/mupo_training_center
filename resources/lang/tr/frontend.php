@@ -212,7 +212,7 @@ return [
 "to your account" => "hesabınıza",
 "Welcome back. Please login" => "Hoş geldin. Lütfen oturum açın",
 "Don’t have an account" => "Hesabınız yok",
-"Welcome to Infix LMS" => "Infix LMS ' ye Hoş Geldiniz",
+"Welcome to MUPO Training Center" => "MUPO Training Center ' ye Hoş Geldiniz",
 "Learning Management System" => "Öğrenim Yönetimi Sistemi",
 "Excellence" => "Mükemmellik",
 "Community" => "Topluluk",

@@ -1,318 +1,221 @@
-@php use Modules\StudentSetting\Entities\Institute; @endphp
 @extends(theme('auth.layouts.app'))
-@section('content')
 
+@section('content')
     <div class="login_wrapper">
         <div class="login_wrapper_left">
             <div class="logo">
                 <a href="{{ url('/') }}">
-                    <img style="width: 190px" src="{{assetPath(Settings('logo') )}} " alt="">
+                    <img style="width: 190px"
+                         src="{{ assetPath('uploads/settings/mupo-logo_1.jpeg') }}"
+                         alt="MUPO Training Center">
                 </a>
             </div>
+
             <div class="login_wrapper_content">
-                <h4>{{__('common.Sign Up Details')}}</h4>
-                <form action="{{route('register')}}" method="POST" id="regForm">
+                <h4>Sign Up Details</h4>
+
+                <form action="{{ route('register') }}" method="POST" id="regForm">
                     @csrf
+
                     <div class="row">
 
-                        @if(isModuleActive('Organization'))
-                            <div class="col-12 mt_20">
-                                <label>{{trans('organization.account_type')}}</label>
-                                <ul class="quiz_select d-flex">
-                                    <li>
-                                        <label
-                                            class="primary_bulet_checkbox d-flex">
-                                            <input checked class="quizAns"
-                                                   name="account_type"
-                                                   type="radio"
-                                                   value="3">
-
-                                            <span
-                                                class="checkmark mr_10"></span>
-                                            <span
-                                                class="label_name">{{__('common.Student')}} </span>
-                                        </label>
-                                    </li>
-
-                                    <li class="ms-3">
-                                        <label
-                                            class="primary_bulet_checkbox d-flex">
-                                            <input class="quizAns"
-                                                   name="account_type"
-                                                   type="radio"
-                                                   value="5">
-
-                                            <span
-                                                class="checkmark mr_10"></span>
-                                            <span
-                                                class="label_name">{{__('organization.Organization')}} </span>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
-
-                        @if($custom_field->show_name)
-                            <div class="col-12 mt_20">
-                                <div class="input-group custom_group_field">
-                                    <input type="text" class="form-control ps-0"
-                                           placeholder="{{__('student.Enter Full Name')}} {{ $custom_field->required_name ? '*' : ''}}"
-                                           {{ $custom_field->required_name ? 'required' : ''}} aria-label="Username"
-                                           name="name" value="{{old('name')}}">
-                                </div>
-                                <span class="text-danger" role="alert">{{$errors->first('name')}}</span>
-                            </div>
-                        @endif
-                        <div class="col-12 mt_20">
+                        <div class="col-md-6 col-12 mt_20">
                             <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control ps-0" required
+                                       placeholder="Enter Full Name *"
+                                       name="name" value="{{ old('name') }}">
+                            </div>
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                        </div>
+
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-email"></i></span>
+                                </div>
                                 <input type="email" class="form-control ps-0" required
-                                       placeholder="{{__('common.Enter Email')}} *" aria-label="email" name="email"
-                                       value="{{old('email')}}">
+                                       placeholder="Enter Email *"
+                                       name="email" value="{{ old('email') }}">
                             </div>
-                            <span class="text-danger" role="alert">{{$errors->first('email')}}</span>
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>
 
-                        @if($custom_field->show_phone)
-                            <div class="col-12 mt_20">
-                                <div class="input-group custom_group_field">
-                                    <input type="text" class="form-control ps-0"
-                                           placeholder="{{__('common.Enter Phone Number')}} {{ $custom_field->required_phone ? '*' : ''}}"
-                                           {{ $custom_field->required_phone ? 'required' : ''}}
-                                           aria-label="phone" name="phone" value="{{old('phone')}}">
-                                </div>
-                                <span class="text-danger" role="alert">{{$errors->first('phone')}}</span>
-                            </div>
-                        @endif
-                        <div class="col-12 mt_20">
+                        <div class="col-md-6 col-12 mt_20">
                             <div class="input-group custom_group_field">
-                                <input type="password" class="form-control ps-0" required
-                                       placeholder="{{__('frontend.Enter Password')}} *"
-                                       autocomplete="new-password"
-                                       aria-label="password" name="password">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-mobile"></i></span>
+                                </div>
+                                <input type="text" class="form-control ps-0"
+                                       placeholder="Enter Phone Number"
+                                       name="phone" value="{{ old('phone') }}">
                             </div>
-                            <span class="text-danger" role="alert">{{$errors->first('password')}}</span>
+                            <span class="text-danger">{{ $errors->first('phone') }}</span>
                         </div>
-                        <div class="col-12 mt_20">
+
+                        <div class="col-md-6 col-12 mt_20">
                             <div class="input-group custom_group_field">
-                                <input type="password" class="form-control ps-0" required
-                                       placeholder="{{__('common.Enter Confirm Password')}} *"
-                                       name="password_confirmation" aria-label="password_confirmation">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-calendar"></i></span>
+                                </div>
+                                <input type="date" class="form-control ps-0"
+                                       name="dob" value="{{ old('dob') }}">
                             </div>
-                            <span class="text-danger" role="alert">{{$errors->first('password_confirmation')}}</span>
+                            <span class="text-danger">{{ $errors->first('dob') }}</span>
                         </div>
 
-                        @if($custom_field->show_dob)
-                            <div class="col-12 mt_20">
-                                <div class="input-group custom_group_field">
-{{--                                    <label for="dob">{{__('common.Date of Birth')}} : </label>--}}
-                                    <input id="dob" type="text" class="form-control ps-0 datepicker w-100" width="300"
-                                           placeholder="{{__('common.Date of Birth')}} {{ $custom_field->required_dob ? '*' : ''}}"
-                                           {{ $custom_field->required_dob ? 'required' : ''}} aria-label="Username"
-                                           name="dob" data-prevent-future="1"  value="{{ old('dob') }}">
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-lock"></i></span>
                                 </div>
-                                <span class="text-danger" role="alert">{{$errors->first('name')}}</span>
+                                <input type="password" class="form-control ps-0" required
+                                       placeholder="Enter Password *"
+                                       name="password"
+                                       autocomplete="new-password">
                             </div>
-                        @endif
+                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                        </div>
 
-
-                        @if($custom_field->show_company)
-                            <div class="col-12 mt_20">
-                                <div class="input-group custom_group_field">
-                                    <input type="text" class="form-control ps-0"
-                                           placeholder="{{__('common.Enter Company')}} {{ $custom_field->required_company ? '*' : ''}}"
-                                           {{ $custom_field->required_company ? 'required' : ''}} aria-label="email"
-                                           name="company" value="{{old('company')}}">
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-lock"></i></span>
                                 </div>
-                                <span class="text-danger" role="alert">{{$errors->first('company')}}</span>
+                                <input type="password" class="form-control ps-0" required
+                                       placeholder="Enter Confirm Password *"
+                                       name="password_confirmation">
                             </div>
-                        @endif
+                            <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                        </div>
 
-                        @if($custom_field->show_identification_number)
-                            <div class="col-12 mt_20">
-                                <div class="input-group custom_group_field">
-                                    <input type="text" class="form-control ps-0"
-                                           placeholder="{{__('common.Enter Identification Number')}} {{ $custom_field->required_identification_number ? '*' : ''}}"
-                                           {{ $custom_field->required_identification_number ? 'required' : ''}}
-                                           aria-label="email" name="identification_number"
-                                           value="{{old('identification_number')}}">
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-briefcase"></i></span>
                                 </div>
-                                <span class="text-danger"
-                                      role="alert">{{$errors->first('identification_number')}}</span>
+                                <input type="text" class="form-control ps-0"
+                                       placeholder="Enter Company"
+                                       name="company" value="{{ old('company') }}">
                             </div>
-                        @endif
+                            <span class="text-danger">{{ $errors->first('company') }}</span>
+                        </div>
 
-                        @if($custom_field->show_job_title)
-                            <div class="col-12 mt_20">
-                                <div class="input-group custom_group_field">
-                                    <input type="text" class="form-control ps-0"
-                                           placeholder="{{__('common.Enter Job Title')}} {{ $custom_field->required_job_title ? '*' : ''}}"
-                                           {{ $custom_field->required_job_title ? 'required' : ''}} aria-label="email"
-                                           name="job_title" value="{{old('job_title')}}">
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-id-badge"></i></span>
                                 </div>
-                                <span class="text-danger" role="alert">{{$errors->first('job_title')}}</span>
+                                <input type="text" class="form-control ps-0"
+                                       placeholder="Enter Identification Number"
+                                       name="identification_number"
+                                       value="{{ old('identification_number') }}">
                             </div>
-                        @endif
+                            <span class="text-danger">{{ $errors->first('identification_number') }}</span>
+                        </div>
 
-                        @if($custom_field->show_gender)
-                            <div class="col-xl-12">
-                                <div class="short_select mt-3">
-                                    <div class="row">
-                                        <div class="col-xl-5">
-                                            <h5 class="mr_10 font_16 f_w_500 mb-0">{{ __('common.choose_gender') }} {{ $custom_field->required_gender ? '*' : '' }}</h5>
-                                        </div>
-                                        <div class="col-xl-7">
-                                            <select class="small_select w-100"
-                                                    name="gender" {{ $custom_field->required_gender ? 'selected' : '' }}>
-                                                {{--                                                <option value="" data-display="Choose">{{__('common.Choose')}}</option>--}}
-                                                <option value="male">{{__('common.Male')}}</option>
-                                                <option value="female">{{__('common.Female')}}</option>
-                                                <option value="other">{{__('common.Other')}}</option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-                                    <span class="text-danger" role="alert">{{$errors->first('gender')}}</span>
-
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-briefcase"></i></span>
                                 </div>
+                                <input type="text" class="form-control ps-0"
+                                       placeholder="Enter Job Title"
+                                       name="job_title"
+                                       value="{{ old('job_title') }}">
                             </div>
-                        @endif
+                            <span class="text-danger">{{ $errors->first('job_title') }}</span>
+                        </div>
 
-                        @if($custom_field->show_student_type)
-                            <div class="col-xl-12">
-                                <div class="short_select mt-3">
-                                    <div class="row">
-                                        <div class="col-xl-5">
-                                            <h5 class="mr_10 font_16 f_w_500 mb-0">{{ __('common.choose_student_type') }} {{ $custom_field->required_student_type ? '*' : '' }}</h5>
-                                        </div>
-                                        <div class="col-xl-7">
-                                            <select class="small_select w-100"
-                                                    name="student_type" {{ $custom_field->required_student_type ? 'selected' : '' }}>
-                                                <option value="personal">{{__('common.Personal')}}</option>
-                                                <option value="corporate">{{__('common.Corporate')}}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <span class="text-danger" role="alert">{{$errors->first('student_type')}}</span>
-
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-user"></i></span>
                                 </div>
+                                <select name="gender" class="form-control ps-0">
+                                    <option value="">Choose Gender</option>
+                                    <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                                    <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                                    <option value="prefer_not_to_say" {{ old('gender') == 'prefer_not_to_say' ? 'selected' : '' }}>Prefer not to say</option>
+                                </select>
                             </div>
-                        @endif
+                            <span class="text-danger">{{ $errors->first('gender') }}</span>
+                        </div>
 
-                        @if($custom_field->show_institute)
-                            <div class="col-xl-12">
-                                <div class="short_select mt-3">
-                                    <div class="row">
-                                        <div class="col-xl-5">
-                                            <h5 class="mr_10 font_16 f_w_500 mb-0">{{ __('common.choose_institute') }} {{ $custom_field->required_institute ? '*' : '' }}</h5>
-                                        </div>
-                                        <div class="col-xl-7">
-                                            <select class="small_select w-100"
-                                                    name="institute_id">
-                                                <option
-                                                    value="">{{__('common.select_one')}}</option>
-                                                @foreach(Institute::where('status',1)->get() as $institute)
-                                                    <option value="{{$institute->id}}">
-                                                        {{$institute->name}}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <span class="text-danger" role="alert">{{$errors->first('institute_id')}}</span>
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-list"></i></span>
+                                </div>
+                                <select name="student_type" class="form-control ps-0">
+                                    <option value="">Choose Student Type</option>
+                                    <option value="personal" {{ old('student_type') == 'personal' ? 'selected' : '' }}>Personal</option>
+                                    <option value="corporate" {{ old('student_type') == 'corporate' ? 'selected' : '' }}>Corporate</option>
+                                </select>
+                            </div>
+                            <span class="text-danger">{{ $errors->first('student_type') }}</span>
+                        </div>
 
+                        <div class="col-md-6 col-12 mt_20">
+                            <div class="input-group custom_group_field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-home"></i></span>
                                 </div>
+                                <select name="institute" class="form-control ps-0">
+                                    <option value="">Choose Institute</option>
+                                    <option value="PRASA" {{ old('institute') == 'PRASA' ? 'selected' : '' }}>PRASA</option>
+                                </select>
                             </div>
-                        @endif
-                        @if(isModuleActive('Affiliate'))
-                            <div class="col-12 mt_20">
-                                <div class="input-group custom_group_field">
-                                    <input type="text" class="form-control ps-0"
-                                           placeholder="{{__('affiliate.Referral Code')}} ({{__('frontend.Optional')}})"
-                                           name="referral_code" value="{{old('referral_code')}}">
-                                </div>
-                                <span class="text-danger" role="alert">{{$errors->first('referral_code')}}</span>
-                            </div>
-                        @endif
+                            <span class="text-danger">{{ $errors->first('institute') }}</span>
+                        </div>
 
                         <div class="col-12 mt_20">
                             <div class="remember_forgot_passs d-flex align-items-center">
                                 <label class="primary_checkbox d-flex" for="checkbox">
                                     <input type="checkbox" id="checkbox" required>
                                     <span class="checkmark mr_15"></span>
-                                    <p>{{__('frontend.By signing up, you agree to')}} <a target="_blank"
-                                                                                         href="{{url('terms')}}">{{__('frontend.Terms of Service')}}</a> {{__('frontend.and')}}
-                                        <a target="_blank"
-                                           href="{{url('privacy')}}">{{__('frontend.Privacy Policy')}}</a></p>
+                                    <p>
+                                        By signing up, you agree to
+                                        <a target="_blank" href="{{ url('terms') }}">Terms of Service</a>
+                                        and
+                                        <a target="_blank" href="{{ url('privacy') }}">Privacy Policy</a>
+                                    </p>
                                 </label>
-
                             </div>
                         </div>
-                        <div class="col-12 mt_20">
-                            @if(saasEnv('NOCAPTCHA_FOR_REG')=='true')
-                                @if(saasEnv('NOCAPTCHA_IS_INVISIBLE')=="true")
-                                    {!! NoCaptcha::display(["data-size"=>"invisible"]) !!}
-                                @else
-                                    {!! NoCaptcha::display() !!}
-                                @endif
-
-                                @if ($errors->has('g-recaptcha-response'))
-                                    <span class="text-danger"
-                                          role="alert">{{$errors->first('g-recaptcha-response')}}</span>s
-                                @endif
-                            @endif
-                        </div>
 
                         <div class="col-12 mt_20">
-                            @if(saasEnv('NOCAPTCHA_FOR_REG')=='true' && saasEnv('NOCAPTCHA_IS_INVISIBLE')=="true")
-
-                                <button type="button" class="g-recaptcha theme_btn text-center w-100 disable_btn"
-                                        disabled
-                                        data-sitekey="{{saasEnv('NOCAPTCHA_SITEKEY')}}" data-size="invisible"
-                                        data-callback="onSubmit"
-                                        class="theme_btn text-center w-100">   {{__('common.Register')}}</button>
-                                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                                <script>
-                                    function onSubmit(token) {
-                                        document.getElementById("regForm").submit();
-                                    }
-                                </script>
-                            @else
-                                <button type="submit" class="theme_btn text-center w-100 disable_btn" disabled
-                                        id="submitBtn">
-                                    {{__('common.Register')}}
-                                </button>
-                            @endif
-
+                            <button type="submit" class="theme_btn text-center w-100 disable_btn" disabled id="submitBtn">
+                                Register
+                            </button>
                         </div>
+
                     </div>
                 </form>
             </div>
 
-
             <h5 class="shitch_text mb-0">
-                {{__('common.You have already an account?')}} <a href="{{route('login')}}"> {{__('common.Login')}}</a>
-
+                You have already an account?
+                <a href="{{ route('login') }}">Login</a>
             </h5>
         </div>
 
         @include(theme('auth.login_wrapper_right'))
-
     </div>
+
     <script>
         $(function () {
             $('#checkbox').click(function () {
-
                 if ($(this).is(':checked')) {
                     $('#submitBtn').removeClass('disable_btn');
                     $('#submitBtn').removeAttr('disabled');
-
                 } else {
                     $('#submitBtn').addClass('disable_btn');
                     $('#submitBtn').attr('disabled', 'disabled');
-
                 }
             });
         });
     </script>
-
 @endsection
