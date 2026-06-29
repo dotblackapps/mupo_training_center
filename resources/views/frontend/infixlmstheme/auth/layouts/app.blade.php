@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{ Settings('site_title')  }}</title>
+    <title>Mupo Training Center | @yield('title', 'Account')</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <link rel="icon" type="image/png" href="{{ assetPath('uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
-<link rel="shortcut icon" type="image/png" href="{{ assetPath('uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
+   <link rel="icon" type="image/png" href="{{ asset('public/uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
+<link rel="shortcut icon" type="image/png" href="{{ asset('public/uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
 
     <x-frontend-dynamic-style-color/>
     <x-backend-dynamic-color/>
@@ -46,6 +46,7 @@
     </script>
     <x-analytics-tool/>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
