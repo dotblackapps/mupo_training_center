@@ -8,7 +8,7 @@
          * artisan serve URL: http://127.0.0.1:8000/ needs /mupo/...
          */
         $isArtisanServe = in_array(request()->getPort(), [8000, 8001, 8080]) || str_contains(request()->getHost(), '127.0.0.1');
-        $mupoAssetBase = $isArtisanServe ? asset('mupo') : asset('public/mupo');
+        $mupoAssetBase = $isArtisanServe ? asset('mupo') : asset('mupo');
     @endphp
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -48,10 +48,10 @@
       <div class="mupo-auth">
         @auth
           <a href="{{ route('dashboard') }}" class="mupo-auth__login">Dashboard</a>
-        @else
-          <a href="{{ route('login') }}" class="mupo-auth__login">Login</a>
-          <a href="{{ route('register') }}" class="mupo-auth__signup">Sign Up</a>
-        @endauth
+       @else
+  <a href="{{ route('login') }}" target="_blank" rel="noopener noreferrer" class="mupo-auth__login">Login</a>
+  <a href="{{ route('register') }}" target="_blank" rel="noopener noreferrer" class="mupo-auth__signup">Sign Up</a>
+@endauth
       </div>
     </div>
   </div>
