@@ -1202,7 +1202,21 @@ if (!function_exists('assetPath')) {
 
         $url = str_replace('public/','',$url);
 
-        if (config('app.has_public_folder')){
+        /*
+         * Works for both:
+         * - XAMPP: http://localhost/lnfixlms/ where assets need /public/...
+         * - php artisan serve: http://127.0.0.1:8000/ where public is already web root
+         */
+        $isArtisanServe = false;
+        try {
+            $host = request()->getHost();
+            $port = request()->getPort();
+            $isArtisanServe = in_array($port, [8000, 8001, 8080]) || ($host === '127.0.0.1' && $port == 8000);
+        } catch (\Throwable $e) {
+            $isArtisanServe = false;
+        }
+
+        if (config('app.has_public_folder') && !$isArtisanServe){
             return asset('public/'.$url);
         }else{
             return asset($url);

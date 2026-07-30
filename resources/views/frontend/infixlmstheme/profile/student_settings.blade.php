@@ -1,6 +1,6 @@
 @extends(theme('layouts.dashboard_master'))
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('profile.profile')}}
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{__('profile.profile')}}
 @endsection
 @section('css')
     <link href="{{assetPath('frontend/infixlmstheme/css/select2.min.css')}}{{assetVersion()}}" rel="stylesheet"/>

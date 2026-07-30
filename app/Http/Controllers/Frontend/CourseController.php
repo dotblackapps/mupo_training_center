@@ -26,13 +26,10 @@ class CourseController extends Controller
     public function courses(Request $request)
     {
         try {
-            if (hasDynamicPage()) {
-                $row = FrontPage::where('slug', '/courses')->first();
-                $details = dynamicContentAppend($row->details);
-                return view('aorapagebuilder::pages.show', compact('row', 'details'));
-            } else {
-                return view(theme('pages.courses'), compact('request'));
-            }
+            // MUPO FRONTEND:
+            // Always use the Mupo courses Blade page. The page itself queries
+            // Course/Category/CourseLevel from the database, so course cards are not hardcoded.
+            return view(theme('pages.courses'), compact('request'));
         } catch (\Exception $e) {
             GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
         }

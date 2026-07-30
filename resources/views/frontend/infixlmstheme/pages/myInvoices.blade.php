@@ -11,7 +11,7 @@
 @extends($extend_file)
 
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('invoice.Invoice')}}
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{__('invoice.Invoice')}}
 @endsection
 @section('css')
     <link href="{{assetPath('frontend/infixlmstheme/css/my_invoice.css')}}{{assetVersion()}}" rel="stylesheet"

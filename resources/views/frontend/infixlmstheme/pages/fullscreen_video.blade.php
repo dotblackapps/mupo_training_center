@@ -1,7 +1,7 @@
 @php use Illuminate\Support\Carbon;use Modules\BunnyStorage\Http\Controllers\BunnyStreamController; @endphp
 @extends(theme('layouts.full_screen_master'))
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{ $course->title}}
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{ $course->title}}
 @endsection
 @section('css')
     <link href="{{assetPath('backend/css/jquery-ui.css')}}{{assetVersion()}}" rel="stylesheet">

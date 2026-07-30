@@ -1,6 +1,6 @@
 @extends(theme('layouts.master'))
 @section('title')
-    {{ Settings('site_title') ? Settings('site_title') : 'Infix LMS' }} | {{ __('membership.Ebook Plan') }}
+    {{ Settings('site_title') ? Settings('site_title') : 'MUPO Training Center' }} | {{ __('membership.Ebook Plan') }}
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{ assetPath('frontend/infixlmstheme/css/class_details.css') }}{{assetVersion()}}"/>

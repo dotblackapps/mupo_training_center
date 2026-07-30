@@ -1,5 +1,5 @@
 @extends(theme('layouts.master'))
-@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} |    {{$course->title}} @endsection
+@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} |    {{$course->title}} @endsection
 @section('css')
 
 @endsection

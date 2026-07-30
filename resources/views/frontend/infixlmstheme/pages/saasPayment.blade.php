@@ -1,5 +1,5 @@
 @extends(theme('layouts.master'))
-@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | @lang('frontendmanage.Payment Method') @endsection
+@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | @lang('frontendmanage.Payment Method') @endsection
 @section('css')
 @endsection
 @section('mainContent')

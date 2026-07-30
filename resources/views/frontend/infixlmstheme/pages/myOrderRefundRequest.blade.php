@@ -1,6 +1,6 @@
 @extends(theme('layouts.dashboard_master'))
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('store.Refund Request')}}
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{__('store.Refund Request')}}
 @endsection
 @section('css')
     <link href="{{assetPath('frontend/infixlmstheme/css/my_invoice.css')}}{{assetVersion()}}" rel="stylesheet"

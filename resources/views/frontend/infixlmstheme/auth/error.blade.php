@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{assetPath(Settings('favicon') )}}{{assetVersion()}}" type="image/png"/>
+    <link rel="icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
     <title>404</title>
     <link rel="stylesheet" href="{{assetPath('backend/')}}/vendors/css/bootstrap.css{{assetVersion()}}"/>
     <link rel="stylesheet" href="{{assetPath('backend/')}}/vendors/css/themify-icons.css{{assetVersion()}}"/>

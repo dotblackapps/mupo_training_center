@@ -1,5 +1,5 @@
 @extends(theme('layouts.dashboard_master'))
-@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{__('payment.Fund Deposit')}} @endsection
+@section('title'){{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{__('payment.Fund Deposit')}} @endsection
 @section('css') @endsection
 @section('js')
     <script src="{{assetPath('frontend/infixlmstheme/js/deposit.js')}}"></script>

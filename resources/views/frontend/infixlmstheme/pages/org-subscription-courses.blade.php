@@ -1,6 +1,6 @@
 @extends(theme('layouts.dashboard_master'))
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} |
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} |
     {{__('org-subscription.My Plan')}}
 @endsection
 @section('css')

@@ -1,6 +1,6 @@
 @extends(theme('layouts.master'))
 @section('title')
-    {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}} | {{$blog->title??''}}
+    {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} | {{$blog->title??''}}
 @endsection
 @section('css') @endsection
 @section('js')

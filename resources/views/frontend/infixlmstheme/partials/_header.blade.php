@@ -8,7 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <link rel="icon" href="{{assetPath(Settings('favicon'))}}{{assetVersion()}}" type="image/png"/>
+    <link rel="icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
 
     {{-- Open Graph Meta Tags --}}
     <meta property="og:url" content="{{ url()->current() }}"/>
@@ -57,7 +57,7 @@
 
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{assetPath(Settings('favicon') )}}">
+    <link rel="shortcut icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
     <!-- Place favicon.ico in the root directory -->
 
 

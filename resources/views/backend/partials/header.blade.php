@@ -7,10 +7,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{assetPath(Settings('favicon'))}}{{assetVersion()}}" type="image/png"/>
-    <title>
-        {{Settings('site_title')  ? Settings('site_title')  : 'Infix LMS'}}
-    </title>
+    <link rel="icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
+    <link rel="shortcut icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
     <meta name="_token" content="{!! csrf_token() !!}"/>
     @include('backend.partials.style')
     <script src="{{assetPath('js/common.js')}}{{assetVersion()}}" type="application/javascript"></script>

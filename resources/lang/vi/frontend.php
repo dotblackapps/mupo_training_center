@@ -212,7 +212,7 @@ return [
     "to your account" => "vào tài khoản",
     "Welcome back. Please login" => "Chào mừng trở lại. Xin đăng nhập",
     "Don’t have an account" => "Không có tài khoản",
-    "Welcome to Infix LMS" => "Chào mừng đến LMS Infix LMS",
+    "Welcome to MUPO Training Center" => "Chào mừng đến LMS MUPO Training Center",
     "Learning Management System" => "Hệ thống quản lý học",
     "Excellence" => "Ưu tú",
     "Community" => "Cộng đồng",
