@@ -15,6 +15,7 @@ RELOAD_APACHE="${RELOAD_APACHE:-1}"
 APACHE_SERVICE="${APACHE_SERVICE:-apache2}"
 WEB_USER="${WEB_USER:-www-data}"
 WEB_GROUP="${WEB_GROUP:-www-data}"
+DEPLOY_USER="${DEPLOY_USER:-${SUDO_USER:-$USER}}"
 
 log() {
   printf '\n[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*"
@@ -36,7 +37,7 @@ ensure_clean_deploy_target() {
 }
 
 fix_permissions() {
-  sudo chown -R "$WEB_USER:$WEB_GROUP" storage bootstrap/cache
+  sudo chown -R "$DEPLOY_USER:$WEB_GROUP" storage bootstrap/cache
   sudo find storage bootstrap/cache -type d -exec chmod 775 {} \;
   sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
 }
