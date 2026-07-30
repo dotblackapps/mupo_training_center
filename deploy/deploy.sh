@@ -93,7 +93,9 @@ git clean -fd --exclude=.env --exclude=storage --exclude=public/uploads --exclud
 
 if [[ "$RUN_COMPOSER" == "1" ]]; then
   log "Installing PHP dependencies"
-  "$COMPOSER_BIN" install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+  fix_permissions
+  "$COMPOSER_BIN" install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts
+  run_as_web "$PHP_BIN" artisan package:discover --ansi
 fi
 
 if [[ "$RUN_NPM_INSTALL" == "1" ]]; then
