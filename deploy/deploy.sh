@@ -89,7 +89,7 @@ git fetch "$REMOTE" "$BRANCH"
 log "Deploying $REMOTE/$BRANCH"
 git checkout "$BRANCH"
 git reset --hard "$REMOTE/$BRANCH"
-git clean -fd --exclude=.env --exclude=storage --exclude=public/uploads --exclude=public/storage
+git clean -fd --exclude=.env --exclude=storage --exclude=public/uploads --exclude=public/public/uploads --exclude=public/storage
 
 if [[ "$RUN_COMPOSER" == "1" ]]; then
   log "Installing PHP dependencies"
