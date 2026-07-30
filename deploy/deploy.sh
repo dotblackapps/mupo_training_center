@@ -72,7 +72,7 @@ cd "$APP_DIR"
 ensure_clean_deploy_target
 
 log "Putting app into maintenance mode"
-run_as_web "$PHP_BIN" artisan down --render="errors::503" || run_as_web "$PHP_BIN" artisan down || true
+run_as_web "$PHP_BIN" artisan down || true
 
 cleanup() {
   local status=$?
@@ -121,7 +121,7 @@ fi
 
 log "Rebuilding safe Laravel caches"
 run_as_web "$PHP_BIN" artisan config:cache
-run_as_web "$PHP_BIN" artisan view:cache || true
+run_as_web "$PHP_BIN" artisan view:clear
 
 fix_permissions
 
