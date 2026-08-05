@@ -1,11 +1,14 @@
 @php
     use Illuminate\Support\Facades\DB;
-try {
-    $isConnected = DB::connection()->getPdo();
- }catch (\Exception $exception){
-    $isConnected =false;
+    use Illuminate\Support\Facades\Schema;
 
- }
+    try {
+        $isConnected = appInstalled()
+            && DB::connection()->getPdo()
+            && Schema::hasTable('home_contents');
+    } catch (\Exception $exception) {
+        $isConnected = false;
+    }
 @endphp
 
 @if($isConnected)
@@ -52,4 +55,3 @@ try {
 @else
     @include('errors.static')
 @endif
-

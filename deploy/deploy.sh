@@ -4,7 +4,7 @@ set -Eeuo pipefail
 APP_DIR="${APP_DIR:-/var/www/html/mupo_training_center}"
 REMOTE="${REMOTE:-origin}"
 BRANCH="${BRANCH:-main}"
-PHP_BIN="${PHP_BIN:-php}"
+PHP_BIN="${PHP_BIN:-php8.2}"
 COMPOSER_BIN="${COMPOSER_BIN:-composer}"
 NPM_BIN="${NPM_BIN:-npm}"
 RUN_COMPOSER="${RUN_COMPOSER:-1}"

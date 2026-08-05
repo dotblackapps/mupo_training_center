@@ -442,7 +442,7 @@ if (!function_exists('checkParent')) {
 if (!function_exists('GettingError')) {
     function GettingError($message, $url = '', $ip = '', $agent = '', $return = false)
     {
-        if (!Storage::exists('.app_installed') || !Storage::get('.app_installed')) {
+        if (!appInstalled()) {
             Log::error($message);
             return false;
         }
@@ -468,6 +468,23 @@ if (!function_exists('GettingError')) {
             abort('500', trans('frontend.Something went wrong, Please check error log'));
         }
 
+    }
+}
+
+if (!function_exists('appInstalled')) {
+    function appInstalled()
+    {
+        foreach (['local', config('filesystems.default')] as $disk) {
+            try {
+                if ($disk && Storage::disk($disk)->exists('.app_installed') && Storage::disk($disk)->get('.app_installed')) {
+                    return true;
+                }
+            } catch (\Exception $exception) {
+                //
+            }
+        }
+
+        return false;
     }
 }
 
