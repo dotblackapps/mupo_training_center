@@ -6,6 +6,7 @@
 @section('css')
     <link href="{{assetPath('backend/css/jquery-ui.css')}}{{assetVersion()}}" rel="stylesheet">
     <link href="{{assetPath('frontend/infixlmstheme/css/full_screen.css')}}{{assetVersion()}}" rel="stylesheet"/>
+    <link href="{{ asset('mupo/assets/css/course-learning.css') }}{{assetVersion()}}" rel="stylesheet"/>
 
     {{-- <link href="{{assetPath('frontend/infixlmstheme/css/class_details.css')}}{{assetVersion()}}" rel="stylesheet"/> --}}
     <link href="{{assetPath('backend/css/summernote-bs5.min.css')}}{{assetVersion()}}" rel="stylesheet">
@@ -359,8 +360,8 @@
                             <div class="header__left d-flex align-items-center">
                                 <div class="">
                                     <a class="logo_img" href="{{url('/')}}">
-                                        <img class="p-2" src="{{getLogoImage(Settings('logo') )}}" width="150"
-                                             alt="{{ Settings('site_name')  }}">
+                                        <img class="p-2" src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}" width="150"
+                                             alt="Mupo Training Center">
                                     </a>
                                 </div>
                                 <div class="category_search d-none d-lg-flex category_box_iner">

@@ -1,30 +1,4 @@
 @extends(theme('auth.layouts.app'))
 @section('content')
-
-    <style>
-        .error_wrapper {
-            padding: 243px 0 250px 0;
-
-        }
-    </style>
-
-    <div class="error_wrapper">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-xl-12">
-                    <div class="error_wrapper_info text-center">
-                        <div class="thumb">
-                            <img src="{{assetPath('infixlmstheme/img/banner/error_thumb.png')}}" alt="">
-                        </div>
-                        <h3>{{ __('frontend.Thanks For Registration') }} !!!</h3>
-                        <h2>
-                            {{ __('frontend.Please Wait For Approval') }}
-                        </h2>
-                        <br>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class="mupo-auth-page"><div class="mupo-auth-shell"><aside class="mupo-auth-side"><div><a href="{ url('/') }" class="mupo-auth-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a><a href="{ url('/') }" class="mupo-auth-logo"><img src="{ asset('mupo/assets/images/mupo-logo_1.jpeg') }" onerror="this.src='{ url('public/uploads/settings/mupo-logo_1.jpeg') }'" alt="Mupo Training Center"></a><h1>Thank you for registering.</h1><p>Your learner application has been received and is awaiting approval.</p><div class="mupo-auth-points"><div class="mupo-auth-point"><b>Secure access</b><br>Your account information is protected.</div><div class="mupo-auth-point"><b>Learner support</b><br>Contact MUPO support when you need assistance.</div></div></div><p><b>Mupo Training Center</b><br>Think. Future. Forward.</p></aside><main class="mupo-auth-main"><section class="mupo-auth-card"><span class="mupo-auth-badge">Registration Received</span><h2>{{ __('frontend.Thanks For Registration') }}</h2><p class="lead">{{ __('frontend.Please Wait For Approval') }}</p><div class="mupo-auth-alert success">Your registration has been submitted successfully. MUPO Training Center will review your account.</div><div class="mupo-auth-links"><a href="{{ url('/') }}">Return to Home</a></div></section></main></div></div>
 @endsection

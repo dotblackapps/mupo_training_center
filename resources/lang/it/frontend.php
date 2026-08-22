@@ -43,7 +43,7 @@ return [
 "Photographer" => "Fotografo",
 "Duration" => "Durata",
 "Insights to lead skills to the believer" => "Approfondimenti sulle capacità di piombo al credente",
-"Top instructors from around the world" => "I top istruttori di tutto il mondo insegnano milioni di studenti su Infix su periferie che aggiungono funzionalità ad un sistema.",
+"Top instructors from around the world" => "I top istruttori di tutto il mondo insegnano milioni di studenti su Mupo Training Center su periferie che aggiungono funzionalità ad un sistema.",
 "Get Start Now" => "Get Start Now",
 "Skill Level" => "Livello di abilità",
 "Buy Now" => "Compra ora",

@@ -156,8 +156,8 @@
                         <div class="header__left d-flex align-items-center gap-20 ">
                             <div class="">
                                 <a class="logo_img" href="{{url('/')}}">
-                                    <img class="p-2" src="{{getLogoImage(Settings('logo') )}}" width="150"
-                                         alt="{{ Settings('site_name')  }}">
+                                    <img class="p-2" src="{{asset('mupo/assets/images/mupo-logo_1.jpeg')}}" width="150"
+                                         alt="{{ 'Mupo Training Center'  }}">
                                 </a>
                             </div>
                             <div class="me-3 translator-switch">
@@ -470,7 +470,8 @@
                                                 </a>
                                             @endforeach
                                         @endif
-                                        <a href="{{route('logout')}}">{{__('frontend.Log Out')}}</a>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('mupo-header1-logout-form').submit();">{{__('frontend.Log Out')}}</a>
+                                        <form id="mupo-header1-logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                                     </div>
                                 </div>
                             </div>

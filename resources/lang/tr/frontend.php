@@ -43,7 +43,7 @@ return [
 "Photographer" => "Fotoğrafçı",
 "Duration" => "Süre",
 "Insights to lead skills to the believer" => "İnançlara yönelik becerilere yol açan öngörüler",
-"Top instructors from around the world" => "Dünyanın dört bir yanından gelen eğitmenler, bir sisteme işlevsellik ekleyen çevre birimleri hakkında Infix 'de milyonlarca öğrenciye ders veriyor.",
+"Top instructors from around the world" => "Dünyanın dört bir yanından gelen eğitmenler, bir sisteme işlevsellik ekleyen çevre birimleri hakkında Mupo Training Center 'de milyonlarca öğrenciye ders veriyor.",
 "Get Start Now" => "Hemen Başlayın",
 "Skill Level" => "Beceri Düzeyi",
 "Buy Now" => "Şimdi Satın al",

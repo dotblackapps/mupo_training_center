@@ -25,8 +25,7 @@
     @endphp
         <!-- course_details::start  -->
     <div class="position-relative">
-        <div class="course__details_head"
-             style="background-image: url({{assetPath($frontendContent->breadcrumb_page_banner ?? 'public/frontend/infixlmstheme/img/new_bread_crumb_bg.png')}})">
+        <div class="course__details_head">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -2225,8 +2224,8 @@
                                 <div class="section__title mb_30">
                                     <div class="d-flex align-items-center justify-content-between gap-3">
                                         <div>
-                                            <h3 class="mb-0">{{__('frontend.More Courses by Author')}}</h3>
-                                            <p>{{__('frontend.Discover Additional Learning Opportunities')}}</p>
+                                            <h3 class="mb-0">More Training Programmes</h3>
+                                            <p>Continue learning with Mupo Training Center</p>
                                         </div>
                                         <div class="view-all-btn">
                                             <a href="{{route('instructorDetails',[$course->user->id,$course->user->name])}}"
@@ -2238,14 +2237,15 @@
                                     </div>
                                 </div>
                                 <div class="more_course_section_slider owl-carousel">
-                                    @foreach(@$course->user->courses->where('scope',1)->where('status',1)->take(6) as $c)
+                                    @foreach(@$course->user->courses->where('scope',1)->where('status',1)->where('id','!=',$course->id)->unique('id')->take(6) as $c)
                                         <div class="slider_item">
                                             <div class="course-item">
                                                 <a href="{{courseDetailsUrl(@$c->id,@$c->type,@$c->slug)}}">
                                                     <div class="course-item-img lazy">
                                                         <img class="w-100"
-                                                             src="{{ fileExists($c->thumbnail) ? assetPath($c->thumbnail) : assetPath('\uploads/course_sample.png') }}"
-                                                             alt="">
+                                                             src="{{ asset('mupo/assets/images/bulb.jpg') }}"
+                                                             onerror="this.onerror=null;this.src='{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}';"
+                                                             alt="{{ $c->title }}">
                                                         <span class="course-tag"><span>                                    {{$c->courseLevel->title}}
 </span></span>
                                                     </div>

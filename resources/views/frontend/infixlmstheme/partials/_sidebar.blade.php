@@ -6,7 +6,7 @@
     <nav class="sidebar">
         <div class="logo d-flex">
     <a href="{{ url('/') }}">
-        <img src="{{ getCourseImage('public/uploads/settings/mupo-logo_1.jpeg') }}"
+        <img src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}"
              alt="MUPO Logo"
              style="max-height:70px;width:auto;">
     </a>

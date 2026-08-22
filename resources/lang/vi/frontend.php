@@ -43,7 +43,7 @@ return [
     "Photographer" => "Chụp ảnh",
     "Duration" => "Thời gian",
     "Insights to lead skills to the believer" => "Hiểu biết về kỹ năng lãnh đạo của người tin",
-    "Top instructors from around the world" => "Các giảng viên hàng đầu từ khắp nơi trên thế giới giảng dạy hàng triệu sinh viên về Infix về các thiết bị ngoại vi thêm chức năng cho một hệ thống.",
+    "Top instructors from around the world" => "Các giảng viên hàng đầu từ khắp nơi trên thế giới giảng dạy hàng triệu sinh viên về Mupo Training Center về các thiết bị ngoại vi thêm chức năng cho một hệ thống.",
     "Get Start Now" => "Bắt đầu ngay",
     "Skill Level" => "Mức Kỹ năng",
     "Buy Now" => "Mua ngay",

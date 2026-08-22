@@ -212,7 +212,8 @@
                         </a>
                     @endforeach
                 @endif
-                <a href="{{route('logout')}}">{{__('frontend.Log Out')}}</a>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('mupo-dashboard-logout-form').submit();">{{__('frontend.Log Out')}}</a>
+                <form id="mupo-dashboard-logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
             </div>
         </div>
     </div>

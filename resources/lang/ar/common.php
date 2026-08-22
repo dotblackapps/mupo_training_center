@@ -197,7 +197,7 @@
   'Log in with Facebook' => 'بدء الاتصال مع الفيسبوك',
   'Log in with Google' => 'تسجيل الدخول عبر جوجل',
   'Or' => 'أو',
-  'Keep me up to date on Infix' => 'أبقني على اطلاع دائم على Infix',
+  'Keep me up to date on Infix' => 'أبقني على اطلاع دائم على Mupo Training Center',
   'Required' => 'مطلوب',
   'New' => 'جديدة',
   'Instructor Payout' => 'الدفع بالدفع للمعلم',

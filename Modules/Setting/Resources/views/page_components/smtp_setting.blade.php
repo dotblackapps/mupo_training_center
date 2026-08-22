@@ -35,7 +35,7 @@
                 <div class="primary_input mb-25">
                     <input type="hidden" name="types[]" value="MAIL_FROM_NAME">
                     <label class="primary_input_label" for="">{{ __('setting.From Name') }}*</label>
-                    <input class="primary_input_field" placeholder="Infix CRM" type="text" name="MAIL_FROM_NAME"
+                    <input class="primary_input_field" placeholder="Mupo Training Center" type="text" name="MAIL_FROM_NAME"
                            value="{{ env('MAIL_FROM_NAME') }}">
                 </div>
             </div>

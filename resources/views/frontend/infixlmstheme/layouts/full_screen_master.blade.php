@@ -6,20 +6,20 @@
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}}
+        {{'Mupo Training Center'  ? 'Mupo Training Center'  : 'MUPO Training Center'}}
     </title>
     <!-- Google / Search Engine Tags -->
-    <meta itemprop="name" content="{{ Settings('site_name')  }}">
+    <meta itemprop="name" content="{{ 'Mupo Training Center'  }}">
     <meta itemprop="description" content="{{ Settings('meta_description')  }}">
-    <meta itemprop="image" content="{{assetPath(Settings('logo') )}}">
+    <meta itemprop="image" content="{{asset('mupo/assets/images/mupo-logo_1.jpeg')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <!-- Facebook Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ Settings('site_title')  }}">
+    <meta property="og:title" content="{{ 'Mupo Training Center'  }}">
     <meta property="og:description" content="{{ Settings('meta_description')  }}">
-    <meta property="og:image" content="{{assetPath(Settings('logo') )}}"/>
+    <meta property="og:image" content="{{asset('mupo/assets/images/mupo-logo_1.jpeg')}}"/>
     <meta property="og:image:type" content="image/png"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{{getCourseImage(Settings('favicon') )}}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}">
 
 
     <x-frontend-dynamic-style-color/>

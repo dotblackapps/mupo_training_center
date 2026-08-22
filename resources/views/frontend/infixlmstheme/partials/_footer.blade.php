@@ -3,12 +3,20 @@
 
 
     <x-popup-content/>
-
-
-    @include(theme('partials.footer.'.$footer_style))
-
-
-    <div class="shoping_wrapper">
+<footer class="mupo-footer">
+  <div class="mupo-footer__wrap">
+    <div class="mupo-footer__about">
+      <a href="{{ route('frontendHomePage') }}" class="mupo-footer__logo"><img src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}" alt="Mupo Training Center Logo"></a>
+      <p>Mupo Training Center provides accredited, practical and industry-relevant training solutions for individuals, organisations and corporate teams.</p>
+      <div class="mupo-footer__social"><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a><a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></div>
+    </div>
+    <div class="mupo-footer__links"><h3>Quick Links</h3><a href="{{ route('frontendHomePage') }}">Home</a><a href="{{ route('about') }}">About Us</a><a href="{{ route('courses') }}">Courses</a><a href="{{ route('services') }}">Services</a><a href="{{ route('corporateTraining') }}">Corporate Training</a><a href="{{ route('contact') }}">Contact Us</a></div>
+    <div class="mupo-footer__links"><h3>Training Solutions</h3><a href="{{ route('courses') }}">Security & Protection</a><a href="{{ route('courses') }}">Office Administration</a><a href="{{ route('courses') }}">Data & IT</a><a href="{{ route('courses') }}">Project Management</a><a href="{{ route('services') }}">Skills Development</a><a href="{{ route('accreditation') }}">Accreditation</a></div>
+    <div class="mupo-footer__contact"><h3>Contact Information</h3><p><i class="fa-solid fa-phone"></i><span>012 004 2004 / 084 750 7013</span></p><p><i class="fa-solid fa-envelope"></i><span>admin@mupotrainingcenter.co.za</span></p><p><i class="fa-solid fa-globe"></i><span>www.mupotrainingcenter.co.za</span></p><p><i class="fa-solid fa-location-dot"></i><span>377 Johannes Ramokhoase Street, Pretoria Central, 0002</span></p></div>
+  </div>
+  <div class="mupo-footer__bottom"><p>Copyright © 2024 Mupo Training Center. All rights reserved | Developed By DotBlack</p><div><a href="{{ url('privacy') }}">Privacy Policy</a><a href="{{ url('terms') }}">Terms & Conditions</a></div></div>
+</footer>
+<div class="shoping_wrapper">
         <div class="dark_overlay"></div>
         <div class="shoping_cart">
             <div class="shoping_cart_inner">

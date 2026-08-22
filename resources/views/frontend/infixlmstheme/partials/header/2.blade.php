@@ -95,7 +95,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center gap-3">
                         <a href="{{url('/')}}" class="heading-logo d-block">
-                            <img src="{{ url('public/uploads/settings/mupo-logo_1.jpeg') }}"
+                            <img src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}"
      class="home d-block"
      alt="MUPO Training Center"
      style="height:43px; width:auto;">
@@ -520,7 +520,8 @@
                                                     </a>
                                                 @endforeach
                                             @endif
-                                            <a href="{{route('logout')}}">{{__('frontend.Log Out')}}</a>
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('mupo-header2-logout-form').submit();">{{__('frontend.Log Out')}}</a>
+                                            <form id="mupo-header2-logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                                         </div>
                                     </div>
                                 </div>
@@ -542,7 +543,7 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header d-flex justify-content-between">
         <a href="{{url('/')}}" class="heading-logo d-block">
-            <img src="{{getLogoImage(Settings('logo') )}}" alt="MUPO Training Center">
+            <img src="{{asset('mupo/assets/images/mupo-logo_1.jpeg')}}" alt="MUPO Training Center">
         </a>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>

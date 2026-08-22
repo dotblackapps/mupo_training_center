@@ -23,7 +23,7 @@
     $levels = \Modules\CourseSetting\Entities\CourseLevel::orderBy('title')->get();
 @endphp
 <section class="page-hero">
-  <div><small>Training Programmes</small><h1>Courses</h1><p>Browse Mupo skills programmes, occupational certificates and short courses directly from the InfixLMS database.</p></div>
+  <div><small>Training Programmes</small><h1>Courses</h1><p>Browse Mupo skills programmes, occupational certificates and short courses directly from the Mupo Training Center database.</p></div>
 </section>
 <section class="section">
   <div class="section-title"><small>Find a course</small><h2>Find the right programme</h2></div>
@@ -78,7 +78,7 @@
         </div>
       </article>
     @empty
-      <div class="mupo-course-empty">No courses found. Add or publish courses in InfixLMS and they will display here automatically.</div>
+      <div class="mupo-course-empty">No courses found. Add or publish courses in Mupo Training Center and they will display here automatically.</div>
     @endforelse
   </div>
   <div class="mupo-course-pagination">{{ $courses->links() }}</div>

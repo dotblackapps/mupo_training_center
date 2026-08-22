@@ -74,6 +74,7 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
 
+        // MUPO requirement: accounts are auto-verified immediately after registration.
         // Force self-registered users to be active.
         $user->status = 1;
         $user->is_active = 1;

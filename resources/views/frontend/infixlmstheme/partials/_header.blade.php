@@ -13,34 +13,34 @@
     {{-- Open Graph Meta Tags --}}
     <meta property="og:url" content="{{ url()->current() }}"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="@yield('meta_title', Settings('site_title'))"/>
+    <meta property="og:title" content="@yield('meta_title', 'Mupo Training Center')"/>
     <meta property="og:description" content="@yield('meta_description', Settings('footer_about_description'))"/>
-    <meta property="og:image" content="@yield('og_image', Settings('logo'))"/>
+    <meta property="og:image" content="@yield('og_image', asset('mupo/assets/images/mupo-logo_1.jpeg'))"/>
     <meta property="og:image:type" content="image/png"/>
 
     {{-- Twitter Meta Tags --}}
-    <meta property="twitter:title" content="@yield('meta_title', Settings('site_title'))"/>
+    <meta property="twitter:title" content="@yield('meta_title', 'Mupo Training Center')"/>
     <meta property="twitter:description" content="@yield('meta_description', Settings('meta_description'))"/>
-    <meta property="twitter:image" content="@yield('og_image', Settings('logo'))"/>
+    <meta property="twitter:image" content="@yield('og_image', asset('mupo/assets/images/mupo-logo_1.jpeg'))"/>
     <meta property="twitter:url" content="{{ url()->current() }}"/>
     <meta property="twitter:card" content="summary_large_image"/>
 
     {{-- Standard Meta Tags --}}
-    <meta name="title" content="@yield('meta_title', Settings('site_title'))">
+    <meta name="title" content="@yield('meta_title', 'Mupo Training Center')">
     <meta name="description" content="@yield('meta_description', Settings('meta_description'))">
     <meta name="keywords" content="{{ Settings('meta_keywords') }}">
 
 
     {{-- Structured Data --}}
-    <meta itemprop="name" content="@yield('meta_title', Settings('site_title'))">
+    <meta itemprop="name" content="@yield('meta_title', 'Mupo Training Center')">
     <meta itemprop="description" content="@yield('meta_description', Settings('meta_description'))">
-    <meta itemprop="image" content="@yield('og_image', Settings('logo'))">
-    <meta itemprop="author" content="{{ Settings('site_name') }}">
+    <meta itemprop="image" content="@yield('og_image', asset('mupo/assets/images/mupo-logo_1.jpeg'))">
+    <meta itemprop="author" content="{{ 'Mupo Training Center' }}">
 
 
 
     {{-- Title Tag --}}
-    <title>@yield('title', Settings('site_title'))</title>
+    <title>@yield('title', 'Mupo Training Center')</title>
 
 
 
@@ -166,6 +166,11 @@
 
     {{--    //analytics tools--}}
     <x-analytics-tool/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('mupo/assets/css/style.css') }}{{assetVersion()}}">
+    <link rel="stylesheet" href="{{ asset('mupo/assets/css/legacy-pages.css') }}{{assetVersion()}}">
+
 </head>
 
 <body>

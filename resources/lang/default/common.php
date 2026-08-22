@@ -197,7 +197,7 @@
     "Log in with Facebook" => "Log in with Facebook",
     "Log in with Google" => "Log in with Google",
     "Or" => "Or",
-    "Keep me up to date on Infix" => "Keep me up to date on Infix",
+    "Keep me up to date on Infix" => "Keep me up to date on Mupo Training Center",
     "Required" => "Required",
     "New" => "New",
     "Instructor Payout" => "Instructor Payout",

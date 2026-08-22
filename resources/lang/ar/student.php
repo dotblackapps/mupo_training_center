@@ -18,7 +18,7 @@
   'Question' => 'سؤال',
   'No Course Purchased Yet' => 'لم يتم شراء البرنامج التدريبي بعد',
   'No Course viewed Yet' => 'لم يتم مشاهدة برنامج تدريبي حتى الآن',
-  'Engineer at InfixLMS' => 'مهندس في InfixLMS',
+  'Engineer at InfixLMS' => 'مهندس في Mupo Training Center',
   'Add a professional headline like' => 'اضافة عنوان محترف مثل',
   'Headline' => 'عنوان خارجي',
   'Write Note here' => 'كتابة ملاحظة هنا',

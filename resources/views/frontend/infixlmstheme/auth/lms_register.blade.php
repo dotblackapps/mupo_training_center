@@ -5,7 +5,7 @@
         <div class="login_wrapper_left">
             <div class="logo">
                 <a href="{{ url('/') }}">
-                    <img style="width: 190px" src="{{assetPath(Settings('logo') )}} " alt="">
+                    <img style="width: 190px" src="{{asset('mupo/assets/images/mupo-logo_1.jpeg')}} " alt="">
                 </a>
             </div>
             <div class="login_wrapper_content">

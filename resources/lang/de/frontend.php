@@ -43,7 +43,7 @@ return [
 "Photographer" => "Fotograf",
 "Duration" => "Dauer",
 "Insights to lead skills to the believer" => "Einblicke in die Führungsqualitäten für den Gläubigen",
-"Top instructors from around the world" => "Top-Trainer aus der ganzen Welt lehren Millionen von Studenten an Infix über Peripheriegeräte, die Funktionalität zu einem System hinzufügen.",
+"Top instructors from around the world" => "Top-Trainer aus der ganzen Welt lehren Millionen von Studenten an Mupo Training Center über Peripheriegeräte, die Funktionalität zu einem System hinzufügen.",
 "Get Start Now" => "Jetzt starten",
 "Skill Level" => "Kenntnisstufe",
 "Buy Now" => "Jetzt kaufen",

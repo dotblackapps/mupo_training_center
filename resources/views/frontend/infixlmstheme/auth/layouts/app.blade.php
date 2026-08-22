@@ -8,8 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <link rel="icon" type="image/png" href="{{ asset('public/uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
-<link rel="shortcut icon" type="image/png" href="{{ asset('public/uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
+   <link rel="icon" type="image/png" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v={{ time() }}">
+<link rel="shortcut icon" type="image/png" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v={{ time() }}">
 
     <x-frontend-dynamic-style-color/>
     <x-backend-dynamic-color/>
@@ -47,6 +47,8 @@
     <x-analytics-tool/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('mupo/assets/css/auth-modern.css') }}?v={{ time() }}">
+    
 </head>
 
 <body>

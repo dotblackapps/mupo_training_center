@@ -424,3 +424,8 @@ Route::get('scorm/video/{lesson_id}/{id}', 'Frontend\WebsiteController@scormPlay
 Route::get('document/video/{lesson_id}', 'Frontend\WebsiteController@documentPlayer')->name('documentPlayer');
 Route::get('get-dynamic-data', 'Frontend\ThemeDynamicData')->name('getDynamicData');
 Route::get('read-some-part-of-books/{id}', 'Frontend\WebsiteController@readSomePartOfBooks')->name('readSomePartOfBooks');
+// MUPO controlled training manual library (staff/admin only)
+Route::group(['prefix' => 'admin/mupo-training-manuals', 'as' => 'admin.mupo-training-manuals.', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('/', '\\App\\Http\\Controllers\\Admin\\MupoTrainingManualController@index')->name('index');
+    Route::get('/download/{id}', '\\App\\Http\\Controllers\\Admin\\MupoTrainingManualController@download')->name('download');
+});
