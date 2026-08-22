@@ -6,13 +6,13 @@
 
     <div class="sidebar-header update_sidebar">
        <a class="large_logo" href="{{ url('/') }}">
-    <img src="{{ asset('public/uploads/settings/mupo-logo_1.jpeg') }}"
+    <img src="{{ getLogoImage(Settings('logo')) }}"
          alt="MUPO Logo"
          style="max-height:60px;width:auto;">
 </a>
 
 <a class="mini_logo" href="{{ url('/') }}">
-    <img src="{{ asset('public/uploads/settings/mupo-logo_1.jpeg') }}"
+    <img src="{{ getLogoImage(Settings('logo')) }}"
          alt="MUPO Logo"
          style="max-height:45px;width:auto;">
 </a>
@@ -208,4 +208,3 @@
     </ul>
 
 </nav>
-

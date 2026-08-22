@@ -21,7 +21,7 @@
                 <input type="hidden" id="logo_title" value="{{Settings('company_name')}}">
                 <div class="small_logo_crm d-lg-none">
     <a href="{{url('/')}}">
-        <img src="{{ asset('public/uploads/settings/mupo-logo_1.jpeg') }}"
+        <img src="{{ getLogoImage(Settings('logo')) }}"
              alt="MUPO Logo"
              style="max-height:50px;width:auto;">
     </a>
@@ -45,7 +45,7 @@
                 <div class="d-flex align-items-center">
                    @if($user->sidebar!=1)
     <a class="large_logo header_logo_area" href="{{ url('/') }}">
-        <img src="{{ asset('public/uploads/settings/mupo-logo_1.jpeg') }}"
+        <img src="{{ getLogoImage(Settings('logo')) }}"
              alt="MUPO Logo"
              style="max-height:60px;width:auto;">
     </a>

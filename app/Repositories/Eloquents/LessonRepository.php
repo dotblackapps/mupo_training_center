@@ -1088,7 +1088,7 @@ class LessonRepository implements LessonRepositoryInterface
                 File::move($file, $new_file);
                 $result['size'] = File::size(base_path($link)) ?? 0;
             } elseif ($driver == 's3') {
-                Storage::disk('s3')->put($new_file, file_get_contents($file), 'public');
+                Storage::disk('s3')->put($new_file, file_get_contents($file));
                 $link = Storage::disk('s3')->url($new_file);
             }
 
@@ -1128,7 +1128,7 @@ class LessonRepository implements LessonRepositoryInterface
             if ($driver == 'local') {
                 File::move($file, $new_file);
             } elseif ($driver == 's3') {
-                Storage::disk('s3')->put($new_file, file_get_contents($file), 'public');
+                Storage::disk('s3')->put($new_file, file_get_contents($file));
                 $link = Storage::disk('s3')->url($new_file);
             }
 

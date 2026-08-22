@@ -3,7 +3,11 @@
 
 <head>
     @php
-        $base_path = (config('app.has_public_folder')) ? 'public/vendor/spondonit' : 'vendor/spondonit';
+        $documentRoot = realpath(request()->server('DOCUMENT_ROOT', ''));
+        $publicRoot = realpath(public_path());
+        $base_path = ($documentRoot && $publicRoot && $documentRoot === $publicRoot)
+            ? 'vendor/spondonit'
+            : ((config('app.has_public_folder')) ? 'public/vendor/spondonit' : 'vendor/spondonit');
     @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

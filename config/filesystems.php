@@ -63,7 +63,6 @@ return [
             'region' => saasEnv('AWS_DEFAULT_REGION'),
             'bucket' => saasEnv('AWS_BUCKET'),
             'url' => saasEnv('AWS_URL'),
-            'visibility' => 'public',
         ], 'google' => [
             'driver' => 'google',
             'clientId' => saasEnv('GOOGLE_DRIVE_CLIENT_ID'),
