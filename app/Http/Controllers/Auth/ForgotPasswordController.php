@@ -24,14 +24,12 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        $page = LoginPage::getData();
-        return view(theme('auth.passwords.email'), compact('page'));
+        return redirect()->route('login', ['forgot' => 1]);
     }
 
     public function SendPasswordResetLink()
     {
-        $page = LoginPage::getData();
-        return view(theme('auth.passwords.email'), compact('page'));
+        return redirect()->route('login', ['forgot' => 1]);
     }
 
     public function ResetPassword()

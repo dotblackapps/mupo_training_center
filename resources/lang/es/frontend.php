@@ -43,7 +43,7 @@ return [
 "Photographer" => "Fotógrafo",
 "Duration" => "Duración",
 "Insights to lead skills to the believer" => "Ideas para dirigir las habilidades al creyente",
-"Top instructors from around the world" => "Instructores de todo el mundo enseñan a millones de estudiantes en Infix sobre periféricos que añaden funcionalidad a un sistema.",
+"Top instructors from around the world" => "Instructores de todo el mundo enseñan a millones de estudiantes en Mupo Training Center sobre periféricos que añaden funcionalidad a un sistema.",
 "Get Start Now" => "Cómo empezar ahora",
 "Skill Level" => "Nivel de habilidad",
 "Buy Now" => "Comprar ahora",

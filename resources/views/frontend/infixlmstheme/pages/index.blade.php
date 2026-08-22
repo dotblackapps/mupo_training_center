@@ -35,7 +35,7 @@
         </div>
       </article>
     @empty
-      <div class="mupo-course-empty">No courses are available yet. Add courses from the InfixLMS admin panel and they will appear here automatically.</div>
+      <div class="mupo-course-empty">No courses are available yet. Add courses from the Mupo Training Center admin panel and they will appear here automatically.</div>
     @endforelse
   </div>
 </section><section class="cta"><div><h2>Ready to Start Your Journey?</h2><p>Invest in skills today and build a stronger future tomorrow.</p></div><a href="{{ route('contact') }}" class="btn">Join Us Today</a></section>

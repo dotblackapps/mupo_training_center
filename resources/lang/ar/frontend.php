@@ -42,7 +42,7 @@
   'Photographer' => 'مصور فوتوغرافي',
   'Duration' => 'المدة',
   'Insights to lead skills to the believer' => 'مناظر لقيادة المهارات إلى المؤمن',
-  'Top instructors from around the world' => 'ويقوم كبار المدربين من جميع أنحاء العالم بتدريس ملايين الطلاب على Infix بشأن الأجهزة الطرفية التي تضيف وظائف إلى نظام.',
+  'Top instructors from around the world' => 'ويقوم كبار المدربين من جميع أنحاء العالم بتدريس ملايين الطلاب على Mupo Training Center بشأن الأجهزة الطرفية التي تضيف وظائف إلى نظام.',
   'Get Start Now' => 'بدء الآن',
   'Skill Level' => 'مستوى المهارات',
   'Buy Now' => 'اشتر الآن',

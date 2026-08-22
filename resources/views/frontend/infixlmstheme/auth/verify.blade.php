@@ -1,44 +1,4 @@
 @extends(theme('auth.layouts.app'))
 @section('content')
-
-    <style>
-        .error_wrapper {
-            padding: 243px 0 250px 0;
-
-        }
-    </style>
-
-    <div class="error_wrapper">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-xl-12">
-                    <div class="error_wrapper_info text-center">
-                        <div class="thumb">
-                            <img src="{{assetPath('/infixlmstheme/img/banner/error_thumb.png')}}" alt="">
-                        </div>
-                        <h3>{{ __('frontend.Verify Your Email Address') }}</h3>
-                        @if (session('resent'))
-                            <p>{{ __('frontend.A fresh verification link has been sent to your email address') }}</p>
-
-                        @endif
-                        <br>
-
-                        <p class="mb-2 h6">
-                            {{ __('frontend.Before proceeding, please check your email for a verification link Login in Using that Link') }}
-                        </p>
-                        <form method="POST" class="" action="{{ route('verification_mail_resend') }}">
-                            @csrf
-                            <div class="">
-                                <button type="submit" class="theme_btn">
-                                    {{ __('frontend.Resend Mail') }}
-                                </button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class="mupo-auth-page"><div class="mupo-auth-shell"><aside class="mupo-auth-side"><div><a href="{ url('/') }" class="mupo-auth-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a><a href="{ url('/') }" class="mupo-auth-logo"><img src="{ asset('mupo/assets/images/mupo-logo_1.jpeg') }" onerror="this.src='{ url('public/uploads/settings/mupo-logo_1.jpeg') }'" alt="Mupo Training Center"></a><h1>Verify your email.</h1><p>Confirm your email address to activate secure access to your learner account.</p><div class="mupo-auth-points"><div class="mupo-auth-point"><b>Secure access</b><br>Your account information is protected.</div><div class="mupo-auth-point"><b>Learner support</b><br>Contact MUPO support when you need assistance.</div></div></div><p><b>Mupo Training Center</b><br>Think. Future. Forward.</p></aside><main class="mupo-auth-main"><section class="mupo-auth-card"><span class="mupo-auth-badge">Email Verification</span><h2>{{ __('frontend.Verify Your Email Address') }}</h2>@if(session('resent'))<div class="mupo-auth-alert success">{{ __('frontend.A fresh verification link has been sent to your email address') }}</div>@endif<p class="lead">{{ __('frontend.Before proceeding, please check your email for a verification link Login in Using that Link') }}</p><form method="POST" action="{{ route('verification_mail_resend') }}">@csrf<button type="submit" class="mupo-auth-submit">{{ __('frontend.Resend Mail') }}</button></form><div class="mupo-auth-links"><a href="{{ url('/') }}">Back to Home</a></div></section></main></div></div>
 @endsection

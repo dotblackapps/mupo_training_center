@@ -617,7 +617,7 @@ class LoginController extends Controller
             Session::flush();
         }
 
-        return redirect('/');
+        return redirect()->route('frontendHomePage');
     }
 
     private function classAttendance($user)

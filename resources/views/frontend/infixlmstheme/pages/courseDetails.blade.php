@@ -23,6 +23,7 @@
     </style>
     <link href="{{assetPath('frontend/infixlmstheme/css/videopopup.css')}}{{assetVersion()}}" rel="stylesheet"/>
     <link href="{{assetPath('frontend/infixlmstheme/css/video.popup.css')}}{{assetVersion()}}" rel="stylesheet"/>
+    <link href="{{ asset('mupo/assets/css/course-learning.css') }}{{assetVersion()}}" rel="stylesheet"/>
     @if(isModuleActive('WaitList'))
         <link href="{{assetPath('frontend/infixlmstheme/css/select2.min.css')}}{{assetVersion()}}" rel="stylesheet"/>
     @endif

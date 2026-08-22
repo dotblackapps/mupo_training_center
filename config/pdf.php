@@ -2,9 +2,9 @@
 
 return [
     'format'           => 'A4',
-    'author'           => 'Infix LMS',
+    'author'           => 'Mupo Training Center',
     'subject'          => '',
     'keywords'         => '', // Separate values with comma
-    'creator'          => 'Infix LMS',
+    'creator'          => 'Mupo Training Center',
     'display_mode'     => 'fullpage'
 ];

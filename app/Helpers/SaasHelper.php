@@ -127,8 +127,8 @@ if (!function_exists('SaasInstitute')) {
             }
         } else {
             $institute = collect();
-            $institute->name = 'InfixLMS';
-            $institute->description = 'InfixLMS';
+            $institute->name = 'Mupo Training Center';
+            $institute->description = 'Mupo Training Center';
             $institute->domain = 'main';
             $institute->user_id = 1;
             $institute->status = 1;
