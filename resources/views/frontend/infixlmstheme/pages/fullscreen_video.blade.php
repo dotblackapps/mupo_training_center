@@ -314,6 +314,13 @@
 @section('mainContent')
     @php
         $video_lesson_hosts=['Iframe','Image','PDF','Word','Excel','PowerPoint','Text','Zip','GoogleDrive','H5P','Editor'];
+        $currentLessonId = (int) $lesson->id;
+        $currentLessonIndex = array_search($currentLessonId, array_map('intval', $lesson_ids ?? []), true);
+        $previousLessonId = ($currentLessonIndex !== false && $currentLessonIndex > 0) ? (int) $lesson_ids[$currentLessonIndex - 1] : null;
+        $nextLessonId = ($currentLessonIndex !== false && isset($lesson_ids[$currentLessonIndex + 1])) ? (int) $lesson_ids[$currentLessonIndex + 1] : null;
+        $isCurrentLessonComplete = auth()->check()
+            ? \App\LessonComplete::where('user_id', auth()->id())->where('course_id', $course->id)->where('lesson_id', $lesson->id)->where('status', 1)->exists()
+            : false;
     @endphp
     @push('js')
         <script>
@@ -376,10 +383,17 @@
                             <div class="header__right">
                                 <div class="contact_wrap d-flex align-items-center flex-wrap mx-0">
                                     <div class="contact_btn d-flex align-items-center flex-wrap">
-                                        @if (in_array($lesson->host, $video_lesson_hosts))
-                                            <button
-                                                class="theme_btn small_btn2 p-2 me-2 mr-lg-4 fs-14 completeAndPlayNext">
-                                                {{ __('frontend.Mark as Complete') }}</button>
+                                        @if ($lesson->is_quiz != 1)
+                                            <button type="button"
+                                                id="completeAndContinueBtn"
+                                                class="theme_btn small_btn2 p-2 me-2 mr-lg-4 fs-14 completeAndPlayNext"
+                                                data-course-id="{{ $course->id }}"
+                                                data-lesson-id="{{ $lesson->id }}"
+                                                data-next-lesson-id="{{ $nextLessonId }}"
+                                                data-completed="{{ $isCurrentLessonComplete ? '1' : '0' }}">
+                                                <i class="fa {{ $isCurrentLessonComplete ? 'fa-check-circle' : 'fa-check' }} me-1"></i>
+                                                <span class="complete-button-label">{{ $nextLessonId ? ($isCurrentLessonComplete ? 'Completed - Next Lesson' : __('frontend.Mark as Complete').' & Continue') : ($isCurrentLessonComplete ? 'Completed' : __('frontend.Mark as Complete')) }}</span>
+                                            </button>
                                         @endif
                                         @if (isset($lessons))
                                             <div class="d-flex aling-items-center">
@@ -390,27 +404,20 @@
                                                 <span class="ps-2 text-nowrap">{{ __('frontend.Auto Next') }}</span>
                                             </div>
                                             <div class="pl-20 text-end ms-3 d-flex align-items-center flex-row">
-                                                @php
-                                                    $last_key = array_key_last($lesson_ids);
-                                                    $last_previous_one = array_key_last($lesson_ids) - 1;
-                                                    $current_page = (int) showPicName(Request::url());
-
-                                                    $current_index = array_search(showPicName(Request::url()), $lesson_ids);
-                                                @endphp
-                                                @if (0 == array_search($current_page, $lesson_ids))
+                                                @if ($previousLessonId === null)
                                                     <a href="#" disabled="disabled"
                                                        class="header__common_btn theme_button_disabled disabled">
                                                         <i class="fa fa-angle-left"></i>
                                                     </a>
                                                 @else
                                                     <a href="#"
-                                                       onclick="goFullScreen({{ $course->id }},{{ $lesson_ids[$current_index - 1] }})"
+                                                       onclick="goFullScreen({{ $course->id }},{{ $previousLessonId }})"
                                                        class="header__common_btn"><i class="fa fa-angle-left"></i>
                                                     </a>
                                                 @endif
-                                                @if (array_search($current_page, $lesson_ids) < array_search(end($lesson_ids), $lesson_ids))
+                                                @if ($nextLessonId !== null)
                                                     <a href="#" id="next_lesson_btn"
-                                                       onclick="goFullScreen({{ $course->id }},{{ $lesson_ids[$current_index + 1] }})"
+                                                       onclick="goFullScreen({{ $course->id }},{{ $nextLessonId }})"
                                                        class="header__common_btn ms-2">
                                                         <i class="fa fa-angle-right"></i>
                                                     </a>
@@ -1520,8 +1527,8 @@ if ($assign->questionBank->shuffle==1){
                         <div class="accordion-item">
                             <div class="accordion-header" id="heading{{ $chapter->id }}">
                                 <h5 class="mb-0">
-                                    <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse{{ $chapter->id }}" aria-expanded="false"
+                                    <button class="accordion-button {{ $lesson->chapter_id == $chapter->id ? '' : 'collapsed' }}" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse{{ $chapter->id }}" aria-expanded="{{ $lesson->chapter_id == $chapter->id ? 'true' : 'false' }}"
                                             aria-controls="collapse{{ $chapter->id }}">
                                         {{ $chapter->name }} <br>
                                         <span class="course_length nowrap">
@@ -1536,7 +1543,7 @@ if ($assign->questionBank->shuffle==1){
                                     </button>
                                 </h5>
                             </div>
-                            <div class="collapse" id="collapse{{ $chapter->id }}"
+                            <div class="collapse {{ $lesson->chapter_id == $chapter->id ? 'show' : '' }}" id="collapse{{ $chapter->id }}"
                                  aria-labelledby="heading{{ $chapter->id }}" data-bs-parent="#accordion1">
                                 <div class="accordion-body">
                                     <div class="curriculam_list">
@@ -1919,21 +1926,75 @@ if ($assign->questionBank->shuffle==1){
             }
 
 
-            $(".completeAndPlayNext").click(function () {
+            // Keep the lesson curriculum visible consistently on desktop.
+            function keepCurriculumVisible() {
+                if (window.innerWidth >= 992) {
+                    $('.courseListPlayer').removeClass('active');
+                    $('.course_fullview_wrapper').removeClass('active');
+                    $('.floating-title').hide();
+                }
+            }
+            keepCurriculumVisible();
+            $(window).on('resize', keepCurriculumVisible);
+
+            // Reliable completion flow: save first, update the UI, then continue.
+            $(document).off('click.mupoComplete', '.completeAndPlayNext').on('click.mupoComplete', '.completeAndPlayNext', function (event) {
+                event.preventDefault();
+                const button = $(this);
+                if (button.data('busy') === 1) {
+                    return;
+                }
+
+                const nextLessonId = parseInt(button.attr('data-next-lesson-id') || '0', 10);
+                const originalLabel = button.find('.complete-button-label').text();
+                button.data('busy', 1).prop('disabled', true).addClass('is-saving');
+                button.find('.complete-button-label').text('Saving progress...');
+
                 $.ajax({
                     type: 'POST',
-                    "_token": "{{ csrf_token() }}",
                     url: '{{ route('lesson.complete.ajax') }}',
+                    dataType: 'json',
                     data: {
+                        _token: '{{ csrf_token() }}',
                         course_id: course,
                         lesson_id: lesson
-                    },
-                    success: function (data) {
-                        if ($('#next_lesson_btn').length) {
-                            $('#next_lesson_btn').trigger('click');
+                    }
+                }).done(function (data) {
+                    if (data === false || (data && data.success === false)) {
+                        button.prop('disabled', false).data('busy', 0).removeClass('is-saving');
+                        button.find('.complete-button-label').text(originalLabel);
+                        if (window.toastr) {
+                            toastr.error('We could not save your progress. Please try again.');
                         } else {
-                            location.reload();
+                            alert('We could not save your progress. Please try again.');
                         }
+                        return;
+                    }
+
+                    $('#single_lesson_' + lesson).find('[type=checkbox]').prop('checked', true);
+                    button.attr('data-completed', '1');
+                    button.find('i').removeClass('fa-check').addClass('fa-check-circle');
+
+                    if (nextLessonId > 0) {
+                        button.find('.complete-button-label').text('Completed - Opening next lesson...');
+                        window.setTimeout(function () {
+                            goFullScreen(parseInt(course, 10), nextLessonId);
+                        }, 350);
+                    } else {
+                        button.find('.complete-button-label').text('Course Lesson Completed');
+                        button.removeClass('is-saving').addClass('is-complete');
+                        button.prop('disabled', false).data('busy', 0);
+                    }
+                }).fail(function (xhr) {
+                    button.prop('disabled', false).data('busy', 0).removeClass('is-saving');
+                    button.find('.complete-button-label').text(originalLabel);
+                    const message = xhr.responseJSON && xhr.responseJSON.message
+                        ? xhr.responseJSON.message
+                        : 'We could not save your progress. Please try again.';
+                    if (window.toastr) {
+                        toastr.error(message);
+                    } else {
+                        alert(message);
                     }
                 });
             });

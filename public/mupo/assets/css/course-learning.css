@@ -91,3 +91,56 @@ body.mupo-learning-body, body:has(.course_fullview_wrapper){background:var(--mup
   .more_course_section{padding:48px 0!important;}
   .course_fullview_wrapper .lesson_content_text{margin:14px!important;padding:22px!important;}
 }
+
+/* MUPO lesson navigation reliability */
+@media (min-width: 992px){
+  .course_fullview_wrapper{width:calc(100% - 380px)!important;padding-right:0!important;}
+  .course_fullview_wrapper.active{width:calc(100% - 380px)!important;}
+  .course_fullview_wrapper .course__play_warp.courseListPlayer,
+  .course_fullview_wrapper .course__play_warp.courseListPlayer.active{
+    display:block!important;
+    position:fixed!important;
+    top:var(--top)!important;
+    right:0!important;
+    width:380px!important;
+    height:calc(100vh - var(--top))!important;
+    transform:translateX(0)!important;
+    visibility:visible!important;
+    opacity:1!important;
+    z-index:40!important;
+    padding:0!important;
+  }
+  .course__play_warp.courseListPlayer .course__play_list{
+    height:calc(100vh - var(--top) - 72px)!important;
+    max-height:calc(100vh - var(--top) - 72px)!important;
+    min-height:0!important;
+    overflow-y:auto!important;
+    scrollbar-width:thin;
+  }
+  .course__play_warp .play_warp_header .play_toggle_btn,
+  .floating-title{display:none!important;}
+}
+
+.completeAndPlayNext{
+  min-width:190px;
+  min-height:44px;
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  box-shadow:0 8px 20px rgba(227,6,19,.18);
+}
+.completeAndPlayNext.is-saving{opacity:.72;cursor:wait!important;}
+.completeAndPlayNext.is-complete{background:#157347!important;border-color:#157347!important;}
+.completeAndPlayNext:disabled{cursor:wait;}
+.course__play_warp .single_play_list a.active{
+  border-left:4px solid var(--mupo-red)!important;
+  font-weight:800!important;
+}
+.course__play_warp .accordion-button:not(.collapsed){
+  border-left:4px solid var(--mupo-red)!important;
+}
+@media(max-width:991px){
+  .completeAndPlayNext{min-width:0;width:auto;}
+  .course__play_warp.courseListPlayer{display:block!important;visibility:visible!important;opacity:1!important;}
+}

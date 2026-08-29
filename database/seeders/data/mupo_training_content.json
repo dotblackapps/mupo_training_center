@@ -896,9 +896,9 @@
         }
       ],
       "quiz": {
-        "title": "PSIRA Grade E, D & C Final Knowledge Assessment",
-        "percentage": 70,
-        "time": 60,
+        "title": "PSIRA Grade E, D & C - Section A: Multiple Choice",
+        "percentage": null,
+        "time": 120,
         "questions": [
           {
             "number": 1,
@@ -1710,6 +1710,952 @@
             ],
             "marks": 1
           }
+        ],
+        "notes": "Section A only. Final assessment is 100 marks and also includes Sections B and C, which require manual assessor marking."
+      },
+      "assessment": {
+        "source_document": "PSIRA Training Manual/MUPO PSIRA Grade E D C - Assessment Exam Pack.doc",
+        "memorandum_document": "PSIRA Training Manual/MUPO PSIRA Grade E D C - Assessor Memorandum.docx",
+        "duration_minutes": 120,
+        "total_marks": 100,
+        "pass_standard": "Apply the current provider-approved assessment standard.",
+        "sections": [
+          {
+            "section": "A",
+            "title": "Multiple choice",
+            "marks": 30,
+            "type": "auto_marked_mcq",
+            "instruction": "Choose the one best answer. Record A, B, C or D.",
+            "questions": [
+              {
+                "number": 1,
+                "question": "Which action best supports professional hygiene before duty?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Wear any available clothing",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Report in a clean, complete uniform",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Use perfume instead of bathing",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Ignore dirty footwear",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 2,
+                "question": "A visitor becomes impatient at the gate. The best first response is to: [1]",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Argue until the visitor agrees",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Ignore the visitor",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Explain the rule calmly and offer the approved next step",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "Allow entry to avoid conflict",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 3,
+                "question": "Which is a vital point?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "A damaged fence",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "A dark corner",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "A main electrical supply",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "An overgrown tree",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 4,
+                "question": "When a suspicious package is found, the officer should first:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Open it carefully",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Move it to a safe place",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Keep people away and notify through approved channels",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "Use a radio directly beside it",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 5,
+                "question": "Which conduct is professional?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Accepting a gift to bypass a rule",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Following lawful post orders",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Sharing confidential information",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Reporting for duty intoxicated",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 6,
+                "question": "The safest general approach to a rising confrontation is to:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Move closer to show authority",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Use calm communication, distance and an exit route",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Challenge the person",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Turn your back",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 7,
+                "question": "An objective observation is:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "The man looked guilty",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "The car was probably stolen",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "A blue sedan left north at 14:10",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "The visitor seemed dishonest",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 8,
+                "question": "During patrol, possible evidence should be:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Moved for safekeeping",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Handled to identify it",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Protected and reported without disturbance",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "Shown to colleagues",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 9,
+                "question": "On discovering a fire, the first priority is to:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Finish the patrol",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Raise the alarm and protect life",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Photograph the fire",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Open all windows",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 10,
+                "question": "An effective radio message is:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Long and informal",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Brief, accurate and professional",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Full of slang",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Sent without identifying the station",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 11,
+                "question": "Force used by a security officer must be:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Punitive",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Necessary and proportionate",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Used whenever a rule is broken",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Kept secret",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 12,
+                "question": "A grievance procedure is mainly used to:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Record visitor entries",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Raise and resolve workplace concerns",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Select patrol routes",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Issue access cards",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 13,
+                "question": "A near miss should be:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Ignored because no one was hurt",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Reported so the hazard can be corrected",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Discussed only with friends",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Removed from the record",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 14,
+                "question": "Before granting access, an officer must confirm:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Identity and authority",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "Only the person’s name",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Whether the person is in a hurry",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Whether the person knows an employee",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 15,
+                "question": "If a person withdraws consent during a consent-based search, the officer should:  [1]",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Continue quickly",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Stop unless another lawful authority applies",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Use force to finish",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Damage the container to check it",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 16,
+                "question": "A pocketbook entry should be made:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "From memory at the end of the month",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Promptly, in ink and in chronological order",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "In pencil so it can be changed",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Only after a supervisor approves every word",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 17,
+                "question": "A strong incident report is:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Emotional and persuasive",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Accurate, concise, complete and objective",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Based on rumours",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Written without times or names",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 18,
+                "question": "An internal threat comes from:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Only people outside the premises",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "A person authorised to be on the premises",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Weather conditions only",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Emergency services",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 19,
+                "question": "Which behaviour damages public relations?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Courtesy",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Listening",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Abuse of authority",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "Helpful directions",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 20,
+                "question": "A vulnerable area is best described as:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "A point essential to operations",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "A place relatively easy to penetrate or difficult to observe",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "A staff rest area",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "An assembly point",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 21,
+                "question": "During a bomb-threat call, the receiver should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "End the call immediately",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Record exact words and relevant voice or background details",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Promise that the threat will be ignored",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Announce the call publicly",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 22,
+                "question": "A lawful instruction should be:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Related to the work and within authority",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "Kept off the record",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Followed even if clearly unlawful",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Used to favour friends",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 23,
+                "question": "When physical danger increases, an officer should normally prioritise: [1]",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "De-escalation, assistance and safe withdrawal",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "Winning the argument",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Standing within reach",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Using the maximum force available",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 24,
+                "question": "A useful vehicle description includes:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "A guess about the driver’s motive",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Make, colour, registration and distinctive features",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Only the vehicle size",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "The officer’s opinion of its value",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 25,
+                "question": "A patrol officer should know:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Only the shift end time",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Post orders, routes and escalation contacts",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Private employee information",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "How to change access records",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 26,
+                "question": "Firefighting equipment should be used only when:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "The officer is trained and escape remains safe",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "Smoke is too thick to see",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "The fire blocks the only exit",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "The officer has never used the equipment",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 27,
+                "question": "Repeat-back in communication is used to:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Make a message longer",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Confirm critical details",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Replace written records",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Avoid identifying the sender",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 28,
+                "question": "When legal authority is uncertain, the officer should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Invent a procedure",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Escalate to a supervisor or police as appropriate",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Hide the incident",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Use force to decide the matter",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 29,
+                "question": "Good housekeeping helps prevent:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Only access disputes",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Trips, blocked exits and some fire hazards",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "All criminal activity",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "The need for patrols",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 30,
+                "question": "An access refusal should be:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Personal and insulting",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Calm, recorded and escalated according to procedure",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "Ignored",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "Changed if the visitor complains",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              }
+            ]
+          },
+          {
+            "section": "B",
+            "title": "Short answers",
+            "marks": 30,
+            "type": "manual_marked_short_answer",
+            "questions": [
+              {
+                "number": 31,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "List three reasons why hygiene and uniform standards matter in security work."
+              },
+              {
+                "number": 32,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "Differentiate a vulnerable area from a vital point and give one example of each."
+              },
+              {
+                "number": 33,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "State three actions required after finding a suspicious object."
+              },
+              {
+                "number": 34,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "Give three principles for safe de-escalation and personal safety."
+              },
+              {
+                "number": 35,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "List three items that should be checked during a patrol."
+              },
+              {
+                "number": 36,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "State three priorities when smoke or fire is discovered."
+              },
+              {
+                "number": 37,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "Explain three checks required before granting access."
+              },
+              {
+                "number": 38,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "What should happen when consent to a search is withdrawn? Give three actions."
+              },
+              {
+                "number": 39,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "List the six questions that structure a complete security record or report."
+              },
+              {
+                "number": 40,
+                "type": "short_answer",
+                "marks": 3,
+                "question": "Differentiate internal and external threats and give one example of each."
+              }
+            ]
+          },
+          {
+            "section": "C",
+            "title": "Applied scenarios",
+            "marks": 40,
+            "type": "manual_marked_scenario",
+            "instruction": "Answer all four scenarios. Give safe, lawful and site-appropriate actions in a logical sequence.",
+            "questions": [
+              {
+                "number": 41,
+                "type": "scenario",
+                "marks": 10,
+                "title": "Suspicious object at reception",
+                "scenario": "At 08:20, a receptionist reports an unattended backpack with wires visible beneath a chair near the main entrance. Staff and visitors are moving through the area. Explain your actions, communication and recordkeeping."
+              },
+              {
+                "number": 42,
+                "type": "scenario",
+                "marks": 10,
+                "title": "Contractor without confirmed authority",
+                "scenario": "A contractor presents valid identification and tools but is not on the authorised list. The contractor says the work is urgent and becomes impatient. Explain how you handle the access decision and interaction."
+              },
+              {
+                "number": 43,
+                "type": "scenario",
+                "marks": 10,
+                "title": "Consent withdrawn during a bag search",
+                "scenario": "A visitor agrees to a bag search but withdraws consent after the search begins. No separate legal authority for the search has been confirmed. Explain the correct response."
+              },
+              {
+                "number": 44,
+                "type": "scenario",
+                "marks": 10,
+                "title": "Night patrol and incident reporting",
+                "scenario": "At 22:15 during patrol, you find a rear door open, fresh marks near the lock and a broken perimeter light. No authorised work is listed. Explain what you do and write the facts that must appear in the occurrence book."
+              }
+            ]
+          }
+        ],
+        "memorandum_text": "SECURITY TRAINING PROGRAMME\nASSESSOR MEMORANDUM\nModel answers, marking tools and moderation record\nPSIRA GRADE E, D & C  |  CONFIDENTIAL - ASSESSOR USE ONLY\nDocument code: MTC-PSIRA-MEMO-01  |  Edition 1.0  |  18 August 2026\n377 Johannes Ramakhoase Street, Office 0005, Jardown 1\n+27 12 004 2004  |  WhatsApp +27 84 750 7013\nadmin@mupotrainingcenter.co.za  |  www.mupotrainingcenter.co.za\nDocument control\nAssessment summary\nAssessor instructions\nMark consistently against this memorandum and the stated mark allocation.\nAccept a valid alternative answer only when it demonstrates the same safe and lawful principle.\nRecord accepted alternatives and apply them consistently across learners.\nComplete the marking record, feedback and moderation evidence in line with the provider's current process.\nReference and control note: Derived from the Mupo Security Training Grade E, D & C Training Manual, Publication Ready Edition 2.1. Review against current PSiRA, legal, accreditation and internal assessment requirements before use.\nASSESSOR MEMORANDUM\nSection A answers\nSection B marking guide\n31. List three reasons why hygiene and uniform standards matter in security work. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: health; professional image; client/public confidence; reduced contamination.\n32. Differentiate a vulnerable area from a vital point and give one example of each. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: vulnerable area definition; vital point definition; two suitable examples.\n33. State three actions required after finding a suspicious object. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: do not touch; move people/isolate; notify approved contacts; preserve access for responders.\n34. Give three principles for safe de-escalation and personal safety. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: calm communication; distance/positioning; exit/assistance; avoid unnecessary confrontation.\n35. List three items that should be checked during a patrol. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: doors/windows/fences; lighting/hazards; vital points; emergency equipment.\n36. State three priorities when smoke or fire is discovered. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: raise alarm; protect/evacuate life; call emergency help; follow site plan.\n37. Explain three checks required before granting access. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: identity; authority/appointment; access conditions or pass; recording.\n38. What should happen when consent to a search is withdrawn? Give three actions. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: stop consent-based search; manage or deny access under policy; call supervisor; record event.\n39. List the six questions that structure a complete security record or report. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: who; what; when; where; why; how.\n40. Differentiate internal and external threats and give one example of each. [3]\nAward one mark for each valid point, up to the stated maximum. Examples: internal definition/example; external definition/example; clear distinction.\nSection C scenario rubrics\n41. Suspicious object at reception [10]\nDoes not touch, move, open or closely examine the object (2)\nMoves people away and controls access in line with the site emergency plan (2)\nNotifies control, supervisor and emergency services through approved channels (2)\nCommunicates calmly and avoids unverified public statements (1)\nRecords time, location, description, persons informed and actions taken from a safe position (2)\nPreserves access for emergency responders and follows instructions (1)\n42. Contractor without confirmed authority [10]\nVerifies identification but recognises that identity alone is not authority (2)\nDoes not grant access until authority is confirmed (2)\nExplains the rule calmly and respectfully (1)\nContacts the approved client representative or supervisor (2)\nMaintains safe positioning and seeks support if behaviour escalates (1)\nRecords the attempt, decision, contacts and outcome (2)\n43. Consent withdrawn during a bag search [10]\nStops the consent-based search (2)\nProtects the person’s dignity and avoids force or damage (1)\nExplains the access consequence under site policy (2)\nCalls a supervisor or authorised decision-maker (2)\nKeeps control of the access point without unlawful detention (1)\nRecords the withdrawal, actions and outcome (2)\n44. Night patrol and incident reporting [10]\nDoes not enter or disturb the possible scene unnecessarily (2)\nMoves to a safe position, requests assistance and notifies control/supervisor (2)\nControls access and follows the site incident procedure (1)\nObserves and records objective facts, not conclusions (2)\nIncludes time, location, door/lock/light condition, persons informed, actions and outcome (2)\nPreserves evidence and supports police or authorised follow-up (1)\nAssessment marking record\nModeration checklist\nYes / No / N/A  -  Assessment conditions and learner identity were verified.\nYes / No / N/A  -  All sections were marked against the approved memorandum.\nYes / No / N/A  -  Alternative answers were accepted consistently and recorded.\nYes / No / N/A  -  Marks were added and transferred accurately.\nYes / No / N/A  -  Feedback and reassessment requirements were recorded.\nYes / No / N/A  -  Assessment evidence is authentic, sufficient, valid and current for the provider’s process."
+      },
+      "content_policy": {
+        "source_of_truth": "Use only wording from the supplied MUPO manual package. Do not generate, paraphrase, simplify, or invent lesson or assessment content.",
+        "learner_content": "Learner Guide and Learner Workbook / learner-facing guide supplied in the manual package.",
+        "assessment_content": "Written/Assessment Examination Pack supplied in the manual package.",
+        "answer_key": "Assessor/Examination Memorandum supplied in the manual package.",
+        "staff_only": [
+          "Facilitator/Instructor Guide",
+          "Assessment/Written Examination Pack",
+          "Assessor/Examination Memorandum"
         ]
       }
     },
@@ -2562,9 +3508,9 @@
         }
       ],
       "quiz": {
-        "title": "NKP Final Knowledge Assessment",
-        "percentage": 50,
-        "time": 60,
+        "title": "NKP - Section A: Multiple-choice questions",
+        "percentage": null,
+        "time": 150,
         "questions": [
           {
             "number": 1,
@@ -3106,6 +4052,701 @@
             ],
             "marks": 1
           }
+        ],
+        "notes": "Section A only. Final written examination is 100 marks and also includes Sections B and C, which require manual assessor marking."
+      },
+      "assessment": {
+        "source_document": "NKP/Mupo NKP Written Examination Pack - Version 1.0.docx",
+        "memorandum_document": "NKP/Mupo NKP Examination Memorandum - Version 1.0.docx",
+        "duration_minutes": 150,
+        "total_marks": 100,
+        "working_threshold": "50% unless the provider-approved assessment plan specifies another threshold",
+        "sections": [
+          {
+            "section": "A",
+            "title": "Multiple-choice questions",
+            "marks": 20,
+            "type": "auto_marked_mcq",
+            "instruction": "Select the one best answer for each question. Record all answers on the Section A answer grid.",
+            "questions": [
+              {
+                "number": 1,
+                "question": "When current law, a site instruction and historical training material appear inconsistent, what should an officer do?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Use the source that permits the fastest action.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Follow the historical training material because it was issued first.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Pause the disputed action and obtain an authorised interpretation.",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "Ask another learner to decide which source is correct.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 2,
+                "question": "Which statement best describes the owner's safeguarding responsibility?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "It ends when a private security contractor is appointed.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "It includes governance, resources, assurance and corrective action even when services are contracted.",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "It is limited to signing the visitor register.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "It may be transferred entirely to the most senior security officer on duty.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 3,
+                "question": "Before acting on a claimed statutory instruction, the officer should first confirm:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "only the name of the person who delivered it.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "whether the instruction is convenient for the shift.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "whether a colleague has heard a similar instruction before.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "the issuer, legal authority or delegation, scope, effective date and conditions.",
+                    "correct": true
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 4,
+                "question": "Recruitment and screening information should be collected when it is:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "lawful, relevant to the role and handled through an authorised process.",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "interesting to the interviewer even if it is unrelated to the role.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "available on social media, regardless of accuracy.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "requested by any employee who knows the applicant.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 5,
+                "question": "A provisional appointment, where lawfully permitted, should include:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "unrestricted deployment until screening is complete.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "no written record because the appointment is temporary.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "restricted duties, supervision, outstanding checks, training, a review date and authorised approval.",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "automatic permanent appointment after the first shift.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 6,
+                "question": "Which event should normally trigger refresher or remedial training?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "A learner requests a new uniform size.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "An incident or performance review identifies a competence gap.",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "The officer completes a routine shift without incident.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "A visitor compliments the officer.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 7,
+                "question": "A contractor presents valid identification but is absent from the authorised appointment list. The best initial response is to:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "allow access because the identity document appears genuine.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "ask another visitor to confirm the contractor.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "confiscate the identity document.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "keep access controlled and verify appointment and authority through an approved independent source.",
+                    "correct": true
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 8,
+                "question": "If consent is the only basis for a search and the person withdraws consent, the officer should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "stop the search unless a separate lawful authority clearly applies.",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "use force to complete the search.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "continue because the search already started.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "arrest the person automatically.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 9,
+                "question": "A suspicious unattended article is found near an entrance. What is the safest response?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Move it to a less busy area.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "Open it carefully to identify the owner.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "Maintain distance, redirect people and notify the authorised control and emergency channels.",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "Photograph it at close range for the occurrence book.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 10,
+                "question": "Which record is essential to an accountable evidence transfer?",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "Only the final storage location.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "The giver, receiver, date, time, purpose, condition, seal or reference and destination.",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "A social-media photograph of the item.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "The personal opinion of the person receiving it.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 11,
+                "question": "Before arresting a person, a security officer must identify:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "a manager who is willing to approve any arrest.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "a reason to question the person privately.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "a convenient place to hold the person indefinitely.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "a lawful arrest power and the facts supporting it, followed by prompt police handover.",
+                    "correct": true
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 12,
+                "question": "Use of force must be:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "lawful, necessary and proportionate, and must stop when the need ends.",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "used whenever a person argues with an officer.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "decided only after the incident report is written.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "greater than the force used by the other person.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 13,
+                "question": "The territorial limit means that:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "an officer may exercise any site-related authority anywhere in South Africa.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "site rules replace the general law outside the site.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "special site-related authority does not automatically apply away from the protected site or legally defined vicinity.",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "an officer has no ordinary legal rights outside the site.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 14,
+                "question": "Before disclosing protected information, the officer should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "send all available information so the recipient can choose what is useful.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "confirm lawful purpose and authorised recipient, share the minimum necessary, use an approved channel and record the disclosure when required.",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "use a private messaging group because it is faster.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "remove the date and then publish the information.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 15,
+                "question": "When serious misconduct is alleged, the correct approach is to:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "dismiss the employee immediately in every case.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "ignore the operational risk until the hearing is completed.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "publish the allegation so witnesses can respond.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "control the immediate risk, preserve evidence and follow the authorised fair process without prejudging the outcome.",
+                    "correct": true
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 16,
+                "question": "An objective occurrence-book entry should contain:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "facts, attributed information, decisions, times, notifications and transparent corrections.",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "labels such as 'criminal' whenever access is refused.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "only the final outcome.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "unverified rumours if they appear important.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 17,
+                "question": "A caller claiming to be technical support asks for alarm identifiers and temporary disabling of a protective function. The officer should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "provide the information if the caller sounds confident.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "disable the function and verify the caller afterwards.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "refuse disclosure or alteration, verify through an independent approved contact and use the authorised change process.",
+                    "correct": true
+                  },
+                  {
+                    "label": "D",
+                    "text": "transfer the call to another officer without reporting it.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 18,
+                "question": "An unidentified drone is repeatedly observed near a generic site boundary. The officer should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "attempt to disable it with available equipment.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "observe safely, report objective details, protect operational information and follow authorised procedure.",
+                    "correct": true
+                  },
+                  {
+                    "label": "C",
+                    "text": "post a photograph online to locate the operator.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "leave the assigned area to chase it.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 19,
+                "question": "Flooding makes the normal evacuation route unsafe. The officer should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "continue using the route because it appears on the old plan.",
+                    "correct": false
+                  },
+                  {
+                    "label": "B",
+                    "text": "create an unapproved shortcut through a restricted area.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "wait for people to discover the hazard themselves.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "block the unsafe route, direct people to an approved alternative and report the change to control.",
+                    "correct": true
+                  }
+                ],
+                "marks": 1
+              },
+              {
+                "number": 20,
+                "question": "A CCTV clip is shared in an unauthorised messaging group. The receiving officer should:",
+                "options": [
+                  {
+                    "label": "A",
+                    "text": "stop further circulation, report receipt confidentially and have the authorised custodian preserve the original recording and audit trail.",
+                    "correct": true
+                  },
+                  {
+                    "label": "B",
+                    "text": "forward it only to trusted friends.",
+                    "correct": false
+                  },
+                  {
+                    "label": "C",
+                    "text": "edit the clip to make the person easier to identify.",
+                    "correct": false
+                  },
+                  {
+                    "label": "D",
+                    "text": "delete every trace before reporting it.",
+                    "correct": false
+                  }
+                ],
+                "marks": 1
+              }
+            ]
+          },
+          {
+            "section": "B",
+            "title": "Structured-response questions",
+            "marks": 40,
+            "type": "manual_marked_structured_response",
+            "instruction": "Answer in clear points or short paragraphs. A correct decision must include the authority, safety, communication, escalation and record controls where relevant.",
+            "questions": [
+              {
+                "number": 21,
+                "type": "structured_response",
+                "marks": 6,
+                "question": "Differentiate the functions of the Minister or delegated authority from the responsibilities of the owner or person in control. Give three points for each role."
+              },
+              {
+                "number": 22,
+                "type": "structured_response",
+                "marks": 5,
+                "question": "List five records that demonstrate that the owner is maintaining an effective safeguarding system."
+              },
+              {
+                "number": 23,
+                "type": "structured_response",
+                "marks": 5,
+                "question": "State five controls required before a person may be deployed under a lawful provisional appointment."
+              },
+              {
+                "number": 24,
+                "type": "structured_response",
+                "marks": 6,
+                "question": "Describe the safe decision sequence when an unidentified or unauthorised person requests entry."
+              },
+              {
+                "number": 25,
+                "type": "structured_response",
+                "marks": 4,
+                "question": "Explain what an officer must do when consent is withdrawn during a consent-based search."
+              },
+              {
+                "number": 26,
+                "type": "structured_response",
+                "marks": 5,
+                "question": "Explain five actions that protect the integrity and chain of custody of possible evidence."
+              },
+              {
+                "number": 27,
+                "type": "structured_response",
+                "marks": 4,
+                "question": "Explain why the same conduct can be both workplace misconduct and a criminal offence, and why the employment outcome must not be prejudged."
+              },
+              {
+                "number": 28,
+                "type": "structured_response",
+                "marks": 5,
+                "question": "List the five questions in the authorised-disclosure test used before protected information is shared."
+              }
+            ]
+          },
+          {
+            "section": "C",
+            "title": "Integrated scenarios",
+            "marks": 40,
+            "type": "manual_marked_scenario",
+            "instruction": "Apply the six-part decision model: authority - limits - safety - communication - escalation - record. Do not add facts that are not in the scenario.",
+            "questions": [
+              {
+                "number": 29,
+                "type": "integrated_scenario",
+                "marks": 20,
+                "title": "Lost credential, attempted tailgating and escalating behaviour",
+                "scenario": "An employee reports a lost access card. Ten minutes later, a person wearing the same department's uniform asks a colleague to hold a controlled door open. The person says an urgent meeting has started, cannot produce another credential and becomes verbally aggressive when the officer keeps the door controlled.",
+                "parts": [
+                  {
+                    "label": "a",
+                    "marks": 5,
+                    "question": "State five immediate access-control and safety actions."
+                  },
+                  {
+                    "label": "b",
+                    "marks": 4,
+                    "question": "Give four elements of a calm, dignity-based communication response."
+                  },
+                  {
+                    "label": "c",
+                    "marks": 5,
+                    "question": "List five records or system logs that must be created or preserved."
+                  },
+                  {
+                    "label": "d",
+                    "marks": 6,
+                    "question": "Explain three authority limits or escalation triggers and the correct response to each."
+                  }
+                ]
+              },
+              {
+                "number": 30,
+                "type": "integrated_scenario",
+                "marks": 20,
+                "title": "System fault, social engineering and protected information",
+                "scenario": "During an access-control system fault, a caller claims to be emergency technical support. The caller asks for controller details and temporary disabling of an alarm. At the same time, a colleague sends a CCTV clip of the fault area to a private messaging group and says it may help technicians.",
+                "parts": [
+                  {
+                    "label": "a",
+                    "marks": 6,
+                    "question": "Describe six immediate actions that address the caller and the requested system change."
+                  },
+                  {
+                    "label": "b",
+                    "marks": 4,
+                    "question": "State four continuity measures that maintain safety and access control during the fault."
+                  },
+                  {
+                    "label": "c",
+                    "marks": 6,
+                    "question": "Explain six information-protection and evidence-preservation actions relating to the call and CCTV clip."
+                  },
+                  {
+                    "label": "d",
+                    "marks": 4,
+                    "question": "Identify four limits on the security officer's authority in this incident."
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "memorandum_text": "NATIONAL KEY POINT SECURITY TRAINING\nEXAMINATION MEMORANDUM\nModel answers, marking allocations and moderation guidance\nSAQA UNIT STANDARD 246693  |  NQF LEVEL 4  |  4 CREDITS\nDocument code: MTC-NKP-MEM-01  |  Version 1.0  |  19 August 2026\nAligned to NKP Learner Guide - Advanced Blended Edition 4.1\nCONFIDENTIAL - assessors and moderators only\n377 Johannes Ramakhoase Street, Office 0005, Jardown 1\n+27 12 004 2004  |  WhatsApp +27 84 750 7013\nadmin@mupotrainingcenter.co.za  |  www.mupotrainingcenter.co.za\nDocument control and marking principles\nConfidentiality: Do not issue this memorandum to learners before the assessment and feedback process authorised by the provider. Store and transmit it through approved controlled channels.\nGeneral marking rules\nAward marks for correct principles expressed in the learner's own words; exact wording is not required unless the question asks for a specific test or sequence.\nAccept a lawful equivalent response supported by current legislation, an approved site procedure or a verified delegated instruction. Record the accepted alternative for moderation.\nDo not award a mark for an answer that invents authority, relies on bias, exposes protected information or recommends an unsafe action.\nWhere one sentence contains several distinct correct points, allocate only the marks supported by the marking indicators.\nUse the approved assessment plan for competence thresholds, reassessment and integrated practical evidence. A written score alone does not prove practical competence.\nAssessment blueprint\nSection A memorandum [20 marks]\nAllocation: One mark for each correct answer. No half marks. Section total: 20.\nSection B memorandum [40 marks]\nQuestion 21 [6 marks]\nDifferentiate the functions of the Minister or delegated authority from the responsibilities of the owner or person in control. Give three points for each role.\nMinister/delegated authority: exercises only current statutory functions; issues lawful notices, directions, standards or delegations through prescribed processes; receives information or oversees compliance where authorised and coordinates with responsible state structures. Award any three relevant points. (3)\nOwner/person in control: establishes and maintains the approved policy and security plan; provides competent staff, supervision, equipment and facilities; controls access; maintains incident and assurance systems; reviews risks and corrects deficiencies. Award any three relevant points. (3)\nQuestion 22 [5 marks]\nList five records that demonstrate that the owner is maintaining an effective safeguarding system.\nAny five: approved policy/security plan/post orders and version history; appointment/screening/competence records; induction/refresher records; equipment/key/credential registers; occurrence books/patrol records/incident reports; escalation logs; inspection/exercise findings; corrective-action and management-review records. (1 each)\nQuestion 23 [5 marks]\nState five controls required before a person may be deployed under a lawful provisional appointment.\nAward one mark each for any five: confirmed lawful basis; written appointment and authorised decision-maker; restricted duties; direct supervision; recorded outstanding checks; required training/induction; review date; controlled access/credential limits; no unrestricted deployment. (5)\nQuestion 24 [6 marks]\nDescribe the safe decision sequence when an unidentified or unauthorised person requests entry.\nObserve from a safe position and assess immediate danger. (1)\nIdentify yourself and request identity, purpose and authority where safe and lawful. (1)\nVerify through the approved independent access-control process. (1)\nKeep access controlled while authority is unconfirmed. (1)\nExplain the decision and approved next step calmly. (1)\nEscalate when risk, refusal, suspected crime or uncertainty requires it, and record the event. (1)\nQuestion 25 [4 marks]\nExplain what an officer must do when consent is withdrawn during a consent-based search.\nStop the consent-based search unless a separate lawful authority clearly applies. (1)\nDo not use force merely to complete that search. (1)\nApply the lawful access consequence and consult the authorised supervisor. (1)\nRecord the withdrawal, response, persons consulted and outcome. (1)\nQuestion 26 [5 marks]\nExplain five actions that protect the integrity and chain of custody of possible evidence.\nAny five: protect safety and prevent unnecessary handling; record original location/condition/features; identify lawful authority; use approved packaging/seal when trained; preserve digital originals and access logs; record every transfer; obtain receiver acknowledgement; report breaks in continuity; deliver promptly to the authorised custodian. (1 each)\nQuestion 27 [4 marks]\nExplain why the same conduct can be both workplace misconduct and a criminal offence, and why the employment outcome must not be prejudged.\nConduct may breach employment duties and also meet elements of a statutory offence; the two processes have different purposes and decision-makers. (2)\nImmediate risk may justify temporary post removal, but guilt/dismissal must follow the authorised fair process, verified facts and applicable labour requirements. (2)\nQuestion 28 [5 marks]\nList the five questions in the authorised-disclosure test used before protected information is shared.\nIs there a lawful duty or authority to disclose? (1)\nIs the recipient authorised and is the information required for a legitimate purpose? (1)\nCan the purpose be achieved by sharing less information? (1)\nIs the channel approved and secure? (1)\nMust the disclosure be recorded or reported? (1)\nSection C memorandum [40 marks]\nQuestion 29: Lost credential, attempted tailgating and escalating behaviour [20 marks]\nScenario: An employee reports a lost access card. Ten minutes later, a person wearing the same department's uniform asks a colleague to hold a controlled door open. The person says an urgent meeting has started, cannot produce another credential and becomes verbally aggressive when the officer keeps the door controlled.\na) [5 marks]\nKeep the door controlled and prevent tailgating without confrontation.\nReport and suspend/disable the lost credential through the authorised process.\nVerify identity and current authority independently.\nRequest supervisor/support early as behaviour escalates.\nMaintain safe distance, exit route and protection of other people.\nb) [4 marks]\nState the access requirement and role calmly.\nAcknowledge urgency/concern without admitting unverified facts.\nAsk one clear question at a time and explain the approved next step.\nAvoid threats, labels, discriminatory language or argument.\nc) [5 marks]\nLost-card report and effective disablement time.\nAccess-control and credential audit logs.\nAppointment/authority verification result.\nRelevant CCTV reference preserved by an authorised custodian.\nOccurrence-book/incident entry recording words, behaviour, decisions, notifications and outcome.\nd) [6 marks]\nNo access solely on clothing, familiarity or urgency: verify first. (2)\nNo unlawful search, detention or force because a person is argumentative: escalate and use only lawful proportionate safety measures. (2)\nEscalate threats, crowding, suspected crime, unclear authority or safety risk to the supervisor/police as appropriate and record the response. (2)\nCritical review: Do not treat a high total as sufficient if the response grants access without verification, uses unlawful force or search, disables a protective function without authority, circulates protected information or contaminates evidence. Follow the approved assessment plan for critical criteria and reassessment.\nQuestion 30: System fault, social engineering and protected information [20 marks]\nScenario: During an access-control system fault, a caller claims to be emergency technical support. The caller asks for controller details and temporary disabling of an alarm. At the same time, a colleague sends a CCTV clip of the fault area to a private messaging group and says it may help technicians.\na) [6 marks]\nDo not disclose identifiers, credentials or system details.\nDo not disable or alter protection on the incoming caller's instruction.\nRecord the call time, number displayed, words used and requested action.\nVerify identity and authority using a separately verified approved contact.\nUse the approved change-authorisation process.\nNotify the duty supervisor/control and escalate suspected fraud or cybercrime through the authorised route.\nb) [4 marks]\nApply the approved manual/degraded-mode procedure.\nMaintain controlled entry and movement.\nDeploy additional patrol/access staff if authorised and required.\nRecord temporary controls, responsible persons and review/restore time.\nc) [6 marks]\nDo not forward, edit or publish the clip.\nReport the unauthorised sharing confidentially.\nPreserve the original recording through the authorised system custodian.\nPreserve export/access logs, camera reference and time basis.\nPreserve message and call metadata without unnecessary copying.\nLimit viewing/transfer to authorised persons through an approved channel and record every access/transfer.\nd) [4 marks]\nNo investigative or system-administration power unless specifically appointed, trained and authorised.\nNo disclosure beyond lawful purpose and minimum necessary information.\nNo alteration of protective controls without approved authority.\nNo public/general-purpose sharing of protected records; preserve and report instead.\nCritical review: Do not treat a high total as sufficient if the response grants access without verification, uses unlawful force or search, disables a protective function without authority, circulates protected information or contaminates evidence. Follow the approved assessment plan for critical criteria and reassessment.\nAssessor and moderation record\nModeration checks\nQuestion paper and memorandum versions match.\nMark totals and transfers have been recalculated.\nEquivalent answers were accepted consistently and recorded.\nUnsafe or unlawful reasoning was handled according to the approved critical-criteria rule.\nFeedback and reassessment decisions are specific, fair and traceable.\nLearner and site information is protected in retained evidence."
+      },
+      "content_policy": {
+        "source_of_truth": "Use only wording from the supplied MUPO manual package. Do not generate, paraphrase, simplify, or invent lesson or assessment content.",
+        "learner_content": "Learner Guide and Learner Workbook / learner-facing guide supplied in the manual package.",
+        "assessment_content": "Written/Assessment Examination Pack supplied in the manual package.",
+        "answer_key": "Assessor/Examination Memorandum supplied in the manual package.",
+        "staff_only": [
+          "Facilitator/Instructor Guide",
+          "Assessment/Written Examination Pack",
+          "Assessor/Examination Memorandum"
         ]
       }
     }
