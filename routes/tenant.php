@@ -247,6 +247,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/validateGenerate', 'HomeController@validateGenerateSubmit')->name('validateGenerateSubmit');
     Route::post('lesson-complete', 'Frontend\WebsiteController@lessonComplete')->name('lesson.complete');
     Route::any('lesson-complete-ajax', 'Frontend\WebsiteController@lessonCompleteAjax')->name('lesson.complete.ajax');
+    Route::get('mupo-assessments/{id}', '\\App\\Http\\Controllers\\MupoManualAssessmentController@show')->name('mupo.assessment.show');
+    Route::post('mupo-assessments/{id}', '\\App\\Http\\Controllers\\MupoManualAssessmentController@save')->name('mupo.assessment.save');
     Route::get('get-notifications', 'NotificationController@getNotificationUpdate')->name('getNotificationUpdate');
     Route::get('ajaxNotificationMakeRead', 'NotificationController@ajaxNotificationMakeRead')->name('ajaxNotificationMakeRead');
     Route::get('NotificationMakeAllRead', 'NotificationController@NotificationMakeAllRead')->name('NotificationMakeAllRead');
@@ -428,4 +430,10 @@ Route::get('read-some-part-of-books/{id}', 'Frontend\WebsiteController@readSomeP
 Route::group(['prefix' => 'admin/mupo-training-manuals', 'as' => 'admin.mupo-training-manuals.', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', '\\App\\Http\\Controllers\\Admin\\MupoTrainingManualController@index')->name('index');
     Route::get('/download/{id}', '\\App\\Http\\Controllers\\Admin\\MupoTrainingManualController@download')->name('download');
+});
+
+Route::group(['prefix' => 'admin/mupo-assessments', 'as' => 'admin.mupo-assessments.', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('/', '\\App\\Http\\Controllers\\MupoManualAssessmentController@adminIndex')->name('index');
+    Route::get('/{id}', '\\App\\Http\\Controllers\\MupoManualAssessmentController@adminShow')->name('show');
+    Route::post('/{id}/grade', '\\App\\Http\\Controllers\\MupoManualAssessmentController@grade')->name('grade');
 });

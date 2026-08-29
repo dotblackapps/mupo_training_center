@@ -43,7 +43,7 @@ class ImportMupoTrainingManuals extends Command
                 foreach ($payload['courses'] as $courseData) {
                     $courseId = $this->importCourse($courseData, $categoryId, $adminId, $langId, $lmsId);
                     $this->importResources($courseId, $courseData, $adminId, $lmsId);
-                    $this->importQuiz($courseId, $courseData, $categoryId, $adminId, $lmsId);
+                    $this->importAssessments($courseId, $courseData, $categoryId, $adminId, $lmsId);
                     $this->refreshCourseCounts($courseId);
                 }
 
@@ -139,6 +139,26 @@ class ImportMupoTrainingManuals extends Command
                 DB::table('question_banks')->whereIn('id', $questionIds)->delete();
             }
             DB::table('online_quizzes')->whereIn('id', $quizIds)->delete();
+        }
+
+        if (Schema::hasTable('mupo_manual_assessments')) {
+            $assessmentIds = DB::table('mupo_manual_assessments')->where('course_id', $courseId)->pluck('id');
+            if ($assessmentIds->isNotEmpty()) {
+                if (Schema::hasTable('mupo_manual_assessment_questions')) {
+                    $questionIds = DB::table('mupo_manual_assessment_questions')->whereIn('assessment_id', $assessmentIds)->pluck('id');
+                    if (Schema::hasTable('mupo_manual_assessment_submissions')) {
+                        $submissionIds = DB::table('mupo_manual_assessment_submissions')->whereIn('assessment_id', $assessmentIds)->pluck('id');
+                        if ($submissionIds->isNotEmpty() && Schema::hasTable('mupo_manual_assessment_answers')) {
+                            DB::table('mupo_manual_assessment_answers')->whereIn('submission_id', $submissionIds)->delete();
+                        }
+                        DB::table('mupo_manual_assessment_submissions')->whereIn('assessment_id', $assessmentIds)->delete();
+                    }
+                    if ($questionIds->isNotEmpty()) {
+                        DB::table('mupo_manual_assessment_questions')->whereIn('id', $questionIds)->delete();
+                    }
+                }
+                DB::table('mupo_manual_assessments')->whereIn('id', $assessmentIds)->delete();
+            }
         }
 
         DB::table('lessons')->where('course_id', $courseId)->delete();
@@ -269,49 +289,192 @@ class ImportMupoTrainingManuals extends Command
         }
     }
 
-    private function importQuiz(int $courseId, array $courseData, int $categoryId, int $adminId, int $lmsId): void
+    private function importAssessments(int $courseId, array $courseData, int $categoryId, int $adminId, int $lmsId): void
     {
-        if (empty($courseData['quiz']['questions'])) return;
-        $quiz = $courseData['quiz'];
-        $quizId = (int) DB::table('online_quizzes')->insertGetId([
-            'title'=>$this->jsonText($quiz['title']),'percentage'=>$quiz['percentage'],'instruction'=>$this->jsonText('Answer all questions. Select the one best answer for each question. Practical and structured-response evidence remains subject to the provider-approved assessment process.'),
-            'status'=>1,'active_status'=>1,'category_id'=>$categoryId,'course_id'=>$courseId,'created_by'=>$adminId,'updated_by'=>$adminId,
-            'random_question'=>0,'question_time_type'=>1,'question_time'=>$quiz['time'] ?? 60,'question_review'=>1,'show_result_each_submit'=>1,'multiple_attend'=>1,
-            'lms_id'=>$lmsId,'show_ans_with_explanation'=>1,'show_ans_sheet'=>1,'show_score_result'=>1,'show_correct_ans_in_ans_sheet'=>1,
-            'total_questions'=>count($quiz['questions']),'total_marks'=>array_sum(array_column($quiz['questions'],'marks')),
-            'created_at'=>now(),'updated_at'=>now(),
-        ]);
+        $assessment = $courseData['assessment'] ?? null;
+        $quiz = $courseData['quiz'] ?? null;
 
-        foreach ($quiz['questions'] as $q) {
-            $questionId = (int) DB::table('question_banks')->insertGetId([
-                'type'=>'M','question'=>$q['question'],'marks'=>$q['marks'] ?? 1,'number_of_option'=>count($q['options']),
-                'category_id'=>$categoryId,'active_status'=>1,'user_id'=>$adminId,'lms_id'=>$lmsId,'shuffle'=>1,
-                'explanation'=>'Correct answer is determined from the supplied controlled assessor memorandum.','number_of_ans'=>1,
-                'created_at'=>now(),'updated_at'=>now(),
-            ]);
-            foreach ($q['options'] as $pos=>$opt) {
-                DB::table('question_bank_mu_options')->insert([
-                    'title'=>$opt['label'].'. '.$opt['text'],'status'=>$opt['correct']?1:0,'active_status'=>1,
-                    'question_bank_id'=>$questionId,'created_by'=>$adminId,'updated_by'=>$adminId,'lms_id'=>$lmsId,'position'=>$pos+1,'option_index'=>$pos+1,
-                    'created_at'=>now(),'updated_at'=>now(),
-                ]);
-            }
-            DB::table('online_exam_question_assigns')->insert([
-                'online_exam_id'=>$quizId,'question_bank_id'=>$questionId,'created_by'=>$adminId,'updated_by'=>$adminId,'lms_id'=>$lmsId,
-                'created_at'=>now(),'updated_at'=>now(),
-            ]);
+        if (!$assessment && (!$quiz || empty($quiz['questions']))) {
+            return;
         }
 
         $chapterId = (int) DB::table('chapters')->insertGetId([
-            'course_id'=>$courseId,'name'=>'Final Knowledge Assessment','chapter_no'=>DB::table('chapters')->where('course_id',$courseId)->max('chapter_no')+1,
-            'is_lock'=>1,'position'=>DB::table('chapters')->where('course_id',$courseId)->max('position')+1,'lms_id'=>$lmsId,
-            'created_at'=>now(),'updated_at'=>now(),
+            'course_id' => $courseId,
+            'name' => 'Controlled Assessment',
+            'chapter_no' => DB::table('chapters')->where('course_id', $courseId)->max('chapter_no') + 1,
+            'is_lock' => 1,
+            'position' => DB::table('chapters')->where('course_id', $courseId)->max('position') + 1,
+            'lms_id' => $lmsId,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
-        DB::table('lessons')->insert([
-            'course_id'=>$courseId,'chapter_id'=>$chapterId,'quiz_id'=>$quizId,'name'=>$quiz['title'],'description'=>'Final online knowledge assessment.',
-            'host'=>null,'duration'=>(string)($quiz['time'] ?? 60),'is_lock'=>1,'is_quiz'=>1,'position'=>9999,'lms_id'=>$lmsId,
-            'created_at'=>now(),'updated_at'=>now(),
-        ]);
+
+        // Section A remains in the native LMS quiz engine because every item is multiple-choice.
+        if ($quiz && !empty($quiz['questions'])) {
+            $sectionA = collect($assessment['sections'] ?? [])->firstWhere('section', 'A');
+            $quizTitle = $sectionA['title'] ?? $quiz['title'];
+            $quizMarks = $sectionA['marks'] ?? array_sum(array_column($quiz['questions'], 'marks'));
+            $instruction = $sectionA['instruction'] ?? 'Select the one best answer for each question.';
+
+            $quizId = (int) DB::table('online_quizzes')->insertGetId([
+                'title' => $this->jsonText($quizTitle),
+                // This is only Section A, not the final course pass percentage.
+                'percentage' => null,
+                'instruction' => $this->jsonText($instruction),
+                'status' => 1,
+                'active_status' => 1,
+                'category_id' => $categoryId,
+                'course_id' => $courseId,
+                'created_by' => $adminId,
+                'updated_by' => $adminId,
+                'random_question' => 0,
+                'question_time_type' => 1,
+                'question_time' => $assessment['duration_minutes'] ?? ($quiz['time'] ?? 60),
+                'question_review' => 1,
+                'show_result_each_submit' => 1,
+                'multiple_attend' => 1,
+                'lms_id' => $lmsId,
+                'show_ans_with_explanation' => 0,
+                'show_ans_sheet' => 0,
+                'show_score_result' => 1,
+                'show_correct_ans_in_ans_sheet' => 0,
+                'total_questions' => count($quiz['questions']),
+                'total_marks' => $quizMarks,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            foreach ($quiz['questions'] as $q) {
+                $questionId = (int) DB::table('question_banks')->insertGetId([
+                    'type' => 'M',
+                    'question' => $q['question'],
+                    'marks' => $q['marks'] ?? 1,
+                    'number_of_option' => count($q['options']),
+                    'category_id' => $categoryId,
+                    'active_status' => 1,
+                    'user_id' => $adminId,
+                    'lms_id' => $lmsId,
+                    'shuffle' => 0,
+                    'explanation' => null,
+                    'number_of_ans' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                foreach ($q['options'] as $pos => $opt) {
+                    DB::table('question_bank_mu_options')->insert([
+                        'title' => $opt['label'].'. '.$opt['text'],
+                        'status' => $opt['correct'] ? 1 : 0,
+                        'active_status' => 1,
+                        'question_bank_id' => $questionId,
+                        'created_by' => $adminId,
+                        'updated_by' => $adminId,
+                        'lms_id' => $lmsId,
+                        'position' => $pos + 1,
+                        'option_index' => $pos + 1,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                DB::table('online_exam_question_assigns')->insert([
+                    'online_exam_id' => $quizId,
+                    'question_bank_id' => $questionId,
+                    'created_by' => $adminId,
+                    'updated_by' => $adminId,
+                    'lms_id' => $lmsId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            DB::table('lessons')->insert([
+                'course_id' => $courseId,
+                'chapter_id' => $chapterId,
+                'quiz_id' => $quizId,
+                'name' => 'Section A: '.$quizTitle,
+                'description' => 'Controlled assessment Section A imported exactly from the supplied examination pack.',
+                'host' => null,
+                'duration' => (string) ($assessment['duration_minutes'] ?? ($quiz['time'] ?? 60)),
+                'is_lock' => 1,
+                'is_quiz' => 1,
+                'position' => 9991,
+                'lms_id' => $lmsId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        // Sections B/C cannot be represented faithfully by InfixLMS question_banks (M/T/F only).
+        // Store them in MUPO's manual-marking workflow without changing or inventing question wording.
+        if (!$assessment || !Schema::hasTable('mupo_manual_assessments')) {
+            return;
+        }
+
+        $manualSections = collect($assessment['sections'] ?? [])->filter(function ($section) {
+            return strtoupper((string) ($section['section'] ?? '')) !== 'A';
+        })->values();
+
+        foreach ($manualSections as $index => $section) {
+            $assessmentId = (int) DB::table('mupo_manual_assessments')->insertGetId([
+                'course_id' => $courseId,
+                'course_slug' => $courseData['slug'],
+                'section_code' => strtoupper((string) $section['section']),
+                'title' => $section['title'],
+                'assessment_type' => $section['type'] ?? 'manual_marked',
+                'instruction' => $section['instruction'] ?? null,
+                'total_marks' => $section['marks'] ?? 0,
+                'duration_minutes' => $assessment['duration_minutes'] ?? null,
+                'source_document' => $assessment['source_document'] ?? null,
+                'memorandum_document' => $assessment['memorandum_document'] ?? null,
+                'memorandum_text' => $assessment['memorandum_text'] ?? null,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            foreach ($section['questions'] ?? [] as $pos => $q) {
+                DB::table('mupo_manual_assessment_questions')->insert([
+                    'assessment_id' => $assessmentId,
+                    'question_number' => $q['number'],
+                    'question_type' => $q['type'] ?? 'manual',
+                    'title' => $q['title'] ?? null,
+                    'scenario' => $q['scenario'] ?? null,
+                    'question' => $q['question'] ?? null,
+                    'parts_json' => !empty($q['parts']) ? json_encode($q['parts'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : null,
+                    'marks' => $q['marks'] ?? array_sum(array_column($q['parts'] ?? [], 'marks')),
+                    'position' => $pos + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            $sectionCode = strtoupper((string) $section['section']);
+            $path = route('mupo.assessment.show', ['id' => $assessmentId], false);
+            $editor = '<div class="mupo-manual-lesson">'
+                .'<h3>Section '.$sectionCode.': '.e($section['title']).'</h3>'
+                .'<p><strong>Total marks:</strong> '.(int) ($section['marks'] ?? 0).'</p>'
+                .(!empty($section['instruction']) ? '<p>'.e($section['instruction']).'</p>' : '')
+                .'<p>This section uses the exact questions from the supplied controlled examination pack and requires manual assessor marking.</p>'
+                .'<p><a href="'.e($path).'" class="btn btn-primary">Open Section '.$sectionCode.' Assessment</a></p>'
+                .'</div>';
+
+            DB::table('lessons')->insert([
+                'course_id' => $courseId,
+                'chapter_id' => $chapterId,
+                'name' => 'Section '.$sectionCode.': '.$section['title'],
+                'description' => 'Controlled written assessment imported exactly from the supplied examination pack.',
+                'host' => 'Editor',
+                'duration' => (string) ($assessment['duration_minutes'] ?? 60),
+                'is_lock' => 1,
+                'is_quiz' => 0,
+                'position' => 9992 + $index,
+                'lms_id' => $lmsId,
+                'editor' => $editor,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 
     private function refreshCourseCounts(int $courseId): void
