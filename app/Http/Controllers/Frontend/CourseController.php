@@ -165,7 +165,13 @@ class CourseController extends Controller
             }
 
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            // Widened from \Exception to \Throwable: a \TypeError (which
+            // extends \Error, not \Exception) can be thrown while resolving
+            // course pricing/settings (see GeneralSettingsServiceProvider),
+            // and previously bypassed this handler entirely, producing a
+            // raw 500 instead of the existing graceful GettingError() log +
+            // redirect flow used everywhere else on this page.
             GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
         }
     }

@@ -8,7 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <link rel="icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
+    <link rel="icon" type="image/png" href="{{ asset('public/uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
 
     {{-- Open Graph Meta Tags --}}
     <meta property="og:url" content="{{ url()->current() }}"/>
@@ -49,15 +49,15 @@
         <meta itemprop="description" content="{{ Settings('meta_description') }}">
         <meta property="og:description" content="{{ Settings('meta_description') }}">
         <meta itemprop="keywords" content="{{ Settings('meta_keywords') }}">
-    @elseif(routeIs('courseDetailsView') || routeIs('quizDetailsView'))
-        <meta itemprop="description" content="{{ $course->meta_description }}">
-        <meta property="og:description" content="{{ $course->meta_description }}">
-        <meta itemprop="keywords" content="{{ $course->meta_keywords }}">
+    @elseif((routeIs('courseDetailsView') || routeIs('quizDetailsView')) && isset($course))
+        <meta itemprop="description" content="{{ $course->meta_description ?? Settings('meta_description') }}">
+        <meta property="og:description" content="{{ $course->meta_description ?? Settings('meta_description') }}">
+        <meta itemprop="keywords" content="{{ $course->meta_keywords ?? Settings('meta_keywords') }}">
     @endif
 
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('public/uploads/settings/mupo_favicon.png') }}?v={{ time() }}">
     <!-- Place favicon.ico in the root directory -->
 
 

@@ -343,7 +343,11 @@ if (!function_exists('getSetting')) {
         try {
             return app('getSetting');
 
-        } catch (Exception $exception) {
+        } catch (\Throwable $exception) {
+            // See GeneralSettingsServiceProvider::boot() for the actual
+            // initialization fix; this catch is only a defensive fallback
+            // (a \TypeError extends \Error, not \Exception, so it was not
+            // being caught here before).
             return false;
         }
     }
