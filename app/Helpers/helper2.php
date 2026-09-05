@@ -152,39 +152,14 @@ if (!function_exists('getBlogImage')) {
 if (!function_exists('getLogoImage')) {
     function getLogoImage($path)
     {
-        $fallback = 'mupo/assets/images/mupo-logo_1.jpeg';
-
         if (filter_var($path, FILTER_VALIDATE_URL)) {
             return (string)$path;
         }
         if (File::exists($path)) {
             return assetPath($path);
+        } else {
+            return assetPath('uploads/settings/logo.png');
         }
-
-        if (File::exists(public_path($fallback))) {
-            return asset($fallback);
-        }
-
-        return assetPath('uploads/settings/logo.png');
-    }
-}
-
-if (!function_exists('getFaviconImage')) {
-    function getFaviconImage($path = null)
-    {
-        $fallback = 'frontend/infixlmstheme/img/favicon.png';
-
-        if (filter_var($path, FILTER_VALIDATE_URL)) {
-            return (string)$path;
-        }
-        if ($path && File::exists($path)) {
-            return assetPath($path);
-        }
-        if (File::exists(public_path($fallback))) {
-            return asset($fallback);
-        }
-
-        return assetPath('uploads/settings/mupo_favicon.png');
     }
 }
 
@@ -809,7 +784,13 @@ if (!function_exists('Settings')) {
                 }
             }
             return app('getSetting')[$value];
-        } catch (Exception $exception) {
+        } catch (\Throwable $exception) {
+            // Catch \Throwable (not just \Exception) so that a PHP \Error
+            // (e.g. a TypeError bubbling up from third-party settings
+            // initialization) degrades gracefully to `false` instead of
+            // producing an uncaught 500 error. The actual initialization
+            // fix lives in GeneralSettingsServiceProvider::boot(); this is
+            // only a defensive fallback for this helper.
             return false;
         }
     }

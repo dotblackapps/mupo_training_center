@@ -1278,6 +1278,33 @@ class CourseSettingController extends Controller
 
     public function getAllCourseData(Request $request)
     {
+        try {
+            return $this->buildAllCourseDataTable($request);
+        } catch (\Throwable $e) {
+            // This endpoint is polled by DataTables via AJAX and MUST always
+            // return valid DataTables JSON with HTTP 200 — an uncaught
+            // exception here previously produced an HTML error page, which
+            // is what DataTables reported as "Ajax error" while the table
+            // stayed stuck on "Processing...". The actual initialization
+            // bug is fixed in GeneralSettingsServiceProvider; this catch is
+            // only a defensive backstop so the admin UI degrades to an
+            // empty (but valid) table instead of hanging/erroring, and logs
+            // the real cause for investigation.
+            \Illuminate\Support\Facades\Log::error('Admin All Courses DataTable failed to build.', [
+                'exception' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'draw' => (int) $request->get('draw', 0),
+                'recordsTotal' => 0,
+                'recordsFiltered' => 0,
+                'data' => [],
+            ]);
+        }
+    }
+
+    private function buildAllCourseDataTable(Request $request)
+    {
 
         $query = Course::whereIn('type', [1, 2])->with('category', 'quiz', 'user');
         if ($request->course_status != "") {
