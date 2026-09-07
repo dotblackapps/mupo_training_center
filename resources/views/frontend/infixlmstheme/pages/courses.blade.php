@@ -19,6 +19,15 @@
     }
 
     $courses = $courseQuery->latest()->paginate(12)->appends(request()->query());
+
+    // Defensive de-duplication: if the database still contains duplicate
+    // MUPO course rows (e.g. before `php artisan mupo:cleanup-duplicate-courses`
+    // has been run on this environment), never render the same slug twice
+    // on the public courses page. The real fix is removing the duplicate
+    // rows via the cleanup command — this is just a rendering-level
+    // safety net so a stale environment can't show duplicate cards.
+    $courses->setCollection($courses->getCollection()->unique('slug')->values());
+
     $categories = \Modules\CourseSetting\Entities\Category::where('status', 1)->orderBy('position_order')->get();
     $levels = \Modules\CourseSetting\Entities\CourseLevel::orderBy('title')->get();
 @endphp
