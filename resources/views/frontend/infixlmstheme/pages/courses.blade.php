@@ -18,15 +18,20 @@
         $courseQuery->where('level', request('level'));
     }
 
-    $courses = $courseQuery->latest()->paginate(12)->appends(request()->query());
+    // Duplicate imports receive different slugs (normally one ends in "-1"),
+    // therefore comparing slugs cannot detect that they are the same course.
+    // Select one canonical database row per translated title before paginating
+    // so both the cards and pagination totals stay correct.
+    $canonicalCourseIds = (clone $courseQuery)
+        ->reorder()
+        ->selectRaw('MIN(courses.id)')
+        ->groupBy('courses.title');
 
-    // Defensive de-duplication: if the database still contains duplicate
-    // MUPO course rows (e.g. before `php artisan mupo:cleanup-duplicate-courses`
-    // has been run on this environment), never render the same slug twice
-    // on the public courses page. The real fix is removing the duplicate
-    // rows via the cleanup command — this is just a rendering-level
-    // safety net so a stale environment can't show duplicate cards.
-    $courses->setCollection($courses->getCollection()->unique('slug')->values());
+    $courses = $courseQuery
+        ->whereIn('courses.id', $canonicalCourseIds)
+        ->latest('courses.id')
+        ->paginate(12)
+        ->appends(request()->query());
 
     $categories = \Modules\CourseSetting\Entities\Category::where('status', 1)->orderBy('position_order')->get();
     $levels = \Modules\CourseSetting\Entities\CourseLevel::orderBy('title')->get();
