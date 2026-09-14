@@ -2237,13 +2237,13 @@
                                     </div>
                                 </div>
                                 <div class="more_course_section_slider owl-carousel">
-                                    @foreach(@$course->user->courses->where('scope',1)->where('status',1)->where('id','!=',$course->id)->unique('id')->take(6) as $c)
+                                    @foreach($moreCourses as $c)
                                         <div class="slider_item">
                                             <div class="course-item">
                                                 <a href="{{courseDetailsUrl(@$c->id,@$c->type,@$c->slug)}}">
                                                     <div class="course-item-img lazy">
                                                         <img class="w-100"
-                                                             src="{{ asset('mupo/assets/images/bulb.jpg') }}"
+                                                             src="{{ getCourseImage($c->image) }}"
                                                              onerror="this.onerror=null;this.src='{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}';"
                                                              alt="{{ $c->title }}">
                                                         <span class="course-tag"><span>                                    {{$c->courseLevel->title}}
@@ -2519,9 +2519,11 @@
             "use strict";
             let isRTL = $('html').attr('dir') === 'rtl';
 
+            const moreCourseCount = {{ $moreCourses->count() }};
+
             $(".more_course_section_slider").owlCarousel({
-                items: 4,
-                loop: true,
+                items: Math.min(4, Math.max(1, moreCourseCount)),
+                loop: moreCourseCount > 4,
                 margin: 24,
                 nav: false,
                 rtl: isRTL,
@@ -2530,7 +2532,7 @@
                     '<svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.425 12.0367L9.55117 11.1752L12.858 7.84826L13.7053 6.99578H12.5033H0.570312V5.76363H12.5033H13.7105L12.8569 4.91008L9.53243 1.58559L10.4225 0.720231L15.5078 5.80556V6.95385L10.425 12.0367Z" fill="currentColor" stroke="currentColor"/></svg>'
                 ],
                 dots: false,
-                autoplay: true,
+                autoplay: moreCourseCount > 4,
                 autoplayTimeout: $('#slider_transition_time').val() * 1000,
                 autoplayHoverPause: true,
                 responsive: {
@@ -2540,18 +2542,18 @@
 
                     },
                     600: {
-                        items: 2,
-                        nav: true,
+                        items: Math.min(2, Math.max(1, moreCourseCount)),
+                        nav: moreCourseCount > 2,
 
                     },
                     1000: {
-                        items: 3,
-                        nav: true,
+                        items: Math.min(3, Math.max(1, moreCourseCount)),
+                        nav: moreCourseCount > 3,
 
                     },
                     1500: {
-                        items: 4,
-                        nav: true,
+                        items: Math.min(4, Math.max(1, moreCourseCount)),
+                        nav: moreCourseCount > 4,
                     }
 
                 }
@@ -2635,6 +2637,4 @@
         });
     });
 </script>
-
-
 

@@ -30,9 +30,35 @@ class CourseDeatilsPageSection extends Component
     {
 
 
-        $related = Course::where('category_id', $this->course->category_id)->with('activeReviews', 'enrollUsers', 'cartUsers', 'lessons')
-            ->where('status',1)
-            ->where('id', '!=', $this->course->id)->with('lessons')->take(2)->get();
+        $currentRawTitle = $this->course->getRawOriginal('title');
+
+        // Imported duplicates have different IDs/slugs but the same stored
+        // translated title. Select one canonical row per title and also
+        // exclude duplicates of the course currently being viewed.
+        $relatedIds = Course::query()
+            ->selectRaw('MIN(id)')
+            ->where('category_id', $this->course->category_id)
+            ->where('status', 1)
+            ->where('title', '!=', $currentRawTitle)
+            ->groupBy('title');
+
+        $related = Course::with('activeReviews', 'enrollUsers', 'cartUsers', 'lessons', 'courseLevel')
+            ->whereIn('id', $relatedIds)
+            ->take(2)
+            ->get();
+
+        $moreCourseIds = Course::query()
+            ->selectRaw('MIN(id)')
+            ->where('user_id', $this->course->user_id)
+            ->where('scope', 1)
+            ->where('status', 1)
+            ->where('title', '!=', $currentRawTitle)
+            ->groupBy('title');
+
+        $moreCourses = Course::with('activeReviews', 'enrollUsers', 'cartUsers', 'lessons', 'courseLevel')
+            ->whereIn('id', $moreCourseIds)
+            ->take(6)
+            ->get();
 
 
         $userRating = userRating($this->course->user_id);
@@ -176,6 +202,6 @@ class CourseDeatilsPageSection extends Component
 
         }
 
-        return view(theme('components.course-details-page-section'), $data, compact('is_cart', 'levels', 'related', 'userRating', 'lessons', 'total', 'isFree', 'isBookmarked', 'course_exercises', 'reviewer_user_ids', 'course_enrolled_std','others'));
+        return view(theme('components.course-details-page-section'), $data, compact('is_cart', 'levels', 'related', 'moreCourses', 'userRating', 'lessons', 'total', 'isFree', 'isBookmarked', 'course_exercises', 'reviewer_user_ids', 'course_enrolled_std','others'));
     }
 }
