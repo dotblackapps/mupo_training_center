@@ -3,7 +3,7 @@
     {{Settings('site_title')  ? Settings('site_title')  : 'MUPO Training Center'}} |  {{$course->title}}
 @endsection
 @section('og_image')
-    {{getCourseImage($course->image)}}
+    {{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}
 @endsection
 @section('meta_title')
     {{$course->meta_keywords}}
