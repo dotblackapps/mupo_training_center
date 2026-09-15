@@ -90,3 +90,33 @@ function goQuizTest(current) {
     window.location.href = current;
 }
 
+
+/* MUPO premium lesson workspace - front-end interaction only. */
+$(document).ready(function () {
+    var $focusToggle = $('#mupoFocusToggle');
+
+    $focusToggle.on('click', function () {
+        $('body').toggleClass('mupo-focus-mode');
+        var active = $('body').hasClass('mupo-focus-mode');
+
+        $(this)
+            .toggleClass('is-active', active)
+            .attr('aria-pressed', active ? 'true' : 'false')
+            .attr('title', active ? 'Show Course Content' : 'Focus Mode');
+
+        $(this).find('i')
+            .toggleClass('fa-expand-alt', !active)
+            .toggleClass('fa-compress-alt', active);
+
+        $(this).find('span').text(active ? 'Contents' : 'Focus');
+    });
+
+    // Keep the currently selected lesson visible in long course outlines.
+    var $activeLesson = $('.course__play_list .single_play_list > a.active').first();
+    if ($activeLesson.length) {
+        var $scrollArea = $('.course__play_list');
+        var targetTop = $activeLesson.position().top + $scrollArea.scrollTop() - 90;
+        $scrollArea.scrollTop(Math.max(0, targetTop));
+    }
+});
+
