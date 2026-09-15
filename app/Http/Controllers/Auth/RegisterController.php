@@ -36,9 +36,8 @@ class RegisterController extends Controller
 
     public function RegisterForm()
     {
-        abort_if(!Settings('student_reg'), 404);
-        abort_if(saasPlanCheck('student'), 404);
-
+        // MUPO Training Center keeps learner self-registration available.
+        // Do not let environment-specific LMS/SaaS setting resolution turn /register into a 404.
         $page = LoginPage::getData();
         $custom_field = StudentCustomField::getData();
 
