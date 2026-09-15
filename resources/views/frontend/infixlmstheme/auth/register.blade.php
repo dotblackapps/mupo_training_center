@@ -23,6 +23,75 @@ body{min-height:100vh;color:var(--mupo-text)}
 @media(max-width:1050px){.mupo-auth-shell{grid-template-columns:34% 1fr}.mupo-auth-brand-inner{padding:32px}.mupo-register-main{padding:36px}.mupo-brand-copy h1{font-size:42px}}
 @media(max-width:820px){.mupo-auth-shell{grid-template-columns:1fr}.mupo-auth-brand-panel{min-height:310px}.mupo-auth-brand-inner{padding:26px}.mupo-brand-logo{margin-top:26px}.mupo-brand-copy{padding:32px 0 18px}.mupo-brand-copy h1{font-size:38px}.mupo-brand-copy p{font-size:14px;margin-top:12px}.mupo-brand-footer{display:none}.mupo-register-main{min-height:auto;padding:38px 24px 52px}}
 @media(max-width:620px){.mupo-form-grid{grid-template-columns:1fr}.mupo-register-head{display:block}.mupo-login-link{margin-top:16px}.mupo-register-main{padding:32px 18px 44px}.mupo-brand-logo img{width:145px}.mupo-brand-copy h1{font-size:34px}}
+
+
+/* MUPO auth viewport refinement: keep brand panel fixed and place navigation consistently. */
+@media (min-width: 992px) {
+    html, body {
+        height: 100%;
+        overflow: hidden !important;
+    }
+
+    .mupo-auth-page {
+        height: 100vh !important;
+        min-height: 100vh !important;
+        overflow: hidden !important;
+    }
+
+    .mupo-auth-shell {
+        height: 100vh !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .mupo-auth-left {
+        height: 100vh !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+        position: relative !important;
+    }
+
+    .mupo-auth-right {
+        height: 100vh !important;
+        min-height: 0 !important;
+    }
+
+    .mupo-back-home {
+        position: absolute !important;
+        top: 30px !important;
+        left: 44px !important;
+        z-index: 20 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 9px !important;
+        margin: 0 !important;
+        width: auto !important;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Registration scroll belongs only to the form/content side. */
+    .mupo-auth-right {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+    }
+
+    .mupo-auth-right::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .mupo-auth-right::-webkit-scrollbar-track {
+        background: #f4f6f9;
+    }
+
+    .mupo-auth-right::-webkit-scrollbar-thumb {
+        background: #b8c0cc;
+        border-radius: 8px;
+    }
+}
+
 </style>
 
 <div class="mupo-auth-page">

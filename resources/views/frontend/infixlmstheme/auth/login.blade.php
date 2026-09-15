@@ -45,6 +45,59 @@ body.mupo-modal-open{overflow:hidden}.mupo-reset-modal{position:fixed;inset:0;z-
 @media(max-width:1050px){.mupo-auth-shell{grid-template-columns:40% 1fr}.mupo-auth-brand-inner{padding:34px}.mupo-auth-main{padding:44px}.mupo-brand-copy h1{font-size:46px}.mupo-brand-copy p{font-size:16px}}
 @media(max-width:820px){.mupo-auth-shell{grid-template-columns:1fr}.mupo-auth-brand-panel{min-height:330px}.mupo-auth-brand-inner{padding:26px}.mupo-brand-logo{margin-top:28px}.mupo-brand-copy{padding:38px 0 20px}.mupo-brand-copy h1{font-size:40px}.mupo-brand-copy p{font-size:15px;margin-top:14px}.mupo-brand-footer{display:none}.mupo-auth-main{min-height:auto;padding:44px 24px 54px}}
 @media(max-width:520px){.mupo-auth-brand-panel{min-height:290px}.mupo-auth-brand-inner{padding:22px}.mupo-brand-logo img{width:145px}.mupo-brand-copy{padding:28px 0 12px}.mupo-brand-copy h1{font-size:34px}.mupo-brand-copy p{font-size:14px}.mupo-auth-main{padding:36px 18px 48px}.mupo-auth-content h2{font-size:32px!important}.mupo-auth-sub{margin-bottom:28px}.mupo-auth-row{align-items:flex-start;flex-direction:column;gap:12px}}
+
+
+/* MUPO auth viewport refinement: keep brand panel fixed and place navigation consistently. */
+@media (min-width: 992px) {
+    html, body {
+        height: 100%;
+        overflow: hidden !important;
+    }
+
+    .mupo-auth-page {
+        height: 100vh !important;
+        min-height: 100vh !important;
+        overflow: hidden !important;
+    }
+
+    .mupo-auth-shell {
+        height: 100vh !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .mupo-auth-left {
+        height: 100vh !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+        position: relative !important;
+    }
+
+    .mupo-auth-right {
+        height: 100vh !important;
+        min-height: 0 !important;
+    }
+
+    .mupo-back-home {
+        position: absolute !important;
+        top: 30px !important;
+        left: 44px !important;
+        z-index: 20 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 9px !important;
+        margin: 0 !important;
+        width: auto !important;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Login fits the viewport; neither side should create a page scrollbar. */
+    .mupo-auth-right {
+        overflow: hidden !important;
+    }
+}
+
 </style>
 
 <div class="mupo-auth-page">
