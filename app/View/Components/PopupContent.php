@@ -2,28 +2,21 @@
 
 namespace App\View\Components;
 
-use Exception;
-use Illuminate\Support\Facades\Session;
 use Illuminate\View\Component;
 
 class PopupContent extends Component
 {
-
+    /**
+     * MUPO Training Center does not display the legacy LMS promotional popup.
+     *
+     * The PopupContent module can remain installed for administration/data
+     * compatibility, but the public component is intentionally disabled on
+     * every page.
+     */
     public function render()
     {
-        try {
-            $popup = \Modules\PopupContent\Entities\PopupContent::getData();
-            $modal = false;
-
-             if (isset($popup->status) && $popup->status == 1 && Session::get('ip') == null) {
-                Session::put('ip', request()->ip());
-                $modal = true;
-            }
-
-        } catch (Exception $exception) {
-            $modal = false;
-            $popup = false;
-        }
+        $popup = false;
+        $modal = false;
 
         return view(theme('components.popup-content'), compact('popup', 'modal'));
     }

@@ -79,9 +79,7 @@ body.mupo-modal-open{overflow:hidden}.mupo-reset-modal{position:fixed;inset:0;z-
                         <h2>Sign in</h2>
                         <p class="mupo-auth-sub">Enter your registered email and password to continue.</p>
                     </div>
-                    @if(Settings('student_reg')==1 && saasPlanCheck('student')==false)
-                        <a class="mupo-switch-link" href="{{ route('register') }}">Sign Up</a>
-                    @endif
+                    <a class="mupo-switch-link" href="{{ route('register') }}">Sign Up</a>
                 </div>
 
                 <form action="{{route('login')}}" method="POST" id="loginForm">
@@ -155,9 +153,7 @@ body.mupo-modal-open{overflow:hidden}.mupo-reset-modal{position:fixed;inset:0;z-
                         <button type="submit" class="mupo-submit">Login</button>
                     @endif
 
-                    @if(Settings('student_reg')==1 && saasPlanCheck('student')==false)
-                        <p class="mupo-note">New learner? <a href="{{route('register')}}">Create your account</a>.</p>
-                    @endif
+                    <p class="mupo-note">New learner? <a href="{{ route('register') }}">Create your account</a>.</p>
                 </form>
 
                 <div class="mupo-support-grid">
