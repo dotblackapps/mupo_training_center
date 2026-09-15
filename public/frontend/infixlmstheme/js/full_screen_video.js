@@ -81,7 +81,7 @@ $(document).ready(function () {
 
 function goFullScreen(course_id, lesson_id) {
     var url = document.getElementById('url').value;
-    window.location.replace(url + '/fullscreen-view/' + course_id + '/' + lesson_id);
+    window.location.assign(url + '/fullscreen-view/' + course_id + '/' + lesson_id);
 
 }
 
