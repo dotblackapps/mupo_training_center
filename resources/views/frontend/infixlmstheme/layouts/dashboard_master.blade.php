@@ -135,11 +135,21 @@ html,body{
     body.mupo-sidebar-collapsed .mupo-sidebar-collapse i{transform:rotate(180deg)}
 }
 
+@media(min-width:992px) and (max-width:1279.98px){
+    .main_content.dashboard_part{
+        width:calc(100% - var(--mupo-sidebar-collapsed))!important;
+        margin-left:var(--mupo-sidebar-collapsed)!important
+    }
+    .mupo-dashboard-topbar{left:var(--mupo-sidebar-collapsed)!important}
+}
+
 /* ===== TOP BAR ===== */
 .mupo-dashboard-topbar{
     height:var(--mupo-topbar)!important;min-height:var(--mupo-topbar)!important;background:#fff!important;
     border-bottom:1px solid var(--mupo-line)!important;display:flex!important;align-items:center!important;
-    justify-content:space-between!important;padding:0 26px!important;position:sticky!important;top:0!important;z-index:1030!important
+    justify-content:space-between!important;padding:0 26px!important;position:fixed!important;top:0!important;
+    right:0!important;left:var(--mupo-sidebar)!important;width:auto!important;z-index:1030!important;
+    transition:left .2s ease!important
 }
 .mupo-topbar-left{display:flex;align-items:center;gap:14px}
 .mupo-page-context strong{display:block;color:var(--mupo-text);font-size:17px;line-height:1.1;font-weight:800}
@@ -181,8 +191,12 @@ html,body{
 /* ===== SHARED CONTENT QUALITY FOR ALL LEARNER PAGES ===== */
 .main_content.dashboard_part{background:var(--mupo-bg)!important;overflow:visible!important}
 .main_content.dashboard_part .main_content_iner{
-    background:var(--mupo-bg)!important;padding:18px 22px 34px!important;margin:0!important;
+    background:var(--mupo-bg)!important;padding:calc(var(--mupo-topbar) + 18px) 22px 34px!important;margin:0!important;
     min-height:calc(100vh - var(--mupo-topbar))!important
+}
+
+@media(min-width:992px){
+    body.mupo-sidebar-collapsed .mupo-dashboard-topbar{left:var(--mupo-sidebar-collapsed)!important}
 }
 .main_content.dashboard_part .container,
 .main_content.dashboard_part .container-fluid{max-width:1500px!important}
@@ -237,8 +251,8 @@ html,body{
     .main_content.dashboard_part{width:100%!important;margin:0!important;min-height:100vh!important}
     .mupo-learner-sidebar{position:fixed!important;top:0!important;bottom:0!important;height:100vh!important;overflow:hidden!important}
     .mupo-learner-sidebar .mupo-sidebar-body{height:calc(100vh - 74px)!important;overflow-y:auto!important}
-    .mupo-dashboard-topbar{padding:0 15px!important}
-    .main_content.dashboard_part .main_content_iner{padding:14px!important}
+    .mupo-dashboard-topbar{left:0!important;padding:0 15px!important}
+    .main_content.dashboard_part .main_content_iner{padding:calc(var(--mupo-topbar) + 14px) 14px 14px!important}
     .mupo-sidebar-collapse{display:none!important}
 }
 @media(max-width:640px){
@@ -248,9 +262,12 @@ html,body{
 }
 </style>
 
+<link href="{{ asset('mupo/assets/css/learning-portal-shell.css') }}?v={{ filemtime(public_path('mupo/assets/css/learning-portal-shell.css')) }}" rel="stylesheet">
+
 
 <div class="dashboard_main_wrapper">
     @include(theme('partials._sidebar'))
+    <button type="button" class="mupo-nav-overlay" id="mupoDashboardNavOverlay" aria-label="Close learner navigation"></button>
 
     <section
         class="main_content dashboard_part @if(\Illuminate\Support\Facades\Route::is('student.gamification.reward')) bg-none bg-body @endif">
@@ -265,6 +282,17 @@ html,body{
 document.addEventListener('DOMContentLoaded', function () {
     var body = document.body;
     var toggle = document.getElementById('mupoSidebarCollapse');
+    var sidebar = document.getElementById('mupoLearnerSidebar');
+    var mobileOpen = document.getElementById('mupoDashboardNavOpen');
+    var mobileClose = sidebar ? sidebar.querySelector('.sidebar_close_icon') : null;
+    var overlay = document.getElementById('mupoDashboardNavOverlay');
+
+    function setMobileNavigation(open) {
+        body.classList.toggle('mupo-portal-nav-open', Boolean(open));
+        if (mobileOpen) {
+            mobileOpen.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+    }
 
     if (window.innerWidth >= 992 && localStorage.getItem('mupoLearnerSidebarCollapsed') === '1') {
         body.classList.add('mupo-sidebar-collapsed');
@@ -279,5 +307,17 @@ document.addEventListener('DOMContentLoaded', function () {
             );
         });
     }
+
+    if (mobileOpen) mobileOpen.addEventListener('click', function () { setMobileNavigation(true); });
+    if (mobileClose) mobileClose.addEventListener('click', function () { setMobileNavigation(false); });
+    if (overlay) overlay.addEventListener('click', function () { setMobileNavigation(false); });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') setMobileNavigation(false);
+    });
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth >= 992) setMobileNavigation(false);
+    });
 });
 </script>

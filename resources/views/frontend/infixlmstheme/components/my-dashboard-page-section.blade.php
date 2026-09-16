@@ -22,7 +22,7 @@
 }
 .mupo-hero-content{position:relative;z-index:2;max-width:720px}
 .mupo-hero-kicker{color:#ff343c;font-size:11px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:8px}
-.mupo-hero h1{font-size:34px!important;line-height:1.06;color:#fff!important;margin:0 0 9px;font-weight:800}
+.main_content.dashboard_part .mupo-hero h1{font-size:34px!important;line-height:1.06;color:#fff!important;margin:0 0 9px;font-weight:800}
 .mupo-hero-course{font-size:16px;font-weight:800;color:#fff;margin-bottom:5px}
 .mupo-hero-progress-copy{font-size:12px;color:rgba(255,255,255,.82);margin-bottom:17px}
 .mupo-hero-btn{display:inline-flex;align-items:center;gap:9px;background:var(--mupo-red);color:#fff!important;padding:11px 19px;border-radius:6px;font-size:11px;font-weight:800}
@@ -89,7 +89,7 @@
 @media(max-width:1199px){.mupo-kpi-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:991px){.mupo-primary-grid,.mupo-secondary-grid{grid-template-columns:1fr}.mupo-hero:after{display:none}}
 @media(max-width:640px){
-    .mupo-hero{min-height:230px;padding:22px 18px;background-position:62% center}.mupo-hero h1{font-size:28px!important}
+    .mupo-hero{min-height:230px;padding:22px 18px;background-position:62% center}.main_content.dashboard_part .mupo-hero h1{font-size:28px!important;color:#fff!important}
     .mupo-kpi-grid{grid-template-columns:1fr 1fr;gap:8px}.mupo-kpi{padding:12px;min-height:95px}
     .mupo-continue-body{grid-template-columns:1fr}.mupo-course-thumb{min-height:185px}
     .mupo-progress-stats{grid-template-columns:1fr 1fr;row-gap:14px}.mupo-progress-stat:nth-child(2){border-right:0}

@@ -14,8 +14,8 @@
 
 <header class="mupo-dashboard-topbar">
     <div class="mupo-topbar-left">
-        <button type="button" class="sidebar_icon d-lg-none mupo-mobile-menu" aria-label="Open learner navigation">
-            <i class="ti-menu"></i>
+        <button type="button" class="sidebar_icon d-lg-none mupo-mobile-menu" id="mupoDashboardNavOpen" aria-label="Open learner navigation" aria-controls="mupoLearnerSidebar" aria-expanded="false">
+            <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
 
         <div class="mupo-page-context">
