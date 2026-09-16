@@ -1,0 +1,278 @@
+:root {
+    --mupo-portal-sidebar: 250px;
+    --mupo-portal-rail: 78px;
+}
+
+/* Keep the course player inside the same authenticated learner portal. */
+.mupo-learner-sidebar {
+    background: linear-gradient(180deg, #061b3a 0%, #08294e 100%) !important;
+    border: 0 !important;
+    color: #fff;
+    box-shadow: none !important;
+}
+
+.mupo-sidebar-brand {
+    height: 74px !important;
+    min-height: 74px !important;
+    background: #fff !important;
+    border-right: 1px solid #e3e8ef !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+}
+
+.mupo-sidebar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mupo-sidebar-logo img {
+    width: auto !important;
+    height: 54px !important;
+    object-fit: contain !important;
+}
+
+.mupo-sidebar-collapse {
+    position: absolute;
+    top: 22px;
+    right: -14px;
+    z-index: 20;
+    width: 29px;
+    height: 29px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #061b3a;
+    color: #fff;
+    place-items: center;
+    cursor: pointer;
+    font-size: 10px;
+    box-shadow: 0 4px 12px rgba(6, 27, 58, .15);
+}
+
+.mupo-sidebar-brand .sidebar_close_icon {
+    position: absolute;
+    right: 15px;
+    color: #061b3a;
+    border: 0;
+    background: transparent;
+}
+
+.mupo-sidebar-body {
+    height: calc(100vh - 74px) !important;
+    padding: 14px 12px 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+}
+
+.mupo-sidebar-identity { padding: 2px 12px 10px; }
+.mupo-sidebar-identity strong {
+    display: block;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+.mupo-sidebar-identity span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(255, 255, 255, .65);
+    font-size: 11px;
+}
+.mupo-sidebar-identity b { color: #ed1c24; }
+.mupo-sidebar-nav { display: flex !important; flex-direction: column !important; }
+.mupo-nav-group { padding: 9px 0; border-top: 1px solid rgba(255, 255, 255, .12); }
+.mupo-nav-label {
+    padding: 0 12px 6px;
+    color: #91a6bf;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.45px;
+    white-space: nowrap;
+}
+.mupo-sidebar-nav a {
+    min-height: 36px !important;
+    padding: 7px 11px !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 11px !important;
+    position: relative !important;
+    color: rgba(255, 255, 255, .9) !important;
+    text-decoration: none !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    white-space: nowrap;
+    transition: background .18s ease, color .18s ease !important;
+}
+.mupo-sidebar-nav a i {
+    width: 19px !important;
+    color: #fff;
+    text-align: center;
+    font-size: 14px !important;
+}
+.mupo-sidebar-nav a:hover,
+.mupo-sidebar-nav a.active { background: rgba(255, 255, 255, .08) !important; color: #fff !important; }
+.mupo-sidebar-nav a.active::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: -12px;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: #ed1c24;
+}
+.mupo-support-group { padding-bottom: 4px; }
+.mupo-sidebar-bottom { margin-top: auto; padding-top: 7px; }
+.mupo-back-site {
+    min-height: 38px;
+    padding: 8px 11px;
+    border: 1px solid rgba(255, 255, 255, .26);
+    border-radius: 7px;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none !important;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.mupo-back-site:hover { background: #fff; color: #061b3a !important; }
+.mupo-back-site i { width: 19px; text-align: center; }
+.mupo-sidebar-motto { padding: 13px 11px 0; display: flex; align-items: flex-start; gap: 10px; }
+.mupo-sidebar-motto > span { width: 3px; height: 42px; border-radius: 4px; background: #ed1c24; }
+.mupo-sidebar-motto strong {
+    color: rgba(255, 255, 255, .82);
+    font-size: 8px;
+    line-height: 1.5;
+    letter-spacing: 1.4px;
+}
+
+.mupo-portal-menu-toggle {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    background: #fff;
+    color: #061b3a;
+    display: none;
+    place-items: center;
+    flex: 0 0 auto;
+}
+
+.mupo-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1170;
+    border: 0;
+    background: rgba(2, 13, 31, .56);
+    backdrop-filter: blur(2px);
+}
+
+@media (min-width: 1280px) {
+    .mupo-learner-sidebar {
+        position: fixed !important;
+        inset: 0 auto 0 0 !important;
+        z-index: 1200 !important;
+        width: var(--mupo-portal-sidebar) !important;
+        height: 100vh !important;
+    }
+
+    body.mupo-learning-portal-shell #sticky-header.header_area { left: var(--mupo-portal-sidebar) !important; }
+    body.mupo-learning-portal-shell .course_fullview_wrapper { left: var(--mupo-portal-sidebar) !important; }
+    body.mupo-learning-portal-shell .mupo-bottom-nav { left: var(--mupo-portal-sidebar) !important; }
+
+    body.mupo-sidebar-collapsed .mupo-learner-sidebar { width: var(--mupo-portal-rail) !important; }
+    body.mupo-learning-portal-shell.mupo-sidebar-collapsed #sticky-header.header_area,
+    body.mupo-learning-portal-shell.mupo-sidebar-collapsed .course_fullview_wrapper,
+    body.mupo-learning-portal-shell.mupo-sidebar-collapsed .mupo-bottom-nav { left: var(--mupo-portal-rail) !important; }
+}
+
+@media (min-width: 992px) {
+    body.mupo-sidebar-collapsed .mupo-sidebar-logo img,
+    .mupo-learning-compact-nav .mupo-sidebar-logo img {
+        height: 42px !important;
+        max-width: 60px !important;
+    }
+    body.mupo-sidebar-collapsed .mupo-sidebar-identity,
+    body.mupo-sidebar-collapsed .mupo-nav-label,
+    body.mupo-sidebar-collapsed .mupo-sidebar-nav a span,
+    body.mupo-sidebar-collapsed .mupo-back-site span,
+    body.mupo-sidebar-collapsed .mupo-sidebar-motto,
+    .mupo-learning-compact-nav .mupo-sidebar-identity,
+    .mupo-learning-compact-nav .mupo-nav-label,
+    .mupo-learning-compact-nav .mupo-sidebar-nav a span,
+    .mupo-learning-compact-nav .mupo-back-site span,
+    .mupo-learning-compact-nav .mupo-sidebar-motto { display: none !important; }
+    body.mupo-sidebar-collapsed .mupo-sidebar-body,
+    .mupo-learning-compact-nav .mupo-sidebar-body { padding-right: 9px !important; padding-left: 9px !important; }
+    body.mupo-sidebar-collapsed .mupo-sidebar-nav a,
+    body.mupo-sidebar-collapsed .mupo-back-site,
+    .mupo-learning-compact-nav .mupo-sidebar-nav a,
+    .mupo-learning-compact-nav .mupo-back-site { justify-content: center !important; padding-right: 0 !important; padding-left: 0 !important; }
+    body.mupo-sidebar-collapsed .mupo-sidebar-nav a i,
+    body.mupo-sidebar-collapsed .mupo-back-site i,
+    .mupo-learning-compact-nav .mupo-sidebar-nav a i,
+    .mupo-learning-compact-nav .mupo-back-site i { width: auto !important; font-size: 16px !important; }
+    body.mupo-sidebar-collapsed .mupo-sidebar-collapse i { transform: rotate(180deg); }
+}
+
+@media (min-width: 992px) and (max-width: 1279.98px) {
+    .mupo-learner-sidebar {
+        position: fixed !important;
+        inset: 0 auto 0 0 !important;
+        z-index: 1200 !important;
+        width: var(--mupo-portal-rail) !important;
+        height: 100vh !important;
+    }
+    .mupo-sidebar-collapse { display: none !important; }
+    .mupo-sidebar-logo img { height: 42px !important; max-width: 60px !important; }
+    .mupo-sidebar-identity,
+    .mupo-nav-label,
+    .mupo-sidebar-nav a span,
+    .mupo-back-site span,
+    .mupo-sidebar-motto { display: none !important; }
+    .mupo-sidebar-body { padding-right: 9px !important; padding-left: 9px !important; }
+    .mupo-sidebar-nav a,
+    .mupo-back-site { justify-content: center !important; padding-right: 0 !important; padding-left: 0 !important; }
+    .mupo-sidebar-nav a i,
+    .mupo-back-site i { width: auto !important; font-size: 16px !important; }
+    body.mupo-learning-portal-shell #sticky-header.header_area,
+    body.mupo-learning-portal-shell .course_fullview_wrapper,
+    body.mupo-learning-portal-shell .mupo-bottom-nav { left: var(--mupo-portal-rail) !important; }
+}
+
+@media (max-width: 991.98px) {
+    .mupo-learner-sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        z-index: 1180 !important;
+        width: min(86vw, 290px) !important;
+        height: 100vh !important;
+        transform: translateX(-102%);
+        transition: transform .22s ease !important;
+        box-shadow: 18px 0 40px rgba(2, 13, 31, .2) !important;
+    }
+    body.mupo-portal-nav-open { overflow: hidden !important; }
+    body.mupo-portal-nav-open .mupo-learner-sidebar { transform: translateX(0); }
+    body.mupo-portal-nav-open .mupo-nav-overlay { display: block; }
+    .mupo-portal-menu-toggle { display: grid; }
+    body.mupo-learning-portal-shell #sticky-header.header_area,
+    body.mupo-learning-portal-shell .course_fullview_wrapper,
+    body.mupo-learning-portal-shell .mupo-bottom-nav { left: 0 !important; }
+}
+
+@media (max-height: 780px) and (min-width: 992px) {
+    .mupo-sidebar-motto { display: none !important; }
+    .mupo-sidebar-body { padding-top: 9px !important; }
+    .mupo-sidebar-identity { padding-bottom: 6px; }
+    .mupo-nav-group { padding: 6px 0; }
+    .mupo-sidebar-nav a { min-height: 33px !important; padding-top: 5px !important; padding-bottom: 5px !important; }
+}

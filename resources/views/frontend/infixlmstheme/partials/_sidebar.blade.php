@@ -36,7 +36,7 @@
                 </a>
 
                 @if(permissionCheck('myCourses'))
-                    <a href="{{ route('myCourses') }}" class="{{ routeIs('myCourses') ? 'active' : '' }}" title="My Courses">
+                    <a href="{{ route('myCourses') }}" class="{{ (routeIs('myCourses') || request()->is('fullscreen-view/*')) ? 'active' : '' }}" title="My Courses">
                         <i class="far fa-play-circle"></i><span>My Courses</span>
                     </a>
                 @endif

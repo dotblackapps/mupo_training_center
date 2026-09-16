@@ -7,6 +7,7 @@
     <link href="{{assetPath('backend/css/jquery-ui.css')}}{{assetVersion()}}" rel="stylesheet">
     <link href="{{assetPath('frontend/infixlmstheme/css/full_screen.css')}}{{assetVersion()}}" rel="stylesheet"/>
     <link href="{{ asset('mupo/assets/css/course-learning.css') }}{{assetVersion()}}" rel="stylesheet"/>
+    <link href="{{ asset('mupo/assets/css/learning-portal-shell.css') }}?v={{ filemtime(public_path('mupo/assets/css/learning-portal-shell.css')) }}" rel="stylesheet"/>
     <link href="{{ asset('mupo/assets/css/guided-instructor.css') }}?v={{ filemtime(public_path('mupo/assets/css/guided-instructor.css')) }}" rel="stylesheet"/>
 
     {{-- <link href="{{assetPath('frontend/infixlmstheme/css/class_details.css')}}{{assetVersion()}}" rel="stylesheet"/> --}}
@@ -321,7 +322,7 @@
             --mupo-muted:#667085;
             --mupo-green:#159957;
             --mupo-side:420px;
-            --mupo-head:88px;
+            --mupo-head:74px;
             --mupo-bottom:76px;
             --mupo-reading:900px;
         }
@@ -1195,6 +1196,13 @@
 @endsection
 
 @section('mainContent')
+    @auth
+        @if((int) auth()->user()->role_id === 3)
+            <script>document.body.classList.add('mupo-learning-portal-shell');</script>
+            @include(theme('partials._sidebar'))
+            <button type="button" class="mupo-nav-overlay" id="mupoLearningNavOverlay" aria-label="Close learner navigation"></button>
+        @endif
+    @endauth
     @php
         $video_lesson_hosts=['Iframe','Image','PDF','Word','Excel','PowerPoint','Text','Zip','GoogleDrive','H5P','Editor'];
         $currentLessonId = (int) $lesson->id;
@@ -1249,7 +1257,8 @@
             <div class="container-fluid"><div class="row"><div class="col-12">
                 <div class="header__wrapper">
                     <div class="header__left d-flex align-items-center">
-                        <a class="logo_img" href="{{ url('/') }}"><img src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}" alt="Mupo Training Center"></a>
+                        <button type="button" class="mupo-portal-menu-toggle" id="mupoLearningNavOpen" aria-label="Open learner navigation" aria-controls="mupoLearnerSidebar" aria-expanded="false"><i class="fas fa-bars"></i></button>
+                        <a class="logo_img d-lg-none" href="{{ url('/') }}"><img src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}" alt="Mupo Training Center"></a>
                         <a class="mupo-exit-course" href="{{ route('myCourses') }}"><i class="fas fa-arrow-left"></i><span>Back to My Courses</span></a>
                         <div class="category_search category_box_iner"><div class="input-group-prepend2">
                             <a class="headerTitle" href="javascript:void(0)"><h4 class="headerTitle">{{ $course->title }}</h4></a>
@@ -2673,6 +2682,43 @@ if ($assign->questionBank->shuffle==1){
 
     <script>
         $(document).ready(function () {
+            const portalBody = document.body;
+            const portalSidebar = document.getElementById('mupoLearnerSidebar');
+            const portalCollapse = document.getElementById('mupoSidebarCollapse');
+            const portalOpen = document.getElementById('mupoLearningNavOpen');
+            const portalClose = portalSidebar ? portalSidebar.querySelector('.sidebar_close_icon') : null;
+            const portalOverlay = document.getElementById('mupoLearningNavOverlay');
+
+            function setPortalNavOpen(open) {
+                portalBody.classList.toggle('mupo-portal-nav-open', Boolean(open));
+                if (portalOpen) {
+                    portalOpen.setAttribute('aria-expanded', open ? 'true' : 'false');
+                }
+            }
+
+            if (window.innerWidth >= 1280 && localStorage.getItem('mupoLearnerSidebarCollapsed') === '1') {
+                portalBody.classList.add('mupo-sidebar-collapsed');
+            }
+
+            if (portalCollapse) {
+                portalCollapse.addEventListener('click', function () {
+                    portalBody.classList.toggle('mupo-sidebar-collapsed');
+                    localStorage.setItem(
+                        'mupoLearnerSidebarCollapsed',
+                        portalBody.classList.contains('mupo-sidebar-collapsed') ? '1' : '0'
+                    );
+                });
+            }
+            if (portalOpen) portalOpen.addEventListener('click', function () { setPortalNavOpen(true); });
+            if (portalClose) portalClose.addEventListener('click', function () { setPortalNavOpen(false); });
+            if (portalOverlay) portalOverlay.addEventListener('click', function () { setPortalNavOpen(false); });
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') setPortalNavOpen(false);
+            });
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 992) setPortalNavOpen(false);
+            });
+
             if ($('.active').length) {
                 let active = $('.active');
                 let parent = active.parents('.collapse').first();
