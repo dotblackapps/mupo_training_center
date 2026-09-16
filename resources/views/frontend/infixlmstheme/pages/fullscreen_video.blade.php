@@ -7,6 +7,7 @@
     <link href="{{assetPath('backend/css/jquery-ui.css')}}{{assetVersion()}}" rel="stylesheet">
     <link href="{{assetPath('frontend/infixlmstheme/css/full_screen.css')}}{{assetVersion()}}" rel="stylesheet"/>
     <link href="{{ asset('mupo/assets/css/course-learning.css') }}{{assetVersion()}}" rel="stylesheet"/>
+    <link href="{{ asset('mupo/assets/css/guided-instructor.css') }}?v={{ filemtime(public_path('mupo/assets/css/guided-instructor.css')) }}" rel="stylesheet"/>
 
     {{-- <link href="{{assetPath('frontend/infixlmstheme/css/class_details.css')}}{{assetVersion()}}" rel="stylesheet"/> --}}
     <link href="{{assetPath('backend/css/summernote-bs5.min.css')}}{{assetVersion()}}" rel="stylesheet">
@@ -2043,6 +2044,7 @@ if ($assign->questionBank->shuffle==1){
                     <h1 id="mupo-current-lesson-title">{{ $lesson->name }}</h1>
                     <p>Work through the lesson content below at your own pace. When you are finished, use Complete &amp; Continue to record your progress and move to the next lesson.</p>
                 </section>
+                @include(theme('partials.guided-instructor-player'))
                 <div class="lesson_content_text w-100">
                     {!! $lesson->editor !!}
                 </div>
@@ -2895,6 +2897,7 @@ if ($assign->questionBank->shuffle==1){
 
     <script src="{{ assetPath('frontend/infixlmstheme/js/class_details.js') }}"></script>
     <script src="{{ assetPath('frontend/infixlmstheme/js/full_screen_video.js') }}"></script>
+    <script src="{{ asset('mupo/assets/js/guided-instructor.js') }}?v={{ filemtime(public_path('mupo/assets/js/guided-instructor.js')) }}"></script>
     @if ($lesson->is_quiz == 1)
         @if (!$result)
             <script src="{{ assetPath('frontend/infixlmstheme/js/quiz_start.js') }}"></script>
