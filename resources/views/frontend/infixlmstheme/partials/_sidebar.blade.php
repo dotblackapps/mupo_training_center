@@ -32,7 +32,7 @@
                 @endif
 
                 <a href="{{ route('studentDashboard') }}#continue-learning" title="My Learning">
-                    <i class="far fa-book-open"></i><span>My Learning</span>
+                    <i class="fas fa-book-open" aria-hidden="true"></i><span>My Learning</span>
                 </a>
 
                 @if(permissionCheck('myCourses'))

@@ -321,7 +321,7 @@
             --mupo-text:#0a1f44;
             --mupo-muted:#667085;
             --mupo-green:#159957;
-            --mupo-side:420px;
+            --mupo-side:clamp(320px,21vw,360px);
             --mupo-head:74px;
             --mupo-bottom:76px;
             --mupo-reading:900px;
@@ -1080,13 +1080,13 @@
         }
 
         @media(max-width:1280px){
-            :root{--mupo-side:360px}
+            :root{--mupo-side:320px}
             .mupo-header-progress{width:210px;padding-left:16px;padding-right:16px}
             h4.headerTitle{max-width:340px}
             .mupo-tool-btn{min-width:52px}
         }
 
-        @media(max-width:991.98px){
+        @media(max-width:1199.98px){
             :root{--mupo-head:72px;--mupo-bottom:70px;--mupo-side:0px}
 
             html,body{overflow:auto!important}

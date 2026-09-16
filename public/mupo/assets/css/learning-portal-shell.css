@@ -164,6 +164,20 @@
     flex: 0 0 auto;
 }
 
+.mupo-mobile-menu {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    border: 1px solid #dbe2ea !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    color: #061b3a !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 17px !important;
+    box-shadow: none !important;
+}
+
 .mupo-nav-overlay {
     display: none;
     position: fixed;
@@ -194,6 +208,8 @@
 }
 
 @media (min-width: 992px) {
+    body.mupo-learning-portal-shell #sticky-header .logo_img { display: none !important; }
+
     body.mupo-sidebar-collapsed .mupo-sidebar-logo img,
     .mupo-learning-compact-nav .mupo-sidebar-logo img {
         height: 42px !important;
@@ -264,6 +280,7 @@
     body.mupo-portal-nav-open .mupo-learner-sidebar { transform: translateX(0); }
     body.mupo-portal-nav-open .mupo-nav-overlay { display: block; }
     .mupo-portal-menu-toggle { display: grid; }
+    .mupo-mobile-menu { display: inline-flex !important; }
     body.mupo-learning-portal-shell #sticky-header.header_area,
     body.mupo-learning-portal-shell .course_fullview_wrapper,
     body.mupo-learning-portal-shell .mupo-bottom-nav { left: 0 !important; }
