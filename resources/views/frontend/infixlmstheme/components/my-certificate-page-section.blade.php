@@ -7,16 +7,19 @@
                     <div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="section__title3 mb_40">
+                                <div class="section__title3 mb_40 mupo-page-heading">
                                     <h3 class="mb-0">{{__('certificate.My Certificates')}}</h3>
-                                    <h4></h4>
+                                    <p>Access, download and verify certificates earned through completed programmes.</p>
                                 </div>
                             </div>
                         </div>
                         @if(count($certificate_records)==0)
                             <div class="col-12">
-                                <div class="section__title3 margin_50">
-                                    <p class="text-center">{{__('certificate.Certificate Not Found!')}}</p>
+                                <div class="mupo-empty-state">
+                                    <span class="mupo-empty-icon"><i class="fas fa-award"></i></span>
+                                    <h4>No certificates earned yet</h4>
+                                    <p>Complete all required lessons and assessments to unlock your course certificate.</p>
+                                    <a class="mupo-primary-action" href="{{ route('myCourses') }}">Continue Learning <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         @else

@@ -6,9 +6,9 @@
                     <div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="section__title3 mb_40">
+                                <div class="section__title3 mb_40 mupo-page-heading">
                                     <h3 class="mb-0">{{__('payment.Purchase history')}}</h3>
-                                    <h4></h4>
+                                    <p>Review enrolment transactions and download the related invoices.</p>
                                 </div>
                             </div>
                         </div>
@@ -16,8 +16,11 @@
                         <div class="row">
                             @if(count($enrolls)==0)
                                 <div class="col-xl-12">
-                                    <div class="section__title3 margin_50">
-                                        <p class="text-center">{{__('student.No Course Purchased Yet')}}!</p>
+                                    <div class="mupo-empty-state">
+                                        <span class="mupo-empty-icon"><i class="fas fa-receipt"></i></span>
+                                        <h4>No purchase history yet</h4>
+                                        <p>Your course purchases and invoices will appear here.</p>
+                                        <a class="mupo-primary-action" href="{{ url('/courses') }}">Browse Courses <i class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             @else
@@ -53,7 +56,7 @@
                                                             {{count($enroll->courses)}}
                                                         @endif
                                                     </td>
-                                                    <td>{{getPriceFormat($enroll->purchase_price,false)}}</td>
+                                                    <td>{{ (float) $enroll->purchase_price === 0.0 ? 'Free' : getPriceFormat($enroll->purchase_price,false) }}</td>
 
                                                     <td> {{getPriceFormat($enroll->discount,false)}}  </td>
                                                     @if(hasTax())
@@ -72,7 +75,7 @@
                                                     </td>
                                                     <td>
                                                         <a href="{{route('invoice',$enroll->id)}}"
-                                                           class="link_value theme_btn small_btn4">{{__('common.View')}}</a>
+                                                           class="link_value theme_btn small_btn4">View Invoice</a>
 
                                                 </tr>
                                             @endforeach
