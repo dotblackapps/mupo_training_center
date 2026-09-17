@@ -144,6 +144,8 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['auth']], function () 
 
 Route::group(['namespace' => 'Frontend', 'middleware' => ['student']], function () {
     Route::get('student-dashboard', 'StudentController@myDashboard')->name('studentDashboard');
+    Route::get('my-learning', 'StudentController@myLearning')->name('myLearning');
+    Route::get('learning-progress', 'StudentController@learningProgress')->name('learningProgress');
     Route::get('my-courses', 'StudentController@myCourses')->name('myCourses');
     Route::get('my-classes', 'StudentController@myCourses')->name('myClasses');
     Route::get('my-online-course', 'StudentController@myCourses')->name('myOnlineCourse');

@@ -31,7 +31,7 @@
                     </a>
                 @endif
 
-                <a href="{{ route('studentDashboard') }}#continue-learning" title="My Learning">
+                <a href="{{ route('myLearning') }}" class="{{ routeIs('myLearning') ? 'active' : '' }}" title="My Learning">
                     <i class="fas fa-book-open" aria-hidden="true"></i><span>My Learning</span>
                 </a>
 
@@ -57,7 +57,7 @@
             <div class="mupo-nav-group">
                 <div class="mupo-nav-label">ACHIEVEMENT</div>
 
-                <a href="{{ route('studentDashboard') }}#learning-progress" title="Progress">
+                <a href="{{ route('learningProgress') }}" class="{{ routeIs('learningProgress') ? 'active' : '' }}" title="Progress">
                     <i class="fas fa-chart-bar"></i><span>Progress</span>
                 </a>
 
