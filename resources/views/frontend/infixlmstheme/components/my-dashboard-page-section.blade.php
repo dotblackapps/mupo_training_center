@@ -144,7 +144,7 @@
             <article class="mupo-panel" id="continue-learning">
                 <div class="mupo-panel-head">
                     <h3>Continue Learning</h3>
-                    @if(permissionCheck('myCourses'))<a href="{{ route('myCourses') }}">View My Courses &nbsp;→</a>@endif
+                    <a href="{{ route('myLearning') }}">View All Learning &nbsp;→</a>
                 </div>
 
                 @if($activeCourse)
@@ -220,7 +220,7 @@
             <article class="mupo-panel" id="learning-progress">
                 <div class="mupo-panel-head">
                     <h3>Your Progress — {{ $activeCourse ? $activeCourse->title : 'Overall Learning' }}</h3>
-                    @if(permissionCheck('myCourses'))<a href="{{ route('myCourses') }}">View Details &nbsp;→</a>@endif
+                    <a href="{{ route('learningProgress') }}">View Detailed Progress &nbsp;→</a>
                 </div>
                 <div class="mupo-progress-body">
                     <div class="mupo-progress-main">

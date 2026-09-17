@@ -3,7 +3,9 @@
     $profileUrl = route('users.settings');
 
     $portalTitle = 'Dashboard';
-    if (routeIs('myCourses')) $portalTitle = 'My Courses';
+    if (routeIs('myLearning')) $portalTitle = 'My Learning';
+    elseif (routeIs('learningProgress')) $portalTitle = 'Learning Progress';
+    elseif (routeIs('myCourses')) $portalTitle = 'My Courses';
     elseif (routeIs('myQuizzes')) $portalTitle = 'Assessments / Quizzes';
     elseif (routeIs('myClasses')) $portalTitle = 'Live Classes';
     elseif (routeIs('myCertificate')) $portalTitle = 'Certificates';

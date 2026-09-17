@@ -264,6 +264,7 @@ html,body{
 
 <link href="{{ asset('mupo/assets/css/learning-portal-shell.css') }}?v={{ filemtime(public_path('mupo/assets/css/learning-portal-shell.css')) }}" rel="stylesheet">
 <link href="{{ asset('mupo/assets/css/learner-dashboard-components.css') }}?v={{ filemtime(public_path('mupo/assets/css/learner-dashboard-components.css')) }}" rel="stylesheet">
+<link href="{{ asset('mupo/assets/css/learner-workspace.css') }}?v={{ filemtime(public_path('mupo/assets/css/learner-workspace.css')) }}" rel="stylesheet">
 
 
 <div class="dashboard_main_wrapper">

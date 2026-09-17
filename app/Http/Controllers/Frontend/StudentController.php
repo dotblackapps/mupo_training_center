@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Events\OneToOneConnection;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendGeneralEmail;
+use App\LessonComplete;
 use App\StudentCustomField;
 use App\TopicReport;
 use App\Traits\GoogleAnalytics4;
@@ -80,6 +81,130 @@ class StudentController extends Controller
         } catch (Exception $e) {
             GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
         }
+    }
+
+    /**
+     * The learner's day-to-day study workspace.
+     */
+    public function myLearning()
+    {
+        try {
+            return view(theme('pages.myLearning'), $this->learnerWorkspaceData());
+        } catch (Exception $e) {
+            GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
+        }
+    }
+
+    /**
+     * A trustworthy course and module completion report.
+     */
+    public function learningProgress()
+    {
+        try {
+            return view(theme('pages.learningProgress'), $this->learnerWorkspaceData(true));
+        } catch (Exception $e) {
+            GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
+        }
+    }
+
+    private function learnerWorkspaceData($includeModules = false)
+    {
+        $userId = Auth::id();
+
+        $relations = ['course.courseLevel', 'course.lessons'];
+        if ($includeModules) {
+            $relations[] = 'course.chapters.lessons';
+        }
+
+        $enrollments = CourseEnrolled::query()
+            ->where('user_id', $userId)
+            ->whereHas('course', function ($query) {
+                $query->where('type', 1)->where('status', 1);
+            })
+            ->with($relations)
+            ->orderByRaw('CASE WHEN last_view_at IS NULL THEN 1 ELSE 0 END')
+            ->orderByDesc('last_view_at')
+            ->get();
+
+        $courseIds = $enrollments->pluck('course_id')->filter()->values();
+        $completionRows = LessonComplete::query()
+            ->where('user_id', $userId)
+            ->whereIn('course_id', $courseIds)
+            ->where('status', 1)
+            ->get(['course_id', 'lesson_id', 'updated_at']);
+
+        $completionsByCourse = $completionRows->groupBy('course_id');
+        $certificateCourseIds = CertificateRecord::query()
+            ->where('student_id', $userId)
+            ->whereIn('course_id', $courseIds)
+            ->pluck('course_id')
+            ->unique();
+
+        $learningCourses = $enrollments->map(function ($enrollment) use ($completionsByCourse, $certificateCourseIds, $includeModules) {
+            $course = $enrollment->course;
+            $lessons = $course->lessons;
+            $completedIds = $completionsByCourse->get($course->id, collect())
+                ->pluck('lesson_id')
+                ->unique();
+            $totalLessons = $lessons->count();
+            $completedLessons = $lessons->whereIn('id', $completedIds)->count();
+            $percentage = $totalLessons > 0
+                ? min(100, (int) ceil(($completedLessons / $totalLessons) * 100))
+                : 0;
+            $status = $percentage >= 100 ? 'completed' : ($percentage > 0 ? 'in-progress' : 'not-started');
+            $nextLesson = $lessons->first(function ($lesson) use ($completedIds) {
+                return !$completedIds->contains($lesson->id);
+            });
+
+            $modules = collect();
+            if ($includeModules) {
+                $modules = $course->chapters->map(function ($chapter) use ($completedIds) {
+                    $chapterLessons = $chapter->lessons;
+                    $chapterTotal = $chapterLessons->count();
+                    $chapterCompleted = $chapterLessons->whereIn('id', $completedIds)->count();
+
+                    return [
+                        'id' => $chapter->id,
+                        'title' => $chapter->name ?: $chapter->title,
+                        'total_lessons' => $chapterTotal,
+                        'completed_lessons' => $chapterCompleted,
+                        'percentage' => $chapterTotal > 0 ? min(100, (int) ceil(($chapterCompleted / $chapterTotal) * 100)) : 0,
+                    ];
+                })->values();
+            }
+
+            return [
+                'enrollment' => $enrollment,
+                'course' => $course,
+                'percentage' => $percentage,
+                'status' => $status,
+                'status_label' => $status === 'completed' ? 'Completed' : ($status === 'in-progress' ? 'In Progress' : 'Not Started'),
+                'total_lessons' => $totalLessons,
+                'completed_lessons' => $completedLessons,
+                'next_lesson' => $nextLesson,
+                'last_activity' => $enrollment->last_view_at,
+                'has_certificate' => $certificateCourseIds->contains($course->id),
+                'modules' => $modules,
+            ];
+        });
+
+        $progressValues = $learningCourses->pluck('percentage');
+        $summary = [
+            'total' => $learningCourses->count(),
+            'in_progress' => $learningCourses->where('status', 'in-progress')->count(),
+            'not_started' => $learningCourses->where('status', 'not-started')->count(),
+            'completed' => $learningCourses->where('status', 'completed')->count(),
+            'certificates' => $certificateCourseIds->count(),
+            'completed_lessons' => $learningCourses->sum('completed_lessons'),
+            'total_lessons' => $learningCourses->sum('total_lessons'),
+            'average_progress' => $progressValues->count() ? (int) round($progressValues->avg()) : 0,
+        ];
+
+        $activeCourse = $learningCourses
+            ->whereIn('status', ['in-progress', 'not-started'])
+            ->first();
+
+        return compact('learningCourses', 'activeCourse', 'summary');
     }
 
     public function myCourses(Request $request)
