@@ -36,7 +36,7 @@
                 <div class="my_courses_wrapper">
                     <div class="row">
                         <div class="col-12">
-                            <div class="section__title3">
+                            <div class="section__title3 mupo-page-heading">
                                 <h3>
                                     @if (routeIs('myClasses'))
                                         {{ __('courses.Live Class') }}
@@ -46,6 +46,7 @@
                                         {{ __('courses.My Courses') }}
                                     @endif
                                 </h3>
+                                <p>@if(routeIs('myClasses'))View scheduled learning sessions and joining details.@elseif(routeIs('myQuizzes'))Review available assessments and monitor your results.@else Continue your programmes and monitor course progress.@endif</p>
                             </div>
                         </div>
 
@@ -62,7 +63,7 @@
                             }
                         @endphp
                     </div>
-                    <div class="row d-flex align-items-center mb-4 mb-lg-5">
+                    <div class="row d-flex align-items-center mupo-filter-toolbar">
                         <div class="col-xl-6 col-md-6 col-sm-12 mt-3">
                             <div class="short_select d-flex align-items-center pt-0 pb-3">
                                 <h5 class="mr_10 font_16 f_w_500 mb-0">{{ __('frontend.Filter By') }}:</h5>
@@ -81,7 +82,7 @@
                             <form action="{{ route(\Request::route()->getName()) }}">
                                 <div class="input-group theme_search_field pt-0 pb-3 float-end w-50">
                                     <div class="input-group-prepend">
-                                        <button class="btn" type="button" id="button-addon1"><i class="ti-search"></i>
+                                        <button class="btn" type="submit" id="button-addon1" aria-label="Search"><i class="ti-search"></i>
                                         </button>
                                     </div>
 
@@ -236,15 +237,16 @@
                         @endif
                         @if (count($courses) == 0)
                             <div class="col-12">
-                                <div class="section__title3 margin_50">
+                                <div class="mupo-empty-state">
+                                    <span class="mupo-empty-icon"><i class="@if(routeIs('myClasses')) fas fa-video @elseif(routeIs('myQuizzes')) far fa-file-alt @else fas fa-graduation-cap @endif"></i></span>
                                     @if (routeIs('myClasses'))
-                                        <p class="text-center">{{ __('student.No Class Purchased Yet') }}!</p>
+                                        <h4>No live classes scheduled</h4><p>Scheduled sessions, joining links and facilitator details will appear here.</p>
                                     @elseif(routeIs('myQuizzes'))
-                                        <p class="text-center">{{ __('student.No Quiz Purchased Yet') }}!</p>
+                                        <h4>No assessments available yet</h4><p>Assessments linked to your enrolled courses will appear when they become available.</p>
                                     @else
-                                        <p class="text-center">{{ __('student.No Course Purchased Yet') }}!</p>
+                                        <h4>No courses found</h4><p>Adjust your search or browse MUPO programmes to begin learning.</p>
                                     @endif
-
+                                    <a class="mupo-primary-action" href="{{ route('myCourses') }}">View My Courses <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         @endif
@@ -292,5 +294,4 @@
         </div>
     </div>
 @endif
-
 

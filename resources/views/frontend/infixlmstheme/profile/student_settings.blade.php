@@ -339,11 +339,11 @@
                 </div>
             </div>
         </div>
-        <div class="profile p-0 m-0">
-            <!-- tab link -->
+        <div class="mupo-settings-layout">
+        <div class="profile p-0 m-0 mupo-settings-navigation">
             @include(theme('profile._tab_link'))
         </div>
-        <div class="dashboard_lg_card">
+        <div class="dashboard_lg_card mupo-settings-content">
             <div class="container-fluid p-0">
                 <div class="row justify-content-center">
                     <div class="col-12">
@@ -394,7 +394,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
 @endsection
-

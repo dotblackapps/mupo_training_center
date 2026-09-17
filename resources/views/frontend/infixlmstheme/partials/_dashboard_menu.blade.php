@@ -1,6 +1,6 @@
 @php
     $user = auth()->user();
-    $profileUrl = $user->username ? route('profileUniqueUrl', $user->username) : route('users.settings');
+    $profileUrl = route('users.settings');
 
     $portalTitle = 'Dashboard';
     if (routeIs('myCourses')) $portalTitle = 'My Courses';
@@ -10,6 +10,7 @@
     elseif (routeIs('myPurchases')) $portalTitle = 'Purchase History';
     elseif (routeIs('logged.in.devices')) $portalTitle = 'Logged-in Devices';
     elseif (routeIs('users.settings')) $portalTitle = 'Profile & Settings';
+    elseif (request()->is('invoice/*')) $portalTitle = 'Invoice';
 @endphp
 
 <header class="mupo-dashboard-topbar">

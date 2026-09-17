@@ -124,8 +124,8 @@
                                 <table style=" margin-bottom: 30px" class="table">
                                     <tbody>
                                     <td>
-                                        <img style="width: 108px" src="{{ getCourseImage(Settings('logo')) }}"
-                                             alt="{{ Settings('site_name') }}">
+                                        <img style="width: 150px; height: 72px; object-fit: contain" src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}"
+                                             alt="MUPO Training Center">
                                     </td>
                                     <td style="text-align: right">
                                         <h3 class="invoice_no black_color" style=" margin-bottom: 10px" ;>
