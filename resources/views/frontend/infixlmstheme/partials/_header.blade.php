@@ -4,11 +4,14 @@
 
 <head>
     @laravelPWA
+    @php($mupoFavicon = asset('mupo/assets/images/mupo-logo_1.jpeg') . '?v=mupo-20260917')
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <link rel="icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ $mupoFavicon }}">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ $mupoFavicon }}">
+    <link rel="apple-touch-icon" href="{{ $mupoFavicon }}">
 
     {{-- Open Graph Meta Tags --}}
     <meta property="og:url" content="{{ url()->current() }}"/>
@@ -57,10 +60,6 @@
 
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}">
-    <!-- Place favicon.ico in the root directory -->
-
-
     <x-frontend-dynamic-style-color/>
     <x-backend-dynamic-color/>
 

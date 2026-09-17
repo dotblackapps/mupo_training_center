@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" href="{{ getFaviconImage(Settings('favicon')) }}?v={{ time() }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
+    <link rel="apple-touch-icon" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
     <title>404</title>
     <link rel="stylesheet" href="{{assetPath('backend/')}}/vendors/css/bootstrap.css{{assetVersion()}}"/>
     <link rel="stylesheet" href="{{assetPath('backend/')}}/vendors/css/themify-icons.css{{assetVersion()}}"/>

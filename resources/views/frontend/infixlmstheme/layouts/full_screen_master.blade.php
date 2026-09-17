@@ -19,7 +19,9 @@
     <meta property="og:description" content="{{ Settings('meta_description')  }}">
     <meta property="og:image" content="{{asset('mupo/assets/images/mupo-logo_1.jpeg')}}"/>
     <meta property="og:image:type" content="image/png"/>
-    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
+    <link rel="apple-touch-icon" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
 
 
     <x-frontend-dynamic-style-color/>
