@@ -321,8 +321,9 @@
             --mupo-text:#0a1f44;
             --mupo-muted:#667085;
             --mupo-green:#159957;
-            --mupo-side-expanded:320px;
+            --mupo-side-expanded:250px;
             --mupo-side-rail:48px;
+            --mupo-panel-safe-gap:22px;
             --mupo-side:var(--mupo-side-expanded);
             --mupo-head:74px;
             --mupo-bottom:76px;
@@ -536,7 +537,7 @@
             position:fixed!important;
             top:var(--mupo-head)!important;
             left:0!important;
-            right:var(--mupo-side)!important;
+            right:calc(var(--mupo-side) + var(--mupo-panel-safe-gap))!important;
             bottom:var(--mupo-bottom)!important;
             width:auto!important;
             height:auto!important;
@@ -793,6 +794,10 @@
             right:0!important;
             bottom:var(--mupo-bottom)!important;
             width:var(--mupo-side)!important;
+            min-width:var(--mupo-side)!important;
+            max-width:var(--mupo-side)!important;
+            flex:0 0 var(--mupo-side)!important;
+            box-sizing:border-box!important;
             height:auto!important;
             background:#fff!important;
             z-index:1060!important;
@@ -810,7 +815,8 @@
         .mupo-course-panel-rail i{font-size:17px}
         .mupo-course-panel-rail span{display:block;margin-top:12px;font-size:11px;font-weight:800;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.5px}
         body.mupo-course-content-collapsed .course_fullview_wrapper{right:var(--mupo-side-rail)!important}
-        body.mupo-course-content-collapsed .course__play_warp.courseListPlayer{width:var(--mupo-side-rail)!important;overflow:visible!important}
+        body.mupo-course-content-collapsed .course__play_warp.courseListPlayer{width:var(--mupo-side-rail)!important;min-width:var(--mupo-side-rail)!important;max-width:var(--mupo-side-rail)!important;flex-basis:var(--mupo-side-rail)!important;overflow:visible!important}
+        body.mupo-course-content-collapsed .mupo-course-panel-toggle{left:3px}
         body.mupo-course-content-collapsed .course__play_warp .play_warp_header,
         body.mupo-course-content-collapsed .course__play_warp .mupo-side-search,
         body.mupo-course-content-collapsed .course__play_warp .course__play_list{display:none!important}
@@ -1100,7 +1106,7 @@
         }
 
         @media(max-width:1280px){
-            :root{--mupo-side-expanded:300px}
+            :root{--mupo-side-expanded:250px}
             .mupo-header-progress{width:210px;padding-left:16px;padding-right:16px}
             h4.headerTitle{max-width:340px}
             .mupo-tool-btn{min-width:52px}
@@ -1117,7 +1123,10 @@
             }
 
             .course__play_warp.courseListPlayer{
-                width:min(90vw,420px)!important;
+                width:min(86vw,290px)!important;
+                min-width:0!important;
+                max-width:min(86vw,290px)!important;
+                flex-basis:auto!important;
                 right:0!important;
                 transform:translateX(100%)!important;
                 transition:transform .2s ease!important;
@@ -1126,7 +1135,7 @@
 
             .course__play_warp.courseListPlayer.active{transform:translateX(0)!important}
             .mupo-course-panel-toggle,.mupo-course-panel-rail{display:none!important}
-            body.mupo-course-content-collapsed .course__play_warp.courseListPlayer{width:min(90vw,420px)!important;overflow:hidden!important}
+            body.mupo-course-content-collapsed .course__play_warp.courseListPlayer{width:min(86vw,290px)!important;min-width:0!important;max-width:min(86vw,290px)!important;flex-basis:auto!important;overflow:hidden!important}
 
             .mupo-mobile-contents{display:inline-flex!important}
             .mupo-focus-toggle{display:none!important}
