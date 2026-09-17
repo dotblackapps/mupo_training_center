@@ -9,7 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
    <link rel="icon" type="image/png" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v={{ time() }}">
-<link rel="shortcut icon" type="image/png" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v={{ time() }}">
+<link rel="icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
+<link rel="shortcut icon" type="image/jpeg" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
+<link rel="apple-touch-icon" href="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}?v=mupo-20260917">
 
     <x-frontend-dynamic-style-color/>
     <x-backend-dynamic-color/>
