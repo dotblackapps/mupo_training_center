@@ -321,7 +321,9 @@
             --mupo-text:#0a1f44;
             --mupo-muted:#667085;
             --mupo-green:#159957;
-            --mupo-side:clamp(320px,21vw,360px);
+            --mupo-side-expanded:320px;
+            --mupo-side-rail:48px;
+            --mupo-side:var(--mupo-side-expanded);
             --mupo-head:74px;
             --mupo-bottom:76px;
             --mupo-reading:900px;
@@ -545,6 +547,7 @@
             padding:24px 28px 36px!important;
             display:block!important;
             scroll-behavior:smooth;
+            transition:right .22s ease;
         }
 
         .course_fullview_wrapper.video{background:var(--mupo-bg)!important}
@@ -797,9 +800,25 @@
             box-shadow:-8px 0 22px rgba(6,27,58,.025)!important;
             overflow:hidden!important;
             transform:none!important;
+            transition:width .22s ease, transform .22s ease!important;
         }
 
+        .mupo-course-panel-toggle{position:absolute;top:18px;left:-21px;width:42px;height:42px;border:3px solid #fff;border-radius:50%;background:var(--mupo-navy);color:#fff;display:flex;align-items:center;justify-content:center;z-index:5;box-shadow:0 5px 16px rgba(6,27,58,.24);cursor:pointer;transition:background .15s ease,transform .15s ease}
+        .mupo-course-panel-toggle:hover,.mupo-course-panel-toggle:focus-visible{background:var(--mupo-red);outline:3px solid rgba(237,28,36,.2);outline-offset:2px}
+        .mupo-course-panel-toggle i{transition:transform .22s ease}
+        .mupo-course-panel-rail{display:none;height:100%;background:var(--mupo-navy);color:#fff;padding-top:76px;text-align:center}
+        .mupo-course-panel-rail i{font-size:17px}
+        .mupo-course-panel-rail span{display:block;margin-top:12px;font-size:11px;font-weight:800;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.5px}
+        body.mupo-course-content-collapsed .course_fullview_wrapper{right:var(--mupo-side-rail)!important}
+        body.mupo-course-content-collapsed .course__play_warp.courseListPlayer{width:var(--mupo-side-rail)!important;overflow:visible!important}
+        body.mupo-course-content-collapsed .course__play_warp .play_warp_header,
+        body.mupo-course-content-collapsed .course__play_warp .mupo-side-search,
+        body.mupo-course-content-collapsed .course__play_warp .course__play_list{display:none!important}
+        body.mupo-course-content-collapsed .mupo-course-panel-rail{display:block}
+        body.mupo-course-content-collapsed .mupo-course-panel-toggle i{transform:rotate(180deg)}
+
         .course__play_warp.courseListPlayer:before{display:none!important}
+        #mupoCoursePanelContent{height:100%;overflow:hidden}
 
         .play_warp_header{
             height:auto!important;
@@ -956,6 +975,7 @@
         }
 
         .single_play_list .primary_checkbox{min-width:21px!important}
+        .single_play_list input[type="checkbox"]{pointer-events:none!important}
         .single_play_list .checkmark{
             width:19px!important;
             height:19px!important;
@@ -1080,7 +1100,7 @@
         }
 
         @media(max-width:1280px){
-            :root{--mupo-side:320px}
+            :root{--mupo-side-expanded:300px}
             .mupo-header-progress{width:210px;padding-left:16px;padding-right:16px}
             h4.headerTitle{max-width:340px}
             .mupo-tool-btn{min-width:52px}
@@ -1105,6 +1125,8 @@
             }
 
             .course__play_warp.courseListPlayer.active{transform:translateX(0)!important}
+            .mupo-course-panel-toggle,.mupo-course-panel-rail{display:none!important}
+            body.mupo-course-content-collapsed .course__play_warp.courseListPlayer{width:min(90vw,420px)!important;overflow:hidden!important}
 
             .mupo-mobile-contents{display:inline-flex!important}
             .mupo-focus-toggle{display:none!important}
@@ -2309,6 +2331,9 @@ if ($assign->questionBank->shuffle==1){
             </p>
         </div>
         <div class="course__play_warp courseListPlayer ">
+            <button type="button" class="mupo-course-panel-toggle" id="mupoCoursePanelToggle" aria-label="Collapse course content" aria-controls="mupoCoursePanelContent" aria-expanded="true" title="Collapse course content"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+            <div class="mupo-course-panel-rail" aria-hidden="true"><i class="fas fa-list-ul"></i><span>Course Content</span></div>
+            <div id="mupoCoursePanelContent">
             <div class="play_warp_header"><div class="mupo-content-head"><div><h3>Course Content</h3><div class="mupo-content-sub">{{ $currentLessonNumber }} of {{ $totalLessonCount ?: $total }} lessons</div></div><strong>{{ $percentage }}%</strong></div><div class="mupo-progress-line"><span style="width:{{ $percentage }}%"></span></div></div>
             <div class="mupo-side-search"><div class="mupo-side-search-wrap"><i class="fas fa-search"></i><input type="search" id="mupoLessonSearch" placeholder="Search lessons..." autocomplete="off"></div></div>
             <div class="course__play_list">
@@ -2354,7 +2379,9 @@ if ($assign->questionBank->shuffle==1){
                                                     @endphp
                                                     <div class="single_play_list"
                                                          id="single_lesson_{{ $singleLesson->id }}">
-                                                        <a class="@if (showPicName(Request::url()) == $singleLesson->id) active @endif"
+                                                        <a class="mupo-curriculum-lesson-link @if (showPicName(Request::url()) == $singleLesson->id) active @endif"
+                                                           data-lesson-id="{{ $singleLesson->id }}"
+                                                           @if(request()->route('lesson_id') == $singleLesson->id) aria-current="page" @endif
                                                            href="{{ route('fullScreenView', [$course->id, $singleLesson->id]) }}">
 
                                                             @if ($singleLesson->is_quiz == 1)
@@ -2487,6 +2514,7 @@ if ($assign->questionBank->shuffle==1){
                     @endif
 
                 </div>
+            </div>
                 <div class="pb-5 mb-5 d-none">
                     <div>{{ __('frontend.Current Time') }}: <span id="currentTime">0</span></div>
                     <div>{{ __('frontend.Total Time') }} : <span id="totalTime">0</span></div>
@@ -2735,6 +2763,38 @@ if ($assign->questionBank->shuffle==1){
             let course = '{{ $course->id }}';
             let lesson = '{{ $lesson->id }}';
 
+            const coursePanelPreferenceKey = 'mupoCourseContentCollapsed';
+            const coursePanelToggle = document.getElementById('mupoCoursePanelToggle');
+
+            function setCoursePanelCollapsed(collapsed, remember) {
+                const useCollapsedState = window.innerWidth >= 1200 && Boolean(collapsed);
+                document.body.classList.toggle('mupo-course-content-collapsed', useCollapsedState);
+                if (coursePanelToggle) {
+                    coursePanelToggle.setAttribute('aria-expanded', useCollapsedState ? 'false' : 'true');
+                    coursePanelToggle.setAttribute('aria-label', useCollapsedState ? 'Expand course content' : 'Collapse course content');
+                    coursePanelToggle.setAttribute('title', useCollapsedState ? 'Expand course content' : 'Collapse course content');
+                }
+                if (remember && window.innerWidth >= 1200) {
+                    localStorage.setItem(coursePanelPreferenceKey, useCollapsedState ? '1' : '0');
+                }
+            }
+
+            setCoursePanelCollapsed(localStorage.getItem(coursePanelPreferenceKey) === '1', false);
+            if (coursePanelToggle) {
+                coursePanelToggle.addEventListener('click', function () {
+                    setCoursePanelCollapsed(!document.body.classList.contains('mupo-course-content-collapsed'), true);
+                });
+            }
+
+            $(document).off('click.mupoLessonRoute', '.mupo-curriculum-lesson-link')
+                .on('click.mupoLessonRoute', '.mupo-curriculum-lesson-link', function (event) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    const destination = this.href;
+                    if (!destination || this.getAttribute('aria-current') === 'page') return;
+                    window.location.assign(destination);
+                });
+
             /*       $("iframe").each(function () {
                        //Using closures to capture each one
                        var iframe = $(this);
@@ -2766,10 +2826,13 @@ if ($assign->questionBank->shuffle==1){
 
             // Keep the lesson curriculum visible consistently on desktop.
             function keepCurriculumVisible() {
-                if (window.innerWidth >= 992) {
+                if (window.innerWidth >= 1200) {
                     $('.courseListPlayer').removeClass('active');
                     $('.course_fullview_wrapper').removeClass('active');
                     $('.floating-title').hide();
+                    setCoursePanelCollapsed(localStorage.getItem(coursePanelPreferenceKey) === '1', false);
+                } else {
+                    document.body.classList.remove('mupo-course-content-collapsed');
                 }
             }
             keepCurriculumVisible();
