@@ -284,6 +284,7 @@ html,body{
 document.addEventListener('DOMContentLoaded', function () {
     var body = document.body;
     var toggle = document.getElementById('mupoSidebarCollapse');
+    var topbarToggle = document.getElementById('mupoTopbarCollapse');
     var sidebar = document.getElementById('mupoLearnerSidebar');
     var mobileOpen = document.getElementById('mupoDashboardNavOpen');
     var mobileClose = sidebar ? sidebar.querySelector('.sidebar_close_icon') : null;
@@ -307,6 +308,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 'mupoLearnerSidebarCollapsed',
                 body.classList.contains('mupo-sidebar-collapsed') ? '1' : '0'
             );
+        });
+    }
+
+    if (topbarToggle) {
+        topbarToggle.addEventListener('click', function () {
+            body.classList.toggle('mupo-sidebar-collapsed');
+            localStorage.setItem('mupoLearnerSidebarCollapsed', body.classList.contains('mupo-sidebar-collapsed') ? '1' : '0');
         });
     }
 
