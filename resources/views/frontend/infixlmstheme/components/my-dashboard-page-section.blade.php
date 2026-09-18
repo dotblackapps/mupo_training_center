@@ -1,264 +1,45 @@
 @php
     $total = Auth::user()->totalStudentCourses();
     $enrolledCourses = Auth::user()->studentCourses()->with(['course.courseLevel'])->latest('last_view_at')->get();
-    $activeEnrollment = $enrolledCourses->first(function ($enrollment) {
-        return $enrollment->course && round($enrollment->course->loginUserTotalPercentage) < 100;
-    });
-    $activeCourse = $activeEnrollment ? $activeEnrollment->course : null;
+    $activeEnrollment = $enrolledCourses->first(fn($e) => $e->course && round($e->course->loginUserTotalPercentage) < 100);
+    $activeCourse = $activeEnrollment ? $activeEnrollment->course : $enrolledCourses->first()?->course;
     $activeProgress = $activeCourse ? max(0, min(100, round($activeCourse->loginUserTotalPercentage))) : 0;
     $progressValues = $enrolledCourses->filter(fn($e) => $e->course)->map(fn($e) => max(0, min(100, round($e->course->loginUserTotalPercentage))));
     $overallProgress = $progressValues->count() ? (int) round($progressValues->avg()) : 0;
     $firstName = trim(explode(' ', Auth::user()->name)[0] ?? Auth::user()->name);
     $lastActivity = $activeEnrollment && $activeEnrollment->last_view_at ? showDate($activeEnrollment->last_view_at) : 'Ready when you are';
+    $hour = (int) now()->format('G');
+    $greeting = $hour < 12 ? 'Good morning' : ($hour < 18 ? 'Good afternoon' : 'Good evening');
 @endphp
 
 <style>
-.mupo-dashboard{max-width:1500px;margin:0 auto;color:var(--mupo-text)}
-.mupo-dashboard a{text-decoration:none}
-.mupo-hero{
-    min-height:214px;border-radius:10px;overflow:hidden;position:relative;padding:28px 31px;
-    background:linear-gradient(90deg,rgba(6,27,58,.99) 0%,rgba(6,27,58,.92) 44%,rgba(6,27,58,.30) 74%,rgba(6,27,58,.08) 100%),
-    url('{{ asset('mupo/assets/images/bulb.jpg') }}') center/cover no-repeat;color:#fff;display:flex;align-items:center
-}
-.mupo-hero-content{position:relative;z-index:2;max-width:720px}
-.mupo-hero-kicker{color:#ff343c;font-size:11px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:8px}
-.main_content.dashboard_part .mupo-hero h1{font-size:34px!important;line-height:1.06;color:#fff!important;margin:0 0 9px;font-weight:800}
-.mupo-hero-course{font-size:16px;font-weight:800;color:#fff;margin-bottom:5px}
-.mupo-hero-progress-copy{font-size:12px;color:rgba(255,255,255,.82);margin-bottom:17px}
-.mupo-hero-btn{display:inline-flex;align-items:center;gap:9px;background:var(--mupo-red);color:#fff!important;padding:11px 19px;border-radius:6px;font-size:11px;font-weight:800}
-.mupo-hero:after{
-    content:"PROFESSIONAL\A LEARNING\A FOR A BRIGHTER\A TOMORROW.";white-space:pre;position:absolute;right:26px;bottom:24px;
-    border-left:3px solid var(--mupo-red);padding-left:14px;font-size:11px;line-height:1.45;letter-spacing:1.8px;font-weight:800;color:#fff
-}
-.mupo-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:13px}
-.mupo-kpi{
-    background:#fff;border:1px solid var(--mupo-line);border-radius:9px;padding:15px 17px;min-height:105px;
-    display:flex;align-items:flex-start;gap:13px;box-shadow:0 4px 14px rgba(6,27,58,.03)
-}
-.mupo-kpi-icon{
-    width:34px;height:34px;border-radius:7px;background:#fff0f1;color:var(--mupo-red);display:grid;place-items:center;
-    font-size:15px;flex:0 0 auto
-}
-.mupo-kpi-content label{display:block;color:var(--mupo-text);font-size:10px;font-weight:800;margin:1px 0 5px}
-.mupo-kpi-content strong{display:block;color:var(--mupo-text);font-size:25px;line-height:1;font-weight:800}
-.mupo-kpi-content p{font-size:9px;color:#8a94a3;margin:5px 0 0}
-.mupo-kpi-progress{min-width:0;flex:1}
-.mupo-kpi-track,.mupo-progress-track{height:7px;background:#e8ecf1;border-radius:10px;overflow:hidden;margin-top:7px}
-.mupo-kpi-track span,.mupo-progress-track span{display:block;height:100%;background:var(--mupo-red);border-radius:10px}
-.mupo-primary-grid{display:grid;grid-template-columns:1.35fr .95fr;gap:12px;margin-top:12px}
-.mupo-secondary-grid{display:grid;grid-template-columns:1.35fr .95fr;gap:12px;margin-top:12px}
-.mupo-panel{background:#fff;border:1px solid var(--mupo-line);border-radius:9px;box-shadow:0 4px 14px rgba(6,27,58,.03);overflow:hidden}
-.mupo-panel-head{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid var(--mupo-line)}
-.mupo-panel-head h3{font-size:14px!important;color:var(--mupo-text)!important;margin:0;font-weight:800}
-.mupo-panel-head a{font-size:10px;color:var(--mupo-red)!important;font-weight:700}
-.mupo-continue-body{padding:13px;display:grid;grid-template-columns:155px 1fr;gap:16px}
-.mupo-course-thumb{min-height:205px;border-radius:7px;background:center/cover no-repeat;position:relative;overflow:hidden}
-.mupo-course-thumb:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,27,58,.04),rgba(6,27,58,.18))}
-.mupo-course-thumb span{position:absolute;top:9px;left:9px;background:var(--mupo-navy);color:#fff;padding:5px 8px;border-radius:5px;font-size:8px;font-weight:700}
-.mupo-course-info h2{font-size:17px!important;line-height:1.24;color:var(--mupo-text)!important;margin:2px 0 7px;font-weight:800}
-.mupo-level{display:inline-block;font-size:9px;background:#eef2f7;border-radius:4px;padding:4px 7px;color:#4c5b70;margin-bottom:9px}
-.mupo-course-progress-copy{font-size:10px;color:var(--mupo-muted);margin-bottom:2px}
-.mupo-course-details{margin:12px 0;display:grid;gap:7px}
-.mupo-course-detail{display:flex;align-items:flex-start;gap:8px;font-size:10px;color:var(--mupo-muted)}
-.mupo-course-detail i{color:var(--mupo-navy);width:14px;margin-top:2px}
-.mupo-course-detail strong{display:block;color:var(--mupo-text);font-size:10px}
-.mupo-primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--mupo-red)!important;color:#fff!important;border-radius:6px;padding:10px 16px;font-size:10px;font-weight:800;width:100%}
-.mupo-upnext-body,.mupo-recent-body{padding:4px 15px}
-.mupo-upnext-item,.mupo-recent-item{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid #edf0f4}
-.mupo-upnext-item:last-child,.mupo-recent-item:last-child{border-bottom:0}
-.mupo-item-icon{width:32px;height:32px;border-radius:50%;background:#f1f4f8;color:var(--mupo-navy);display:grid;place-items:center;font-size:13px}
-.mupo-item-icon.red{background:#fff0f1;color:var(--mupo-red)}
-.mupo-upnext-item strong,.mupo-recent-item strong{display:block;color:var(--mupo-text);font-size:10px}
-.mupo-upnext-item p,.mupo-recent-item p{margin:2px 0 0;color:var(--mupo-muted);font-size:9px;line-height:1.35}
-.mupo-item-action{font-size:9px;color:var(--mupo-red)!important;font-weight:700;white-space:nowrap}
-.mupo-status-pill{font-size:8px;color:#59687b;background:#f0f3f6;padding:4px 7px;border-radius:12px;white-space:nowrap}
-.mupo-progress-body{padding:15px}
-.mupo-progress-main{display:flex;align-items:center;justify-content:space-between;gap:15px}
-.mupo-progress-main strong{font-size:11px;color:var(--mupo-text)}
-.mupo-progress-main .pct{font-size:15px;font-weight:800;color:var(--mupo-text)}
-.mupo-progress-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:16px;border-top:1px solid var(--mupo-line);padding-top:14px}
-.mupo-progress-stat{padding:0 15px;border-right:1px solid var(--mupo-line)}
-.mupo-progress-stat:first-child{padding-left:0}.mupo-progress-stat:last-child{border-right:0}
-.mupo-progress-stat strong{display:block;font-size:15px;color:var(--mupo-text)}
-.mupo-progress-stat span{display:block;font-size:8px;color:var(--mupo-muted);margin-top:3px}
-.mupo-progress-stat i{color:var(--mupo-navy);margin-right:6px}
-.mupo-recent-item{grid-template-columns:30px 1fr auto;padding:10px 0}
-.mupo-recent-time{font-size:8px;color:#8792a2;text-align:right}
-.mupo-empty{padding:28px 18px;text-align:center;color:var(--mupo-muted);font-size:11px}
-.mupo-empty i{font-size:23px;color:#b6c0cc;margin-bottom:9px;display:block}
-@media(max-width:1199px){.mupo-kpi-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:991px){.mupo-primary-grid,.mupo-secondary-grid{grid-template-columns:1fr}.mupo-hero:after{display:none}}
-@media(max-width:640px){
-    .mupo-hero{min-height:230px;padding:22px 18px;background-position:62% center}.main_content.dashboard_part .mupo-hero h1{font-size:28px!important;color:#fff!important}
-    .mupo-kpi-grid{grid-template-columns:1fr 1fr;gap:8px}.mupo-kpi{padding:12px;min-height:95px}
-    .mupo-continue-body{grid-template-columns:1fr}.mupo-course-thumb{min-height:185px}
-    .mupo-progress-stats{grid-template-columns:1fr 1fr;row-gap:14px}.mupo-progress-stat:nth-child(2){border-right:0}
-}
+.mupo-dashboard{max-width:1420px;margin:0 auto;color:var(--mupo-text);font-size:14px}.mupo-dashboard a{text-decoration:none}.mupo-dashboard *{box-sizing:border-box}
+.mupo-welcome{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin:4px 0 20px}.mupo-welcome h1{font-size:27px!important;line-height:1.15!important;margin:0 0 5px!important;color:var(--mupo-text)!important;font-weight:800!important}.mupo-welcome p{margin:0;color:#718096;font-size:14px}.mupo-welcome-date{text-align:right;font-size:13px;color:var(--mupo-text)}.mupo-quote{margin-top:12px;padding-left:12px;border-left:3px solid var(--mupo-red);font-size:11px;color:#35445a}
+.mupo-hero{min-height:275px;border-radius:9px;overflow:hidden;position:relative;padding:38px 42px;background:linear-gradient(90deg,rgba(4,23,50,.98),rgba(4,23,50,.89) 47%,rgba(4,23,50,.28) 76%),url('{{ asset('mupo/assets/images/bulb.jpg') }}') center/cover no-repeat;color:#fff;display:flex;align-items:center}.mupo-hero-content{z-index:2;max-width:760px}.mupo-hero-kicker{color:#ff3038;font-size:13px;font-weight:900;letter-spacing:1.4px;margin-bottom:9px}.main_content.dashboard_part .mupo-hero h2{font-size:34px!important;line-height:1.04!important;color:#fff!important;margin:0 0 10px!important;font-weight:800!important;max-width:650px}.mupo-hero-meta{font-size:14px;font-weight:700;margin-bottom:8px}.mupo-hero-sub{font-size:12px;color:rgba(255,255,255,.84);margin-bottom:22px}.mupo-hero-actions{display:flex;align-items:center;gap:24px}.mupo-hero-btn{display:inline-flex;align-items:center;gap:12px;background:var(--mupo-red);color:#fff!important;padding:13px 23px;border-radius:6px;font-size:13px;font-weight:800}.mupo-hero-link{color:#fff!important;font-size:12px;text-decoration:underline!important}.mupo-hero:after{content:"LEARN.\A QUALIFY.\A ADVANCE.";white-space:pre;position:absolute;right:38px;top:50%;transform:translateY(-50%);border-left:4px solid var(--mupo-red);padding-left:16px;font-size:22px;line-height:1.25;letter-spacing:1px;font-weight:800;color:#fff}
+.mupo-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:15px}.mupo-kpi{background:#fff;border:1px solid var(--mupo-line);border-radius:9px;padding:18px;min-height:110px;display:flex;gap:15px;box-shadow:0 4px 14px rgba(6,27,58,.03)}.mupo-kpi-icon{width:44px;height:44px;border-radius:7px;background:#fff0f1;color:var(--mupo-red);display:grid;place-items:center;font-size:19px;flex:0 0 auto}.mupo-kpi label{display:block;font-size:12px;font-weight:800;color:var(--mupo-text);margin-bottom:5px}.mupo-kpi strong{font-size:26px;line-height:1;color:var(--mupo-text);font-weight:800}.mupo-kpi p{font-size:11px;color:#7d8999;margin:7px 0 0}.mupo-track{height:7px;background:#e6eaf0;border-radius:10px;overflow:hidden;margin-top:8px}.mupo-track span{display:block;height:100%;background:var(--mupo-red);border-radius:10px}
+.mupo-grid{display:grid;grid-template-columns:1.35fr .95fr;gap:14px;margin-top:14px}.mupo-panel{background:#fff;border:1px solid var(--mupo-line);border-radius:9px;box-shadow:0 4px 14px rgba(6,27,58,.03);overflow:hidden}.mupo-panel-head{min-height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;border-bottom:1px solid var(--mupo-line)}.mupo-panel-head h3{font-size:16px!important;color:var(--mupo-text)!important;margin:0!important;font-weight:800!important}.mupo-panel-head a{font-size:11px;color:var(--mupo-red)!important;font-weight:700}
+.mupo-course-card{padding:16px;display:grid;grid-template-columns:145px 1fr;gap:18px}.mupo-course-thumb{min-height:215px;border-radius:7px;background:center/cover no-repeat}.mupo-course-info h2{font-size:19px!important;line-height:1.25!important;margin:2px 0 8px!important;color:var(--mupo-text)!important;font-weight:800!important}.mupo-level{display:inline-block;font-size:10px;background:#edf2f7;padding:4px 7px;border-radius:4px;margin-bottom:10px}.mupo-course-info p{font-size:12px;color:#667085;margin:8px 0}.mupo-course-detail{display:flex;gap:9px;align-items:center;font-size:12px;color:#536276;margin:10px 0}.mupo-course-detail i{color:var(--mupo-navy);width:16px}.mupo-primary-btn{display:flex;justify-content:center;align-items:center;gap:10px;background:var(--mupo-red)!important;color:#fff!important;padding:12px;border-radius:6px;font-size:12px;font-weight:800;margin-top:14px}
+.mupo-list{padding:4px 16px}.mupo-list-row{display:grid;grid-template-columns:38px 1fr auto;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid #edf0f4}.mupo-list-row:last-child{border:0}.mupo-round-icon{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#eef4fb;color:#1665b7}.mupo-round-icon.red{background:#fff0f1;color:var(--mupo-red)}.mupo-round-icon.green{background:#eaf8f0;color:#1aa765}.mupo-list-row strong{font-size:12px;display:block;color:var(--mupo-text)}.mupo-list-row p{font-size:10px;color:#718096;margin:3px 0 0}.mupo-action{font-size:10px;color:var(--mupo-red)!important;font-weight:800;white-space:nowrap}
+.mupo-journey{padding:20px 18px 22px}.mupo-journey-line{display:grid;grid-template-columns:repeat(6,1fr);position:relative}.mupo-journey-line:before{content:"";position:absolute;left:7%;right:7%;top:17px;height:2px;background:#dfe5ec}.mupo-step{position:relative;text-align:center;z-index:1}.mupo-step-dot{width:35px;height:35px;margin:0 auto 9px;border-radius:50%;display:grid;place-items:center;background:#e9edf2;color:#506079;font-size:11px;font-weight:800}.mupo-step.active .mupo-step-dot{background:var(--mupo-red);color:#fff}.mupo-step strong{display:block;font-size:10px;color:var(--mupo-text)}.mupo-step span{display:block;font-size:9px;color:#7a8797;margin-top:5px}
+.mupo-module-list{padding:5px 16px}.mupo-module{display:grid;grid-template-columns:26px 1fr auto auto;gap:9px;align-items:center;padding:11px 0;border-bottom:1px solid #edf0f4}.mupo-module:last-child{border:0}.mupo-module i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:10px}.mupo-module .done{background:#1db26b;color:#fff}.mupo-module .current{background:var(--mupo-red);color:#fff}.mupo-module .todo{border:2px solid #aab6c5;color:#fff}.mupo-module strong{font-size:11px;color:var(--mupo-text);font-weight:600}.mupo-module em{font-style:normal;font-size:9px;color:#77869a}.mupo-module b{font-size:10px;color:var(--mupo-text)}
+.mupo-certificate{padding:18px}.mupo-cert-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.mupo-cert-step{text-align:center;position:relative}.mupo-cert-step .circle{width:38px;height:38px;border-radius:50%;background:#e9edf2;color:#536176;display:grid;place-items:center;margin:0 auto 8px;font-weight:800}.mupo-cert-step.active .circle{background:var(--mupo-red);color:#fff}.mupo-cert-step strong{display:block;font-size:10px;color:var(--mupo-text)}.mupo-cert-step span{font-size:9px;color:#788598}.mupo-cert-note{margin-top:15px;background:#f4f7fa;border-radius:7px;padding:11px 13px;font-size:10px;color:#667085}
+.mupo-help{padding:18px}.mupo-help p{font-size:11px;color:#667085}.mupo-help-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.mupo-help-option{text-align:center;padding:11px 5px;border-right:1px solid #edf0f4}.mupo-help-option:last-child{border:0}.mupo-help-option i{font-size:20px;color:var(--mupo-navy);margin-bottom:7px}.mupo-help-option strong{display:block;font-size:10px;color:var(--mupo-text)}.mupo-help-option span{font-size:9px;color:#788598}.mupo-help-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mupo-secondary-btn{border:1px solid var(--mupo-navy);color:var(--mupo-navy)!important;border-radius:5px;padding:10px;text-align:center;font-size:10px;font-weight:800}
+@media(max-width:1100px){.mupo-hero:after{display:none}.mupo-grid{grid-template-columns:1fr}.mupo-kpi-grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.mupo-welcome{display:block}.mupo-welcome-date{text-align:left;margin-top:10px}.mupo-hero{min-height:260px;padding:28px 22px}.main_content.dashboard_part .mupo-hero h2{font-size:28px!important}.mupo-kpi-grid{grid-template-columns:1fr}.mupo-course-card{grid-template-columns:1fr}.mupo-course-thumb{min-height:190px}.mupo-journey-line{grid-template-columns:repeat(3,1fr);row-gap:18px}.mupo-journey-line:before{display:none}}
 </style>
 
-<div class="main_content_iner">
-    <div class="mupo-dashboard">
-        <section class="mupo-hero">
-            <div class="mupo-hero-content">
-                <div class="mupo-hero-kicker">Welcome back, {{ strtoupper($firstName) }}</div>
-                <h1>Continue where you left off.</h1>
+<div class="main_content_iner"><div class="mupo-dashboard">
+    <section class="mupo-welcome"><div><h1>👋 {{ $greeting }}, {{ $firstName }}</h1><p>Stay consistent. Every lesson brings you closer to your goals.</p></div><div class="mupo-welcome-date">{{ now()->format('l, d F Y') }}<div class="mupo-quote">“Discipline today creates opportunity tomorrow.”</div></div></section>
 
-                @if($activeCourse)
-                    <div class="mupo-hero-course">{{ $activeCourse->title }}</div>
-                    <div class="mupo-hero-progress-copy">{{ $activeProgress }}% complete &nbsp;•&nbsp; Last activity {{ $lastActivity }}</div>
-                    <a href="{{ route('continueCourse', [$activeCourse->slug]) }}" class="mupo-hero-btn">
-                        Continue Learning <i class="fas fa-arrow-right"></i>
-                    </a>
-                @else
-                    <div class="mupo-hero-course">Your learning journey starts here.</div>
-                    <div class="mupo-hero-progress-copy">Choose a course and begin learning at your own pace.</div>
-                    <a href="{{ route('courses') }}" class="mupo-hero-btn">Explore Courses <i class="fas fa-arrow-right"></i></a>
-                @endif
-            </div>
-        </section>
+    <section class="mupo-hero"><div class="mupo-hero-content"><div class="mupo-hero-kicker">CONTINUE LEARNING</div>@if($activeCourse)<h2>{{ $activeCourse->title }}</h2><div class="mupo-hero-meta">{{ $activeProgress }}% complete &nbsp; | &nbsp; Continue your learning journey</div><div class="mupo-hero-sub">Estimated time varies &nbsp; | &nbsp; Last activity: {{ $lastActivity }}</div><div class="mupo-hero-actions"><a href="{{ route('continueCourse',[$activeCourse->slug]) }}" class="mupo-hero-btn">Continue Learning <i class="fas fa-arrow-right"></i></a><a href="{{ route('myLearning') }}" class="mupo-hero-link">View Course Details</a></div>@else<h2>Your learning journey starts here.</h2><div class="mupo-hero-sub">Choose a course and begin learning at your own pace.</div><a href="{{ route('courses') }}" class="mupo-hero-btn">Explore Courses <i class="fas fa-arrow-right"></i></a>@endif</div></section>
 
-        <section class="mupo-kpi-grid" aria-label="Learning overview">
-            <article class="mupo-kpi">
-                <span class="mupo-kpi-icon"><i class="fas fa-graduation-cap"></i></span>
-                <div class="mupo-kpi-content"><label>Courses Enrolled</label><strong>{{ $total['total'] }}</strong><p>Total active enrolments</p></div>
-            </article>
-            <article class="mupo-kpi">
-                <span class="mupo-kpi-icon"><i class="fas fa-play"></i></span>
-                <div class="mupo-kpi-content"><label>Courses in Progress</label><strong>{{ $total['process'] }}</strong><p>Keep going!</p></div>
-            </article>
-            <article class="mupo-kpi">
-                <span class="mupo-kpi-icon"><i class="fas fa-check-circle"></i></span>
-                <div class="mupo-kpi-content"><label>Completed Courses</label><strong>{{ $total['complete'] }}</strong><p>Courses completed</p></div>
-            </article>
-            <article class="mupo-kpi">
-                <span class="mupo-kpi-icon"><i class="fas fa-chart-bar"></i></span>
-                <div class="mupo-kpi-content mupo-kpi-progress">
-                    <label>Overall Progress</label><strong>{{ $overallProgress }}%</strong>
-                    <div class="mupo-kpi-track"><span style="width:{{ $overallProgress }}%"></span></div>
-                    <p>Across all your courses</p>
-                </div>
-            </article>
-        </section>
+    <section class="mupo-kpi-grid"><article class="mupo-kpi"><span class="mupo-kpi-icon"><i class="fas fa-graduation-cap"></i></span><div><label>Courses Enrolled</label><strong>{{ $total['total'] }}</strong><p>Active enrolments</p></div></article><article class="mupo-kpi"><span class="mupo-kpi-icon"><i class="fas fa-chart-bar"></i></span><div style="flex:1"><label>Overall Progress</label><strong>{{ $overallProgress }}%</strong><div class="mupo-track"><span style="width:{{ $overallProgress }}%"></span></div><p>Across all your courses</p></div></article><article class="mupo-kpi"><span class="mupo-kpi-icon"><i class="fas fa-file-alt"></i></span><div><label>Assessments</label><strong>{{ permissionCheck('myQuizzes') ? '✓' : '—' }}</strong><p>{{ permissionCheck('myQuizzes') ? 'Open assessment area' : 'No action available' }}</p></div></article><article class="mupo-kpi"><span class="mupo-kpi-icon"><i class="fas fa-award"></i></span><div><label>Certificates</label><strong>{{ $myCertificateNumber }}</strong><p>{{ $myCertificateNumber ? 'Available certificates' : 'Not yet available' }}</p></div></article></section>
 
-        <section class="mupo-primary-grid">
-            <article class="mupo-panel" id="continue-learning">
-                <div class="mupo-panel-head">
-                    <h3>Continue Learning</h3>
-                    <a href="{{ route('myLearning') }}">View All Learning &nbsp;→</a>
-                </div>
+    <section class="mupo-grid"><article class="mupo-panel"><div class="mupo-panel-head"><h3>Current Course Progress</h3><a href="{{ route('myLearning') }}">View Full Course →</a></div>@if($activeCourse)<div class="mupo-course-card"><div class="mupo-course-thumb" style="background-image:url('{{ getCourseImage($activeCourse->image) }}')"></div><div class="mupo-course-info"><h2>{{ $activeCourse->title }}</h2>@if($activeCourse->courseLevel)<span class="mupo-level">{{ $activeCourse->courseLevel->title }}</span>@endif<p><b>{{ $activeProgress }}% complete</b></p><div class="mupo-track"><span style="width:{{ $activeProgress }}%"></span></div><div class="mupo-course-detail"><i class="far fa-bookmark"></i><span>Continue from your latest lesson</span></div><div class="mupo-course-detail"><i class="far fa-clock"></i><span>Last activity: {{ $lastActivity }}</span></div><a class="mupo-primary-btn" href="{{ route('continueCourse',[$activeCourse->slug]) }}">Continue Learning <i class="fas fa-arrow-right"></i></a></div></div>@else<div class="mupo-help">No course is currently in progress.</div>@endif</article>
+    <article class="mupo-panel"><div class="mupo-panel-head"><h3>Up Next</h3><a href="{{ route('myLearning') }}">View All →</a></div><div class="mupo-list">@if($activeCourse)<div class="mupo-list-row"><span class="mupo-round-icon"><i class="far fa-play-circle"></i></span><div><strong>Continue Lesson</strong><p>{{ $activeCourse->title }}</p></div><a class="mupo-action" href="{{ route('continueCourse',[$activeCourse->slug]) }}">Continue →</a></div>@endif @if(permissionCheck('myQuizzes'))<div class="mupo-list-row"><span class="mupo-round-icon red"><i class="far fa-file-alt"></i></span><div><strong>Assessment</strong><p>View available assessments</p></div><a class="mupo-action" href="{{ route('myQuizzes') }}">Start →</a></div>@endif @if(permissionCheck('myClasses'))<div class="mupo-list-row"><span class="mupo-round-icon green"><i class="fas fa-video"></i></span><div><strong>Live Class</strong><p>View scheduled sessions</p></div><a class="mupo-action" href="{{ route('myClasses') }}">View →</a></div>@endif</div></article></section>
 
-                @if($activeCourse)
-                    <div class="mupo-continue-body">
-                        <div class="mupo-course-thumb" style="background-image:url('{{ getCourseImage($activeCourse->image) }}')">
-                            <span>In Progress</span>
-                        </div>
-                        <div class="mupo-course-info">
-                            <h2>{{ $activeCourse->title }}</h2>
-                            @if($activeCourse->courseLevel)<span class="mupo-level">{{ $activeCourse->courseLevel->title }}</span>@endif
-                            <div class="mupo-course-progress-copy">{{ $activeProgress }}% complete</div>
-                            <div class="mupo-progress-track"><span style="width:{{ $activeProgress }}%"></span></div>
+    <section class="mupo-grid"><article class="mupo-panel"><div class="mupo-panel-head"><h3>Training Journey</h3></div><div class="mupo-journey"><div class="mupo-journey-line">@foreach([['Theory Training','In Progress'],['Formative Assessment','Not Started'],['Practical Training','Not Started'],['Summative Assessment','Locked'],['Moderation','Pending'],['Certification','Not Available']] as $i=>$step)<div class="mupo-step {{ $i===0 ? 'active':'' }}"><div class="mupo-step-dot">{{ $i+1 }}</div><strong>{{ $step[0] }}</strong><span>{{ $step[1] }}</span></div>@endforeach</div></div></article><article class="mupo-panel"><div class="mupo-panel-head"><h3>Recent Activity</h3></div><div class="mupo-list">@forelse($enrolledCourses->take(4) as $enrollment)@if($enrollment->course)<div class="mupo-list-row"><span class="mupo-round-icon {{ $loop->first ? '' : 'green' }}"><i class="fas {{ $loop->first ? 'fa-play':'fa-check' }}"></i></span><div><strong>{{ $loop->first ? 'Continued learning':'Course activity' }}</strong><p>{{ $enrollment->course->title }}</p></div><span style="font-size:9px;color:#8290a2">{{ $enrollment->last_view_at ? showDate($enrollment->last_view_at) : 'Ready' }}</span></div>@endif @empty<div class="mupo-help">No recent activity yet.</div>@endforelse</div></article></section>
 
-                            <div class="mupo-course-details">
-                                <div class="mupo-course-detail">
-                                    <i class="far fa-bookmark"></i>
-                                    <span><strong>Up next</strong>Continue your current lesson</span>
-                                </div>
-                                <div class="mupo-course-detail">
-                                    <i class="far fa-clock"></i>
-                                    <span><strong>Last activity</strong>{{ $lastActivity }}</span>
-                                </div>
-                            </div>
+    <section class="mupo-grid"><article class="mupo-panel"><div class="mupo-panel-head"><h3>Course Modules</h3><a href="{{ route('myLearning') }}">View All Modules →</a></div><div class="mupo-module-list">@foreach([['Introduction to the Private Security Industry','Completed','100','done'],['Current learning module','In Progress',$activeProgress,'current'],['Next learning module','Not Started','0','todo'],['Further course content','Locked','0','todo'],['Final course requirements','Locked','0','todo']] as $m)<div class="mupo-module"><i class="fas {{ $m[3]==='done'?'fa-check':($m[3]==='current'?'fa-square':'fa-circle') }} {{ $m[3] }}"></i><strong>{{ $m[0] }}</strong><em>{{ $m[1] }}</em><b>{{ $m[2] }}%</b></div>@endforeach</div></article><article class="mupo-panel"><div class="mupo-panel-head"><h3>Certificate Status</h3><a href="{{ route('myCertificate') }}">Learn more →</a></div><div class="mupo-certificate"><div class="mupo-cert-flow">@foreach([['Learning','In Progress'],['Assessment','Not Started'],['Moderation','Pending'],['Certification','Not Available']] as $i=>$s)<div class="mupo-cert-step {{ $i===0?'active':'' }}"><div class="circle">{{ $i+1 }}</div><strong>{{ $s[0] }}</strong><span>{{ $s[1] }}</span></div>@endforeach</div><div class="mupo-cert-note"><i class="far fa-file-alt"></i> Your certificate becomes available after all required learning and assessment conditions are completed.</div></div></article></section>
 
-                            <a class="mupo-primary-btn" href="{{ route('continueCourse', [$activeCourse->slug]) }}">
-                                Continue Learning <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                @else
-                    <div class="mupo-empty">
-                        <i class="fas fa-book-open"></i>
-                        <strong>No course currently in progress.</strong><br>
-                        Choose a course to begin your learning journey.
-                    </div>
-                @endif
-            </article>
-
-            <article class="mupo-panel">
-                <div class="mupo-panel-head">
-                    <h3>Up Next</h3>
-                    @if(permissionCheck('myCourses'))<a href="{{ route('myCourses') }}">View All &nbsp;→</a>@endif
-                </div>
-                <div class="mupo-upnext-body">
-                    @if($activeCourse)
-                        <div class="mupo-upnext-item">
-                            <span class="mupo-item-icon"><i class="far fa-book-open"></i></span>
-                            <div><strong>Continue lesson</strong><p>{{ $activeCourse->title }}</p></div>
-                            <a class="mupo-item-action" href="{{ route('continueCourse', [$activeCourse->slug]) }}">Continue →</a>
-                        </div>
-                    @endif
-
-                    @if(permissionCheck('myQuizzes'))
-                        <div class="mupo-upnext-item">
-                            <span class="mupo-item-icon red"><i class="far fa-file-alt"></i></span>
-                            <div><strong>Assessment</strong><p>Review your available quizzes and assessments.</p></div>
-                            <a class="mupo-item-action" href="{{ route('myQuizzes') }}">Open →</a>
-                        </div>
-                    @endif
-
-                    @if(permissionCheck('myClasses'))
-                        <div class="mupo-upnext-item">
-                            <span class="mupo-item-icon"><i class="fas fa-video"></i></span>
-                            <div><strong>Live class</strong><p>Check your scheduled learning sessions.</p></div>
-                            <a class="mupo-item-action" href="{{ route('myClasses') }}">View →</a>
-                        </div>
-                    @endif
-                </div>
-            </article>
-        </section>
-
-        <section class="mupo-secondary-grid">
-            <article class="mupo-panel" id="learning-progress">
-                <div class="mupo-panel-head">
-                    <h3>Your Progress — {{ $activeCourse ? $activeCourse->title : 'Overall Learning' }}</h3>
-                    <a href="{{ route('learningProgress') }}">View Detailed Progress &nbsp;→</a>
-                </div>
-                <div class="mupo-progress-body">
-                    <div class="mupo-progress-main">
-                        <strong>Overall course progress</strong>
-                        <span class="pct">{{ $activeCourse ? $activeProgress : $overallProgress }}%</span>
-                    </div>
-                    <div class="mupo-progress-track">
-                        <span style="width:{{ $activeCourse ? $activeProgress : $overallProgress }}%"></span>
-                    </div>
-
-                    <div class="mupo-progress-stats">
-                        <div class="mupo-progress-stat"><strong><i class="fas fa-graduation-cap"></i>{{ $total['total'] }}</strong><span>Courses enrolled</span></div>
-                        <div class="mupo-progress-stat"><strong><i class="fas fa-play-circle"></i>{{ $total['process'] }}</strong><span>In progress</span></div>
-                        <div class="mupo-progress-stat"><strong><i class="fas fa-check-circle"></i>{{ $total['complete'] }}</strong><span>Completed</span></div>
-                        <div class="mupo-progress-stat"><strong><i class="fas fa-award"></i>{{ $myCertificateNumber }}</strong><span>Certificates earned</span></div>
-                    </div>
-                </div>
-            </article>
-
-            <article class="mupo-panel">
-                <div class="mupo-panel-head"><h3>Recent Activity</h3></div>
-                <div class="mupo-recent-body">
-                    @forelse($enrolledCourses->take(3) as $enrollment)
-                        @if($enrollment->course)
-                            <div class="mupo-recent-item">
-                                <span class="mupo-item-icon"><i class="far fa-play-circle"></i></span>
-                                <div>
-                                    <strong>{{ $enrollment->course->title }}</strong>
-                                    <p>{{ $enrollment->last_view_at ? 'Learning activity recorded' : 'Enrolled and ready to learn' }}</p>
-                                </div>
-                                <span class="mupo-recent-time">{{ $enrollment->last_view_at ? showDate($enrollment->last_view_at) : 'Ready' }}</span>
-                            </div>
-                        @endif
-                    @empty
-                        <div class="mupo-empty"><i class="far fa-clock"></i>No recent learning activity yet.</div>
-                    @endforelse
-                </div>
-            </article>
-        </section>
-    </div>
-</div>
+    <section class="mupo-grid" style="grid-template-columns:1fr .95fr"><article class="mupo-panel"><div class="mupo-panel-head"><h3>My Learning</h3><a href="{{ route('myLearning') }}">View All →</a></div><div class="mupo-list">@forelse($enrolledCourses->take(3) as $enrollment)@if($enrollment->course)<div class="mupo-list-row"><span class="mupo-round-icon"><i class="fas fa-book-open"></i></span><div><strong>{{ $enrollment->course->title }}</strong><p>{{ round($enrollment->course->loginUserTotalPercentage) }}% complete</p></div><a class="mupo-action" href="{{ route('continueCourse',[$enrollment->course->slug]) }}">Continue →</a></div>@endif @empty<div class="mupo-help">No enrolled courses.</div>@endforelse</div></article><article class="mupo-panel"><div class="mupo-panel-head"><h3>Need Help?</h3></div><div class="mupo-help"><p>Our team is here to support you.</p><div class="mupo-help-options"><div class="mupo-help-option"><i class="fab fa-whatsapp"></i><strong>WhatsApp Us</strong><span>Training support</span></div><div class="mupo-help-option"><i class="far fa-envelope"></i><strong>Email Support</strong><span>Mupo Training Center</span></div><div class="mupo-help-option"><i class="fas fa-phone"></i><strong>Call Us</strong><span>Contact support</span></div></div><div class="mupo-help-actions"><a href="{{ route('contact') }}" class="mupo-secondary-btn">Browse FAQs</a><a href="{{ route('contact') }}" class="mupo-secondary-btn">Contact Facilitator</a></div></div></article></section>
+</div></div>

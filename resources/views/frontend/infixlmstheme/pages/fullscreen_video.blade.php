@@ -1243,6 +1243,9 @@
         $isCurrentLessonComplete = auth()->check()
             ? \App\LessonComplete::where('user_id', auth()->id())->where('course_id', $course->id)->where('lesson_id', $lesson->id)->where('status', 1)->exists()
             : false;
+        $completedLessonCount = auth()->check()
+            ? \App\LessonComplete::where('user_id', auth()->id())->where('course_id', $course->id)->where('status', 1)->count()
+            : 0;
         $currentLessonNumber = $currentLessonIndex !== false ? $currentLessonIndex + 1 : 1;
         $totalLessonCount = count($lesson_ids ?? []);
         $currentChapter = $chapters->firstWhere('id', $lesson->chapter_id);
@@ -1297,13 +1300,11 @@
                         </div></div>
                     </div>
                     <div class="header__right"><div class="contact_wrap d-flex align-items-center">
-                        <div class="mupo-header-progress d-none d-lg-block"><div class="mupo-header-progress-top"><span>Course Progress</span><strong>{{ $percentage }}%</strong></div><div class="mupo-progress-line"><span style="width:{{ $percentage }}%"></span></div><div style="font-size:9px;color:#758195;margin-top:5px">{{ $currentLessonNumber }} of {{ $totalLessonCount ?: $total }} lessons</div></div>
-                        <div class="mupo-header-tools">
-                            @if($lesson->is_quiz!=1)<button type="button" class="mupo-tool-btn" data-bs-toggle="modal" data-bs-target="#qnamodal" title="Q&A"><i class="far fa-question-circle"></i><span>Q&amp;A</span></button>@endif
-                            <button type="button" class="mupo-tool-btn mupo-focus-toggle d-none d-lg-flex" id="mupoFocusToggle" title="Focus Mode" aria-pressed="false"><i class="fas fa-expand-alt"></i><span>Focus</span></button>
-                            <button type="button" class="mupo-tool-btn mupo-mobile-contents play_toggle_btn d-none" title="Course Content"><i class="fas fa-list"></i><span>Contents</span></button>
-                        </div>
-                        <div class="header__common_btn dropdown"><button class="d-block w-100 h-100 bg-transparent border-0 dropdown-toggle outline-none p-0 currentColor" type="button" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ShareLink"><i class="fa fa-share fs-12 me-2"></i>{{ __('frontend.Share') }}</a></li><li><a class="dropdown-item" href="{{ route('myCourses') }}"><i class="fa fa-arrow-left fs-12 me-2"></i>Back to My Courses</a></li></ul></div>
+                        <form class="mupo-lesson-global-search d-none d-xl-flex" action="{{ route('courses') }}" method="GET" role="search"><i class="fas fa-search"></i><input type="search" name="query" placeholder="Search lessons, topics..." aria-label="Search lessons and topics"></form>
+                        <a href="{{ route('myNotification') }}" class="mupo-lesson-notification" aria-label="Notifications"><i class="far fa-bell"></i>@if(auth()->user()->unreadNotifications->count())<span>{{ auth()->user()->unreadNotifications->count() > 9 ? '9+' : auth()->user()->unreadNotifications->count() }}</span>@endif</a>
+                        <a href="{{ route('users.settings') }}" class="mupo-lesson-profile"><span>{{ strtoupper(substr(auth()->user()->name,0,1)) }}{{ strtoupper(substr(strrchr(' '.auth()->user()->name,' '),1,1)) }}</span><b>{{ auth()->user()->name }}</b><small>Learner</small><i class="fas fa-chevron-down"></i></a>
+                        <button type="button" class="mupo-tool-btn mupo-focus-toggle d-none d-lg-flex" id="mupoFocusToggle" title="Focus Mode" aria-pressed="false"><i class="fas fa-expand-alt"></i><span>Focus</span></button>
+                        <button type="button" class="mupo-tool-btn mupo-mobile-contents play_toggle_btn d-none" title="Course Content"><i class="fas fa-list"></i><span>Contents</span></button>
                     </div></div>
                 </div>
             </div></div></div>
@@ -2343,7 +2344,7 @@ if ($assign->questionBank->shuffle==1){
             <button type="button" class="mupo-course-panel-toggle" id="mupoCoursePanelToggle" aria-label="Collapse course content" aria-controls="mupoCoursePanelContent" aria-expanded="true" title="Collapse course content"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
             <div class="mupo-course-panel-rail" aria-hidden="true"><i class="fas fa-list-ul"></i><span>Course Content</span></div>
             <div id="mupoCoursePanelContent">
-            <div class="play_warp_header"><div class="mupo-content-head"><div><h3>Course Content</h3><div class="mupo-content-sub">{{ $currentLessonNumber }} of {{ $totalLessonCount ?: $total }} lessons</div></div><strong>{{ $percentage }}%</strong></div><div class="mupo-progress-line"><span style="width:{{ $percentage }}%"></span></div></div>
+            <div class="play_warp_header"><div class="mupo-content-head"><div><h3>Course Progress</h3></div><strong>{{ $percentage }}%</strong></div><div class="mupo-progress-line"><span style="width:{{ $percentage }}%"></span></div><div class="mupo-content-sub">{{ $completedLessonCount }} of {{ $totalLessonCount ?: $total }} lessons completed</div></div>
             <div class="mupo-side-search"><div class="mupo-side-search-wrap"><i class="fas fa-search"></i><input type="search" id="mupoLessonSearch" placeholder="Search lessons..." autocomplete="off"></div></div>
             <div class="course__play_list">
                 @php
@@ -3028,3 +3029,11 @@ if ($assign->questionBank->shuffle==1){
     @include(theme('partials.fullscreen_video._summernote_script'))
     @include(theme('partials.fullscreen_video._scorm_script'))
 @endpush
+
+        /* Match the supplied MUPO course-player reference at normal 100% browser zoom. */
+        @media(min-width:1200px){:root{--mupo-side-expanded:330px;--mupo-side:var(--mupo-side-expanded);--mupo-reading:1000px;--mupo-head:76px;--mupo-bottom:78px}.course_fullview_wrapper{padding:24px 28px 36px!important}.mupo-lesson-context,.mupo-editor-heading,.lesson_content_text{max-width:1000px!important}.lesson_content_text{font-size:17px!important}.lesson_content_text p,.lesson_content_text li{font-size:17px!important}.course_play_name>span,.quiz_name{font-size:14px!important}.course_play_duration{font-size:12px!important}}
+        .play_warp_header{background:#fff!important;color:var(--mupo-text)!important;border-bottom:1px solid var(--mupo-line)!important;min-height:112px!important;padding:20px!important}.mupo-content-head h3,.mupo-content-head strong{color:var(--mupo-text)!important}.play_warp_header .mupo-progress-line{margin-top:12px}.play_warp_header .mupo-content-sub{color:#667085!important;margin:8px 0 0!important;font-size:13px!important}
+        .mupo-lesson-global-search{width:265px;height:42px;position:relative;align-items:center;margin-right:12px}.mupo-lesson-global-search i{position:absolute;left:13px;color:#62718a;font-size:14px}.mupo-lesson-global-search input{width:100%;height:100%;border:1px solid #dbe2ea;border-radius:7px;padding:0 12px 0 39px;font-size:12px;color:var(--mupo-text);outline:0;background:#f8fafc}.mupo-lesson-global-search input:focus{border-color:#9ba9ba;box-shadow:0 0 0 3px rgba(6,27,58,.05)}
+        .mupo-lesson-notification{width:42px;height:42px;display:grid;place-items:center;position:relative;color:var(--mupo-navy)!important;font-size:18px;margin:0 8px;text-decoration:none!important}.mupo-lesson-notification span{position:absolute;right:1px;top:0;min-width:17px;height:17px;border-radius:9px;background:var(--mupo-red);color:#fff;font-size:9px;display:grid;place-items:center;border:2px solid #fff}
+        .mupo-lesson-profile{display:grid;grid-template-columns:42px auto 16px;grid-template-rows:1fr 1fr;column-gap:10px;align-items:center;color:var(--mupo-text)!important;text-decoration:none!important;min-width:190px}.mupo-lesson-profile>span{grid-row:1/3;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--mupo-navy);color:#fff;font-size:12px;font-weight:800}.mupo-lesson-profile b{font-size:11px;align-self:end;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mupo-lesson-profile small{font-size:9px;color:#7d8998;align-self:start}.mupo-lesson-profile>i{grid-column:3;grid-row:1/3;font-size:9px}.mupo-header-tools{margin-left:0}
+
