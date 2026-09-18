@@ -52,6 +52,10 @@
                         <i class="fas fa-video"></i><span>Live Classes</span>
                     </a>
                 @endif
+
+                <a href="{{ route('myHomework') }}" class="{{ routeIs('myHomework') ? 'active' : '' }}" title="Learning Material">
+                    <i class="far fa-file-alt"></i><span>Learning Material</span>
+                </a>
             </div>
 
             <div class="mupo-nav-group">
@@ -97,9 +101,6 @@
         </nav>
 
         <div class="mupo-sidebar-bottom">
-            <a href="{{ url('/') }}" class="mupo-back-site" title="Back to MUPO Website">
-                <i class="fas fa-globe-africa"></i><span>Back to MUPO Website</span>
-            </a>
             <div class="mupo-sidebar-motto">
                 <span></span>
                 <strong>EMPOWERING MINDS.<br>BUILDING FUTURES.</strong>
