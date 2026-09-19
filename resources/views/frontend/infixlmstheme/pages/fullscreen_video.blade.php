@@ -1255,11 +1255,26 @@
             .course_play_name>span,.quiz_name{font-size:14px!important}
             .course_play_duration{font-size:12px!important}
         }
-        @media(min-width:1200px) and (max-width:1599.98px){
+        @media(min-width:1280px) and (max-width:1599.98px){
+            #sticky-header .header__wrapper{padding:0 16px!important;gap:12px!important}
+            #sticky-header .header__left{gap:14px!important}
+            .mupo-exit-course{font-size:13px;gap:7px}
+            h4.headerTitle{font-size:17px!important}
+            .mupo-header-breadcrumb{margin-top:5px!important;font-size:10.5px!important}
+            .mupo-lesson-global-search{width:210px!important;flex-basis:210px!important;margin-right:0!important}
+            .mupo-lesson-global-search input{font-size:11px!important;padding-right:9px!important}
+            .mupo-lesson-notification{width:38px!important;height:42px!important;flex-basis:38px!important;margin:0 2px!important}
+            .mupo-lesson-profile{grid-template-columns:42px minmax(76px,110px) 12px!important;min-width:140px!important;max-width:164px!important;column-gap:8px!important}
+        }
+        @media(min-width:1200px) and (max-width:1279.98px){
+            #sticky-header .header__wrapper{padding:0 14px!important;gap:10px!important}
+            #sticky-header .header__left{gap:12px!important}
+            .mupo-exit-course{font-size:12px;gap:6px}
+            h4.headerTitle{font-size:16px!important}
+            .mupo-header-breadcrumb{margin-top:4px!important;font-size:10px!important}
             .mupo-lesson-global-search{display:none!important}
-            .mupo-lesson-profile{min-width:42px!important;width:42px!important;max-width:42px!important;grid-template-columns:42px!important;column-gap:0!important}
-            .mupo-lesson-profile b,.mupo-lesson-profile small,.mupo-lesson-profile>i{display:none!important}
-            #sticky-header .header__wrapper{padding-right:18px!important}
+            .mupo-lesson-notification{width:38px!important;flex-basis:38px!important;margin:0 2px!important}
+            .mupo-lesson-profile{grid-template-columns:42px minmax(70px,96px) 12px!important;min-width:132px!important;max-width:150px!important;column-gap:7px!important}
         }
         .play_warp_header{background:var(--mupo-navy)!important;color:#fff!important;border-bottom:1px solid rgba(255,255,255,.08)!important;min-height:112px!important;padding:20px!important}
         .mupo-content-head h3,.mupo-content-head strong{color:#fff!important}
@@ -1347,7 +1362,7 @@
                         </div></div>
                     </div>
                     <div class="header__right"><div class="contact_wrap d-flex align-items-center">
-                        <form class="mupo-lesson-global-search d-none d-xl-flex" action="{{ route('courses') }}" method="GET" role="search"><i class="fas fa-search"></i><input type="search" name="query" placeholder="Search lessons, topics..." aria-label="Search lessons and topics"></form>
+                        <form class="mupo-lesson-global-search d-none d-xl-flex" action="{{ route('courses') }}" method="GET" role="search"><i class="fas fa-search"></i><input type="search" name="query" placeholder="Search lessons, courses or resources..." aria-label="Search lessons, courses or resources"></form>
                         <a href="{{ route('myNotification') }}" class="mupo-lesson-notification" aria-label="Notifications"><i class="far fa-bell"></i>@if(auth()->user()->unreadNotifications->count())<span>{{ auth()->user()->unreadNotifications->count() > 9 ? '9+' : auth()->user()->unreadNotifications->count() }}</span>@endif</a>
                         <a href="{{ route('users.settings') }}" class="mupo-lesson-profile"><span>{{ strtoupper(substr(auth()->user()->name,0,1)) }}{{ strtoupper(substr(strrchr(' '.auth()->user()->name,' '),1,1)) }}</span><b>{{ auth()->user()->name }}</b><small>Learner</small><i class="fas fa-chevron-down"></i></a>
                         <button type="button" class="mupo-tool-btn mupo-focus-toggle d-none d-lg-flex" id="mupoFocusToggle" title="Focus Mode" aria-pressed="false"><i class="fas fa-expand-alt"></i><span>Focus</span></button>
