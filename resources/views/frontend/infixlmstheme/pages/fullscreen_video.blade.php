@@ -418,11 +418,6 @@
             min-width:0;
         }
 
-        a.headerTitle{
-            pointer-events:none;
-            text-decoration:none!important;
-        }
-
         h4.headerTitle{
             font-size:20px!important;
             line-height:1.15!important;
@@ -437,6 +432,9 @@
         }
 
         .mupo-header-breadcrumb{
+            display:flex;
+            align-items:center;
+            gap:7px;
             font-size:12px;
             color:#758195;
             margin-top:7px;
@@ -446,8 +444,11 @@
             max-width:520px;
         }
 
+        .mupo-header-breadcrumb .mupo-breadcrumb-separator{color:#a0aabd;flex:0 0 auto}
+        .mupo-header-breadcrumb .mupo-breadcrumb-module,
+        .mupo-header-breadcrumb .mupo-breadcrumb-lesson{min-width:0;overflow:hidden;text-overflow:ellipsis}
         .mupo-header-breadcrumb b{color:var(--mupo-text)}
-        #sticky-header .header__right{margin-left:auto!important}
+        #sticky-header .header__right{margin-left:auto!important;min-width:0!important;flex:0 0 auto!important}
         .contact_wrap,.contact_btn{flex-wrap:nowrap!important}
 
         .mupo-header-progress{
@@ -1209,12 +1210,12 @@
         @media(min-width:1200px){
             :root{--mupo-side-expanded:250px;--mupo-side:var(--mupo-side-expanded);--mupo-reading:1000px;--mupo-head:76px;--mupo-bottom:78px}
             #sticky-header .header__wrapper{padding:0 22px!important;gap:16px!important}
-            #sticky-header .header__left{flex:1 1 auto!important;min-width:0!important;gap:16px!important}
+            #sticky-header .header__left{flex:1 1 0!important;min-width:0!important;gap:16px!important;overflow:hidden!important}
             #sticky-header .category_search{flex:1 1 auto!important;min-width:0!important}
-            .input-group-prepend2{width:100%!important;min-width:0!important}
-            h4.headerTitle{max-width:430px!important;font-size:18px!important}
-            .mupo-header-breadcrumb{max-width:600px!important;font-size:11px!important}
-            .mupo-lesson-global-search{width:265px;height:42px;position:relative;display:flex!important;align-items:center;margin-right:8px;flex:0 0 265px}
+            .input-group-prepend2{display:block!important;width:100%!important;min-width:0!important;overflow:hidden!important}
+            h4.headerTitle{display:block!important;max-width:100%!important;font-size:18px!important}
+            .mupo-header-breadcrumb{max-width:100%!important;font-size:11px!important}
+            .mupo-lesson-global-search{width:230px;height:42px;position:relative;display:flex!important;align-items:center;margin-right:4px;flex:0 0 230px}
             .mupo-lesson-global-search i{position:absolute;left:13px;color:#62718a;font-size:14px;z-index:2}
             .mupo-lesson-global-search input{width:100%;height:100%;border:1px solid #dbe2ea!important;border-radius:7px!important;padding:0 12px 0 39px!important;font-size:12px!important;color:var(--mupo-text)!important;outline:0;background:#f8fafc!important;box-shadow:none!important}
             .mupo-lesson-notification{width:42px;height:42px;display:grid;place-items:center;position:relative;color:var(--mupo-navy)!important;font-size:18px;margin:0 5px;text-decoration:none!important;flex:0 0 42px}
@@ -1231,6 +1232,12 @@
             .lesson_content_text p,.lesson_content_text li{font-size:17px!important}
             .course_play_name>span,.quiz_name{font-size:14px!important}
             .course_play_duration{font-size:12px!important}
+        }
+        @media(min-width:1200px) and (max-width:1599.98px){
+            .mupo-lesson-global-search{display:none!important}
+            .mupo-lesson-profile{min-width:42px!important;width:42px!important;max-width:42px!important;grid-template-columns:42px!important;column-gap:0!important}
+            .mupo-lesson-profile b,.mupo-lesson-profile small,.mupo-lesson-profile>i{display:none!important}
+            #sticky-header .header__wrapper{padding-right:18px!important}
         }
         .play_warp_header{background:var(--mupo-navy)!important;color:#fff!important;border-bottom:1px solid rgba(255,255,255,.08)!important;min-height:112px!important;padding:20px!important}
         .mupo-content-head h3,.mupo-content-head strong{color:#fff!important}
@@ -1308,9 +1315,13 @@
                         <button type="button" class="mupo-portal-menu-toggle" id="mupoLearningNavOpen" aria-label="Open learner navigation" aria-controls="mupoLearnerSidebar" aria-expanded="false"><i class="fas fa-bars"></i></button>
                         <a class="logo_img d-lg-none" href="{{ url('/') }}"><img src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}" alt="Mupo Training Center"></a>
                         <a class="mupo-exit-course" href="{{ route('myCourses') }}"><i class="fas fa-arrow-left"></i><span>Back to My Courses</span></a>
-                        <div class="category_search category_box_iner"><div class="input-group-prepend2">
-                            <a class="headerTitle" href="javascript:void(0)"><h4 class="headerTitle">{{ $course->title }}</h4></a>
-                            <div class="mupo-header-breadcrumb">{{ optional($currentChapter)->name ?? 'Course Content' }} &nbsp;›&nbsp; <b>Lesson {{ $currentLessonNumber }}: {{ $lesson->name }}</b></div>
+                        <div class="category_search category_box_iner"><div class="input-group-prepend2 mupo-course-heading">
+                            <h4 class="headerTitle">{{ $course->title }}</h4>
+                            <div class="mupo-header-breadcrumb" aria-label="Current lesson location">
+                                <span class="mupo-breadcrumb-module">{{ optional($currentChapter)->name ?? 'Course Content' }}</span>
+                                <span class="mupo-breadcrumb-separator" aria-hidden="true">›</span>
+                                <b class="mupo-breadcrumb-lesson">Lesson {{ $currentLessonNumber }}: {{ $lesson->name }}</b>
+                            </div>
                         </div></div>
                     </div>
                     <div class="header__right"><div class="contact_wrap d-flex align-items-center">
