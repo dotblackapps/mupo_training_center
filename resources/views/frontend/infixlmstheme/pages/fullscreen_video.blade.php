@@ -548,8 +548,20 @@
             padding:24px 28px 36px!important;
             display:block!important;
             scroll-behavior:smooth;
+            scrollbar-width:thin;
+            scrollbar-color:#9eabbc #edf1f5;
+            scrollbar-gutter:stable;
             transition:right .22s ease;
         }
+
+        .course_fullview_wrapper::-webkit-scrollbar{width:9px}
+        .course_fullview_wrapper::-webkit-scrollbar-track{background:#edf1f5}
+        .course_fullview_wrapper::-webkit-scrollbar-thumb{
+            background:#9eabbc;
+            border:2px solid #edf1f5;
+            border-radius:999px;
+        }
+        .course_fullview_wrapper::-webkit-scrollbar-thumb:hover{background:#748398}
 
         .course_fullview_wrapper.video{background:var(--mupo-bg)!important}
         .course_fullview_wrapper.video:before{display:none!important}
@@ -885,8 +897,18 @@
             padding:0!important;
             background:#fff!important;
             scrollbar-width:thin;
-            scrollbar-color:#c3ccd8 transparent;
+            scrollbar-color:#9eabbc #f2f5f8;
+            scrollbar-gutter:stable;
         }
+
+        .course__play_list::-webkit-scrollbar{width:8px}
+        .course__play_list::-webkit-scrollbar-track{background:#f2f5f8}
+        .course__play_list::-webkit-scrollbar-thumb{
+            background:#9eabbc;
+            border:2px solid #f2f5f8;
+            border-radius:999px;
+        }
+        .course__play_list::-webkit-scrollbar-thumb:hover{background:#748398}
 
         .theme_according{margin:0!important}
         .theme_according .accordion-item{
