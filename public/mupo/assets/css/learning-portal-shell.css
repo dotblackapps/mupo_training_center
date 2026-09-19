@@ -235,7 +235,7 @@
     body.mupo-sidebar-collapsed .mupo-back-site i,
     .mupo-learning-compact-nav .mupo-sidebar-nav a i,
     .mupo-learning-compact-nav .mupo-back-site i { width: auto !important; font-size: 16px !important; }
-    body.mupo-sidebar-collapsed .mupo-sidebar-collapse i { transform: rotate(180deg); }
+    body.mupo-sidebar-collapsed .mupo-sidebar-collapse i { transform: none; }
 }
 
 @media (min-width: 992px) and (max-width: 1279.98px) {
@@ -305,4 +305,4 @@
 /* Final learner-reference cleanup */
 .mupo-sidebar-bottom{margin-top:auto!important;padding-top:10px!important}
 .mupo-sidebar-bottom .mupo-sidebar-motto{padding-top:8px!important}
-.mupo-sidebar-bottom .mupo-back-site{display:none!important}
+.mupo-sidebar-bottom .mupo-back-site{display:flex!important}
