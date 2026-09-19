@@ -348,6 +348,9 @@
             top:0!important;
             left:0!important;
             right:0!important;
+            width:auto!important;
+            max-width:none!important;
+            box-sizing:border-box!important;
             height:var(--mupo-head)!important;
             background:#fff!important;
             border-bottom:1px solid var(--mupo-line)!important;
