@@ -250,7 +250,13 @@ html,body{
     .dashboard_main_wrapper{display:block!important}
     .main_content.dashboard_part{width:100%!important;margin:0!important;min-height:100vh!important}
     .mupo-learner-sidebar{position:fixed!important;top:0!important;bottom:0!important;height:100vh!important;overflow:hidden!important}
-    .mupo-learner-sidebar .mupo-sidebar-body{height:calc(100vh - 74px)!important;overflow-y:auto!important}
+    .mupo-learner-sidebar .mupo-sidebar-body{
+        height:calc(100vh - 74px)!important;
+        overflow-y:auto!important;
+        scrollbar-width:none;
+        -ms-overflow-style:none;
+    }
+    .mupo-learner-sidebar .mupo-sidebar-body::-webkit-scrollbar{display:none}
     .mupo-dashboard-topbar{left:0!important;padding:0 15px!important}
     .main_content.dashboard_part .main_content_iner{padding:calc(var(--mupo-topbar) + 14px) 14px 14px!important}
     .mupo-sidebar-collapse{display:none!important}
@@ -284,7 +290,6 @@ html,body{
 document.addEventListener('DOMContentLoaded', function () {
     var body = document.body;
     var toggle = document.getElementById('mupoSidebarCollapse');
-    var topbarToggle = document.getElementById('mupoTopbarCollapse');
     var sidebar = document.getElementById('mupoLearnerSidebar');
     var mobileOpen = document.getElementById('mupoDashboardNavOpen');
     var mobileClose = sidebar ? sidebar.querySelector('.sidebar_close_icon') : null;
@@ -308,13 +313,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 'mupoLearnerSidebarCollapsed',
                 body.classList.contains('mupo-sidebar-collapsed') ? '1' : '0'
             );
-        });
-    }
-
-    if (topbarToggle) {
-        topbarToggle.addEventListener('click', function () {
-            body.classList.toggle('mupo-sidebar-collapsed');
-            localStorage.setItem('mupoLearnerSidebarCollapsed', body.classList.contains('mupo-sidebar-collapsed') ? '1' : '0');
         });
     }
 

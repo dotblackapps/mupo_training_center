@@ -100,15 +100,6 @@
             </div>
         </nav>
 
-        <div class="mupo-sidebar-bottom">
-            <div class="mupo-sidebar-motto mupo-sidebar-note" role="note" aria-label="Learning note">
-                <i class="far fa-lightbulb" aria-hidden="true"></i>
-                <div>
-                    <span>LEARNING NOTE</span>
-                    <strong>Complete each lesson in order to keep your progress up to date.</strong>
-                </div>
-            </div>
-        </div>
     </div>
 </nav>
 @endif

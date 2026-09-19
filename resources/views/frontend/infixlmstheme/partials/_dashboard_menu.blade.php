@@ -18,7 +18,6 @@
 <header class="mupo-dashboard-topbar">
     <div class="mupo-topbar-left">
         <button type="button" class="sidebar_icon d-lg-none mupo-mobile-menu" id="mupoDashboardNavOpen" aria-label="Open learner navigation" aria-controls="mupoLearnerSidebar" aria-expanded="false"><i class="fas fa-bars"></i></button>
-        <button type="button" class="mupo-topbar-collapse d-none d-lg-grid" id="mupoTopbarCollapse" aria-label="Toggle learner navigation"><i class="fas fa-bars"></i></button>
         <form class="mupo-global-search" action="{{ route('courses') }}" method="GET" role="search">
             <i class="fas fa-search" aria-hidden="true"></i>
             <input type="search" name="query" value="{{ request('query') }}" placeholder="Search for courses, lessons or resources..." aria-label="Search courses, lessons or resources">
