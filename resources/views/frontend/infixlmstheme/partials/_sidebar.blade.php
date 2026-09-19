@@ -8,7 +8,7 @@
             <img src="{{ asset('mupo/assets/images/mupo-logo_1.jpeg') }}" alt="MUPO Training Center">
         </a>
         <button type="button" class="mupo-sidebar-collapse d-none d-lg-grid" id="mupoSidebarCollapse" aria-label="Collapse learner navigation" title="Collapse sidebar">
-            <i class="fas fa-chevron-left"></i>
+            <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
         <button type="button" class="sidebar_close_icon d-lg-none" aria-label="Close learner navigation">
             <i class="ti-close"></i>
@@ -101,6 +101,9 @@
         </nav>
 
         <div class="mupo-sidebar-bottom">
+            <a href="{{ url('/') }}" class="mupo-back-site" title="Back to MUPO Website">
+                <i class="fas fa-globe-africa" aria-hidden="true"></i><span>Back to MUPO Website</span>
+            </a>
             <div class="mupo-sidebar-motto">
                 <span></span>
                 <strong>EMPOWERING MINDS.<br>BUILDING FUTURES.</strong>

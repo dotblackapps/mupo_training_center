@@ -132,7 +132,7 @@ html,body{
     body.mupo-sidebar-collapsed .mupo-sidebar-nav a i,
     body.mupo-sidebar-collapsed .mupo-back-site i{width:auto!important;font-size:16px!important}
     body.mupo-sidebar-collapsed .mupo-nav-group{padding:8px 0}
-    body.mupo-sidebar-collapsed .mupo-sidebar-collapse i{transform:rotate(180deg)}
+    body.mupo-sidebar-collapsed .mupo-sidebar-collapse i{transform:none}
 }
 
 @media(min-width:992px) and (max-width:1279.98px){
