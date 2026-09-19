@@ -304,5 +304,10 @@
 
 /* Final learner-reference cleanup */
 .mupo-sidebar-bottom{margin-top:auto!important;padding-top:10px!important}
-.mupo-sidebar-bottom .mupo-sidebar-motto{padding-top:8px!important}
-.mupo-sidebar-bottom .mupo-back-site{display:flex!important}
+.mupo-sidebar-bottom .mupo-back-site{display:none!important}
+.mupo-sidebar-bottom .mupo-sidebar-note{display:flex!important;align-items:flex-start!important;gap:9px!important;margin:0!important;padding:11px!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:8px!important;background:rgba(255,255,255,.045)!important}
+.mupo-sidebar-bottom .mupo-sidebar-note>i{width:18px!important;margin-top:2px!important;color:#fff!important;font-size:13px!important;text-align:center!important;flex:0 0 18px!important}
+.mupo-sidebar-bottom .mupo-sidebar-note>div{min-width:0!important}
+.mupo-sidebar-bottom .mupo-sidebar-note span{display:block!important;color:#9fb2c8!important;font-size:8px!important;font-weight:800!important;letter-spacing:1.1px!important;line-height:1.2!important;margin-bottom:4px!important}
+.mupo-sidebar-bottom .mupo-sidebar-note strong{display:block!important;color:rgba(255,255,255,.88)!important;font-size:9px!important;font-weight:600!important;letter-spacing:0!important;line-height:1.45!important}
+@media(min-width:992px){body.mupo-sidebar-collapsed .mupo-sidebar-note{display:none!important}}

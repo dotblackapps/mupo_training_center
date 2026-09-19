@@ -101,12 +101,12 @@
         </nav>
 
         <div class="mupo-sidebar-bottom">
-            <a href="{{ url('/') }}" class="mupo-back-site" title="Back to MUPO Website">
-                <i class="fas fa-globe-africa" aria-hidden="true"></i><span>Back to MUPO Website</span>
-            </a>
-            <div class="mupo-sidebar-motto">
-                <span></span>
-                <strong>EMPOWERING MINDS.<br>BUILDING FUTURES.</strong>
+            <div class="mupo-sidebar-motto mupo-sidebar-note" role="note" aria-label="Learning note">
+                <i class="far fa-lightbulb" aria-hidden="true"></i>
+                <div>
+                    <span>LEARNING NOTE</span>
+                    <strong>Complete each lesson in order to keep your progress up to date.</strong>
+                </div>
             </div>
         </div>
     </div>
