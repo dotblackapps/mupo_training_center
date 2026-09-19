@@ -196,7 +196,12 @@
         height: 100vh !important;
     }
 
-    body.mupo-learning-portal-shell #sticky-header.header_area { left: var(--mupo-portal-sidebar) !important; }
+    body.mupo-learning-portal-shell #sticky-header.header_area {
+        left: var(--mupo-portal-sidebar) !important;
+        right: 0 !important;
+        width: auto !important;
+        max-width: none !important;
+    }
     body.mupo-learning-portal-shell .course_fullview_wrapper { left: var(--mupo-portal-sidebar) !important; }
     body.mupo-learning-portal-shell .mupo-bottom-nav { left: var(--mupo-portal-sidebar) !important; }
 
@@ -204,6 +209,11 @@
     body.mupo-learning-portal-shell.mupo-sidebar-collapsed #sticky-header.header_area,
     body.mupo-learning-portal-shell.mupo-sidebar-collapsed .course_fullview_wrapper,
     body.mupo-learning-portal-shell.mupo-sidebar-collapsed .mupo-bottom-nav { left: var(--mupo-portal-rail) !important; }
+
+    body.mupo-learning-portal-shell.mupo-sidebar-collapsed #sticky-header.header_area {
+        right: 0 !important;
+        width: auto !important;
+    }
 }
 
 @media (min-width: 992px) {
@@ -260,6 +270,11 @@
     body.mupo-learning-portal-shell #sticky-header.header_area,
     body.mupo-learning-portal-shell .course_fullview_wrapper,
     body.mupo-learning-portal-shell .mupo-bottom-nav { left: var(--mupo-portal-rail) !important; }
+
+    body.mupo-learning-portal-shell #sticky-header.header_area {
+        right: 0 !important;
+        width: auto !important;
+    }
 }
 
 @media (max-width: 991.98px) {
@@ -283,6 +298,11 @@
     body.mupo-learning-portal-shell #sticky-header.header_area,
     body.mupo-learning-portal-shell .course_fullview_wrapper,
     body.mupo-learning-portal-shell .mupo-bottom-nav { left: 0 !important; }
+
+    body.mupo-learning-portal-shell #sticky-header.header_area {
+        right: 0 !important;
+        width: auto !important;
+    }
 }
 
 @media (max-height: 780px) and (min-width: 992px) {
