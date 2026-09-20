@@ -1432,19 +1432,25 @@
         .single_play_list>a{min-height:44px!important;padding:7px 9px!important;border-radius:7px!important}
         .course_play_name>span,.quiz_name{font-size:12px!important;line-height:1.3!important}
         .course_play_duration{font-size:11px!important}
-        .single_play_list .primary_checkbox{min-width:24px!important}
+        .single_play_list .primary_checkbox{min-width:20px!important}
         .single_play_list .primary_checkbox>i{display:none!important}
         .single_play_list .checkmark{
-            width:22px!important;height:22px!important;flex:0 0 22px!important;
+            position:relative!important;width:18px!important;height:18px!important;flex:0 0 18px!important;
             border:2px solid #8fa3bc!important;border-radius:50%!important;
             background:#fff!important;
         }
         .single_play_list .checkmark:after{display:none!important}
         .single_play_list input:checked~.checkmark{background:#08a66c!important;border-color:#08a66c!important}
         .single_play_list input:checked~.checkmark:before{
-            content:'\2713'!important;font-family:inherit!important;inset:0!important;
-            transform:none!important;display:grid!important;place-items:center!important;
-            color:#fff!important;font-size:13px!important;line-height:1!important;font-weight:800!important;
+            content:'\f00c'!important;
+            font-family:'Font Awesome 5 Free'!important;
+            font-style:normal!important;font-weight:900!important;
+            position:absolute!important;display:block!important;
+            top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;
+            transform:translate(-50%,-50%)!important;
+            width:auto!important;height:auto!important;
+            color:#fff!important;font-size:8px!important;line-height:1!important;
+            text-indent:0!important;background:transparent!important;border:0!important;
         }
         .single_play_list>a.active .checkmark{background:#fff!important;border-color:#ed1c24!important}
         .single_play_list>a.active input:checked~.checkmark{background:#fff!important;border-color:#ed1c24!important}
