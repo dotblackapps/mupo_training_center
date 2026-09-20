@@ -53,9 +53,6 @@
                     </a>
                 @endif
 
-                <a href="{{ route('myHomework') }}" class="{{ routeIs('myHomework') ? 'active' : '' }}" title="Learning Material">
-                    <i class="far fa-file-alt"></i><span>Learning Material</span>
-                </a>
             </div>
 
             <div class="mupo-nav-group">
