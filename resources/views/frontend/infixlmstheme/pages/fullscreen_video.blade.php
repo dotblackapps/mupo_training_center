@@ -1387,7 +1387,8 @@
         .mupo-editor-heading h1{font-size:40px!important;line-height:1.08!important;letter-spacing:-.5px!important}
         .mupo-editor-heading p{font-size:16px!important;line-height:1.55!important;max-width:720px!important;color:rgba(255,255,255,.93)!important}
         .mupo-hero-meta{width:150px!important;flex-basis:150px!important}
-        .mupo-hero-icon{width:58px!important;height:58px!important;font-size:24px!important}
+        .mupo-hero-icon{width:58px!important;height:58px!important;font-size:24px!important;color:#fff!important}
+        .mupo-hero-icon i{display:block!important;color:#fff!important;font-size:24px!important;line-height:1!important}
 
         .lesson_content_text{
             padding:18px 24px!important;
@@ -2345,7 +2346,7 @@ if ($assign->questionBank->shuffle==1){
                         <p>Work through the lesson content below at your own pace. When you are finished, use Complete &amp; Continue to record your progress and move to the next lesson.</p>
                     </div>
                     <div class="mupo-hero-meta" aria-label="Lesson information">
-                        <span class="mupo-hero-icon"><i class="far fa-book-open" aria-hidden="true"></i></span>
+                        <span class="mupo-hero-icon"><i class="fas fa-book-open" aria-hidden="true"></i></span>
                         <strong>Lesson {{ $currentLessonNumber }} of {{ $totalLessonCount ?: $total }}</strong>
                         <small><i class="far fa-clock" aria-hidden="true"></i> {{ MinuteFormat($lesson->duration) }}</small>
                     </div>

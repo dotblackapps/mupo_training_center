@@ -306,7 +306,18 @@
 }
 
 @media (max-height: 780px) and (min-width: 992px) {
-    .mupo-sidebar-motto { display: none !important; }
+    .mupo-sidebar-bottom { padding-top: 3px; }
+    .mupo-sidebar-motto {
+        display: flex !important;
+        padding-top: 7px;
+        gap: 8px;
+    }
+    .mupo-sidebar-motto > span { height: 31px; }
+    .mupo-sidebar-motto strong {
+        font-size: 7px;
+        line-height: 1.35;
+        letter-spacing: 1.1px;
+    }
     .mupo-sidebar-body { padding-top: 9px !important; }
     .mupo-sidebar-identity { padding-bottom: 6px; }
     .mupo-nav-group { padding: 6px 0; }
