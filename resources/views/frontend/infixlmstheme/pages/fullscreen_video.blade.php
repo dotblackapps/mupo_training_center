@@ -1333,6 +1333,147 @@
             .mupo-hero-meta{display:none!important}
             .lesson_content_text{padding:22px 18px!important}
         }
+
+        /* ===== MUPO REFERENCE MATCH: authoritative final layer ===== */
+        :root{
+            --mupo-navy:#082b52;
+            --mupo-navy-2:#0b3767;
+            --mupo-red:#ed1c24;
+            --mupo-blue:#0864c5;
+            --mupo-green:#08a66c;
+            --mupo-bg:#f4f7fb;
+            --mupo-line:#dbe4ee;
+            --mupo-text:#09254a;
+            --mupo-muted:#657b98;
+            --mupo-side-expanded:320px;
+            --mupo-side:var(--mupo-side-expanded);
+            --mupo-reading:1010px;
+            --mupo-head:76px;
+            --mupo-bottom:78px;
+        }
+
+        .course_fullview_wrapper{
+            padding:24px 34px 32px!important;
+            background:#f4f7fb!important;
+        }
+
+        .mupo-lesson-context,
+        .mupo-editor-heading,
+        .lesson_content_text{max-width:1010px!important}
+
+        .mupo-lesson-context{
+            min-height:82px!important;
+            padding:12px 16px!important;
+            border-color:#dbe4ee!important;
+            border-radius:11px!important;
+            box-shadow:0 4px 16px rgba(9,37,74,.035)!important;
+        }
+
+        .mupo-lesson-context strong{font-size:16px!important;color:#09254a!important}
+        .mupo-lesson-context span:not(.mupo-lesson-status){font-size:13px!important;color:#657b98!important}
+        .mupo-context-icon{background:#e8f2ff!important;color:#0864c5!important;border-radius:9px!important}
+        .mupo-lesson-status{background:#e2efff!important;color:#0755ae!important;min-width:108px!important;min-height:40px!important}
+        .mupo-lesson-status.completed{background:#e8f7ef!important;color:#08a66c!important}
+
+        .mupo-editor-heading{
+            min-height:204px!important;
+            padding:28px 40px!important;
+            border-radius:10px!important;
+            background-image:linear-gradient(90deg,rgba(5,38,73,.98) 0%,rgba(6,48,91,.94) 58%,rgba(7,50,94,.82) 100%),var(--mupo-lesson-cover)!important;
+            background-position:center!important;
+        }
+
+        .mupo-editor-kicker{font-size:12px!important;color:#ff3e46!important;margin-bottom:12px!important}
+        .mupo-editor-heading h1{font-size:40px!important;line-height:1.08!important;letter-spacing:-.5px!important}
+        .mupo-editor-heading p{font-size:16px!important;line-height:1.55!important;max-width:720px!important;color:rgba(255,255,255,.93)!important}
+        .mupo-hero-meta{width:150px!important;flex-basis:150px!important}
+        .mupo-hero-icon{width:58px!important;height:58px!important;font-size:24px!important}
+
+        .lesson_content_text{
+            padding:18px 24px!important;
+            border-radius:11px!important;
+            border-color:#dbe4ee!important;
+            box-shadow:0 6px 20px rgba(9,37,74,.035)!important;
+        }
+
+        .mupo-essential-knowledge{min-height:0!important}
+        .mupo-objectives-heading{padding:0 0 12px!important;margin-bottom:8px!important}
+        .mupo-objectives-heading strong{font-size:18px!important}
+        .mupo-objectives-heading small{font-size:14px!important;color:#526987!important}
+        .mupo-essential-knowledge>ul li{font-size:14px!important;line-height:1.45!important;padding:6px 0 6px 34px!important}
+        .mupo-essential-knowledge>ul li:before{top:5px!important;width:23px!important;height:23px!important;background:#0864c5!important}
+
+        .course__play_warp.courseListPlayer{background:#f4f7fb!important;border-left-color:#dbe4ee!important}
+        #mupoCoursePanelContent{background:#f4f7fb!important}
+        .play_warp_header{
+            width:calc(100% - 24px)!important;
+            min-height:104px!important;
+            margin:12px 12px 10px!important;
+            padding:16px 18px!important;
+            background:#fff!important;
+            color:#09254a!important;
+            border:1px solid #dbe4ee!important;
+            border-radius:10px!important;
+            box-shadow:0 4px 14px rgba(9,37,74,.045)!important;
+        }
+        .mupo-content-head{align-items:center!important}
+        .mupo-content-head h3{font-size:17px!important;color:#09254a!important}
+        .mupo-content-head strong{font-size:16px!important;color:#09254a!important}
+        .play_warp_header .mupo-content-sub{font-size:12px!important;color:#657b98!important;margin:8px 0 0!important}
+        .play_warp_header .mupo-progress-line{height:8px!important;margin-top:10px!important;background:#e4eaf1!important}
+
+        .mupo-side-search{padding:12px!important;background:#fff!important;border:1px solid #dbe4ee!important;border-radius:9px!important;margin:0 12px 10px!important}
+        .mupo-side-search input{height:42px!important;font-size:13px!important}
+        .course__play_list{height:calc(100% - 188px)!important;background:#fff!important;border-top:1px solid #e3e9f0!important}
+        .theme_according .accordion-button{padding:15px 18px!important;font-size:14px!important}
+        .theme_according .accordion-button:not(.collapsed){background:#fff1f2!important;color:#ed1c24!important;border-left:4px solid #ed1c24!important;padding-left:14px!important}
+        .theme_according .accordion-body{padding:6px 10px 10px!important}
+        .single_play_list>a{min-height:44px!important;padding:7px 9px!important;border-radius:7px!important}
+        .course_play_name>span,.quiz_name{font-size:12px!important;line-height:1.3!important}
+        .course_play_duration{font-size:11px!important}
+        .single_play_list .primary_checkbox{min-width:24px!important}
+        .single_play_list .primary_checkbox>i{display:none!important}
+        .single_play_list .checkmark{
+            width:22px!important;height:22px!important;flex:0 0 22px!important;
+            border:2px solid #8fa3bc!important;border-radius:50%!important;
+            background:#fff!important;
+        }
+        .single_play_list .checkmark:after{display:none!important}
+        .single_play_list input:checked~.checkmark{background:#08a66c!important;border-color:#08a66c!important}
+        .single_play_list input:checked~.checkmark:before{
+            content:'\2713'!important;font-family:inherit!important;inset:0!important;
+            transform:none!important;display:grid!important;place-items:center!important;
+            color:#fff!important;font-size:13px!important;line-height:1!important;font-weight:800!important;
+        }
+        .single_play_list>a.active .checkmark{background:#fff!important;border-color:#ed1c24!important}
+        .single_play_list>a.active input:checked~.checkmark{background:#fff!important;border-color:#ed1c24!important}
+        .single_play_list>a.active input:checked~.checkmark:before{display:none!important}
+        .single_play_list>a.active{background:#fff1f2!important;border-left:4px solid #ed1c24!important}
+
+        .mupo-bottom-nav{height:78px!important;padding:10px 26px!important}
+        .mupo-nav-btn{height:48px!important;min-width:216px!important}
+        .mupo-complete-btn{height:50px!important;min-width:304px!important}
+
+        @media(min-width:1280px){
+            body.mupo-learning-portal-shell{--mupo-portal-sidebar:267px}
+            #sticky-header .header__wrapper{padding:0 24px!important;gap:14px!important}
+            .mupo-portal-menu-toggle{width:40px!important;height:40px!important;border-radius:50%!important;background:#082b52!important;color:#fff!important}
+            .mupo-exit-course{font-size:12px!important;gap:8px!important}
+            .mupo-course-heading{gap:9px!important}
+            .mupo-course-heading h4.headerTitle{font-size:12px!important;color:#09254a!important}
+            .mupo-header-breadcrumb{font-size:11px!important;color:#657b98!important}
+            .mupo-lesson-global-search{width:268px!important;flex-basis:268px!important;height:42px!important}
+            .mupo-lesson-profile{width:58px!important;min-width:58px!important;max-width:58px!important}
+        }
+
+        @media(min-width:1280px) and (max-width:1439.98px){
+            body.mupo-learning-portal-shell{--mupo-portal-sidebar:232px}
+            :root{--mupo-side-expanded:286px;--mupo-side:286px;--mupo-reading:900px}
+            .course_fullview_wrapper{padding:18px 22px 26px!important}
+            .mupo-lesson-context,.mupo-editor-heading,.lesson_content_text{max-width:900px!important}
+            .mupo-lesson-global-search{width:210px!important;flex-basis:210px!important}
+            .mupo-editor-heading h1{font-size:35px!important}
+        }
     </style>
 
 @endsection
