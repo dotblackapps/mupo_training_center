@@ -1283,6 +1283,56 @@
         .mupo-content-head h3,.mupo-content-head strong{color:#fff!important}
         .play_warp_header .mupo-progress-line{margin-top:12px}
         .play_warp_header .mupo-content-sub{color:rgba(255,255,255,.72)!important;margin:8px 0 0!important;font-size:13px!important}
+
+        /* ===== FINAL BOSS-REFERENCE LESSON SYSTEM ===== */
+        .mupo-lesson-context{display:grid!important;grid-template-columns:42px minmax(0,1fr) auto!important;min-height:68px!important;padding:12px 16px!important;margin-bottom:14px!important}
+        .mupo-context-icon{width:42px;height:42px;border-radius:9px;background:#eaf3ff;color:#0864c5;display:grid;place-items:center;font-size:19px}
+        .mupo-lesson-status{min-width:88px!important;justify-content:center!important;background:#e5f1ff!important;color:#0755ae!important}
+        .mupo-lesson-status.completed{background:#eaf7f0!important;color:var(--mupo-green)!important}
+        .mupo-editor-heading{min-height:188px!important;padding:30px 34px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:28px!important;background-image:linear-gradient(90deg,rgba(6,27,58,.98) 0%,rgba(6,38,75,.93) 58%,rgba(7,40,77,.78) 100%),var(--mupo-lesson-cover)!important;background-size:cover!important;background-position:center!important}
+        .mupo-editor-heading:after{right:12px!important;top:-18px!important;width:210px!important;height:210px!important;background:rgba(255,255,255,.035)!important}
+        .mupo-editor-copy{position:relative;z-index:2;min-width:0;flex:1 1 auto}
+        .mupo-editor-heading h1{font-size:38px!important}
+        .mupo-hero-meta{position:relative;z-index:2;width:165px;flex:0 0 165px;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center;gap:8px}
+        .mupo-hero-icon{width:58px;height:58px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;font-size:25px;background:rgba(255,255,255,.08)}
+        .mupo-hero-meta strong{font-size:12px;color:#fff;line-height:1.3}
+        .mupo-hero-meta small{font-size:12px;color:rgba(255,255,255,.9)}
+        .lesson_content_text{padding:26px 28px!important}
+        .mupo-objectives-heading{display:flex;align-items:center;gap:14px;padding:0 0 15px;margin-bottom:12px;border-bottom:1px solid var(--mupo-line)}
+        .mupo-objectives-heading>span{width:48px;height:48px;border-radius:50%;background:#fff0f1;color:var(--mupo-red);display:grid;place-items:center;font-size:23px;flex:0 0 48px}
+        .mupo-objectives-heading strong{display:block;color:var(--mupo-text);font-size:18px;line-height:1.2}
+        .mupo-objectives-heading small{display:block;color:#526987;font-size:14px;margin-top:3px}
+        .mupo-essential-knowledge>ul{list-style:none!important;padding:0!important;margin:0!important}
+        .mupo-essential-knowledge>ul li{position:relative;padding:7px 0 7px 36px!important;margin:0!important}
+        .mupo-essential-knowledge>ul li:before{content:'\2713';position:absolute;left:0;top:7px;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:#0864c5;color:#fff;font-size:12px;font-weight:800}
+        .mupo-essential-knowledge>.table-responsive{margin-top:16px!important;border-radius:9px!important;background:#eaf4ff!important;padding:10px 14px!important}
+        .mupo-essential-knowledge>.table-responsive table{margin:0!important;border:0!important;background:transparent!important}
+        .mupo-essential-knowledge>.table-responsive td{border:0!important;background:transparent!important;color:#42607f!important;padding:9px 10px 9px 54px!important;position:relative}
+        .mupo-essential-knowledge>.table-responsive td:before{content:'\f15c';font-family:'Font Awesome 5 Free';font-weight:400;position:absolute;left:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:7px;background:#d8eaff;color:#0864c5;display:grid;place-items:center;font-size:17px}
+        .play_warp_header{background:#fff!important;color:var(--mupo-text)!important;border-bottom:1px solid var(--mupo-line)!important;min-height:108px!important}
+        .mupo-content-head h3,.mupo-content-head strong{color:var(--mupo-text)!important}
+        .play_warp_header .mupo-content-sub{color:var(--mupo-muted)!important}
+        .mupo-side-search{border-bottom:1px solid var(--mupo-line)!important}
+        @media(min-width:1280px){
+            .mupo-course-heading{display:flex!important;align-items:center!important;gap:10px!important;white-space:nowrap!important}
+            .mupo-course-heading h4.headerTitle{flex:0 1 auto!important;font-size:13px!important;font-weight:800!important;overflow:hidden!important;text-overflow:ellipsis!important}
+            .mupo-header-breadcrumb{display:flex!important;flex:1 1 auto!important;margin:0!important;font-size:10.5px!important;overflow:hidden!important}
+            .mupo-course-heading h4.headerTitle:after{content:'›';color:#a0aabd;margin-left:10px;font-weight:500}
+            .mupo-lesson-profile{min-width:58px!important;width:58px!important;max-width:58px!important;grid-template-columns:42px 12px!important;column-gap:6px!important}
+            .mupo-lesson-profile b,.mupo-lesson-profile small{display:none!important}
+            .mupo-lesson-profile>i{grid-column:2!important}
+        }
+        .course__play_warp.courseListPlayer{background:#f6f8fb!important}
+        .play_warp_header{width:calc(100% - 24px)!important;margin:12px 12px 8px!important;border:1px solid var(--mupo-line)!important;border-radius:9px!important;box-shadow:0 5px 16px rgba(6,27,58,.045)!important;min-height:96px!important;padding:16px!important}
+        .mupo-side-search{background:#fff!important}
+        @media(max-width:767.98px){
+            .mupo-lesson-context{grid-template-columns:38px minmax(0,1fr)!important;padding:10px!important}
+            .mupo-context-icon{width:38px;height:38px}
+            .mupo-lesson-status{grid-column:1/-1;justify-self:start;margin-left:52px;margin-top:3px}
+            .mupo-editor-heading{min-height:0!important;padding:24px 20px!important;display:block!important}
+            .mupo-hero-meta{display:none!important}
+            .lesson_content_text{padding:22px 18px!important}
+        }
     </style>
 
 @endsection
@@ -1310,6 +1360,7 @@
         $currentLessonNumber = $currentLessonIndex !== false ? $currentLessonIndex + 1 : 1;
         $totalLessonCount = count($lesson_ids ?? []);
         $currentChapter = $chapters->firstWhere('id', $lesson->chapter_id);
+        $isEssentialKnowledge = strtolower(trim((string) $lesson->name)) === 'essential knowledge';
     @endphp
     @push('js')
         <script>
@@ -1365,7 +1416,7 @@
                         </div></div>
                     </div>
                     <div class="header__right"><div class="contact_wrap d-flex align-items-center">
-                        <form class="mupo-lesson-global-search d-none d-xl-flex" action="{{ route('courses') }}" method="GET" role="search"><i class="fas fa-search"></i><input type="search" name="query" placeholder="Search lessons, courses or resources..." aria-label="Search lessons, courses or resources"></form>
+                        <form class="mupo-lesson-global-search d-none d-xl-flex" action="{{ route('courses') }}" method="GET" role="search"><i class="fas fa-search"></i><input type="search" name="query" placeholder="Search lessons, topics..." aria-label="Search lessons and topics"></form>
                         <a href="{{ route('myNotification') }}" class="mupo-lesson-notification" aria-label="Notifications"><i class="far fa-bell"></i>@if(auth()->user()->unreadNotifications->count())<span>{{ auth()->user()->unreadNotifications->count() > 9 ? '9+' : auth()->user()->unreadNotifications->count() }}</span>@endif</a>
                         <a href="{{ route('users.settings') }}" class="mupo-lesson-profile"><span>{{ strtoupper(substr(auth()->user()->name,0,1)) }}{{ strtoupper(substr(strrchr(' '.auth()->user()->name,' '),1,1)) }}</span><b>{{ auth()->user()->name }}</b><small>Learner</small><i class="fas fa-chevron-down"></i></a>
                         <button type="button" class="mupo-tool-btn mupo-focus-toggle d-none d-lg-flex" id="mupoFocusToggle" title="Focus Mode" aria-pressed="false"><i class="fas fa-expand-alt"></i><span>Focus</span></button>
@@ -1378,6 +1429,7 @@
 
     <div class="course_fullview_wrapper {{$lesson->is_quiz == 1 ? '' : 'video'}} {{$lesson->host == 'Editor' ? 'flex-column justify-content-start p-4' : ''}}">
         <div class="mupo-lesson-context">
+            <div class="mupo-context-icon" aria-hidden="true"><i class="far fa-file-alt"></i></div>
             <div>
                 <strong>{{ optional($currentChapter)->name ?? 'Course Content' }}</strong>
                 <span>Lesson {{ $currentLessonNumber }} of {{ $totalLessonCount ?: $total }} &nbsp;•&nbsp; {{ MinuteFormat($lesson->duration) }}</span>
@@ -2145,13 +2197,26 @@ if ($assign->questionBank->shuffle==1){
                         list-style-type: unset;
                     }
                 </style>
-                <section class="mupo-editor-heading" aria-labelledby="mupo-current-lesson-title">
-                    <div class="mupo-editor-kicker">{{ optional($currentChapter)->name ?? 'Course Content' }}</div>
-                    <h1 id="mupo-current-lesson-title">{{ $lesson->name }}</h1>
-                    <p>Work through the lesson content below at your own pace. When you are finished, use Complete &amp; Continue to record your progress and move to the next lesson.</p>
+                <section class="mupo-editor-heading" aria-labelledby="mupo-current-lesson-title" style="--mupo-lesson-cover:url('{{ getCourseImage($course->thumbnail) }}')">
+                    <div class="mupo-editor-copy">
+                        <div class="mupo-editor-kicker">{{ optional($currentChapter)->name ?? 'Course Content' }}</div>
+                        <h1 id="mupo-current-lesson-title">{{ $lesson->name }}</h1>
+                        <p>Work through the lesson content below at your own pace. When you are finished, use Complete &amp; Continue to record your progress and move to the next lesson.</p>
+                    </div>
+                    <div class="mupo-hero-meta" aria-label="Lesson information">
+                        <span class="mupo-hero-icon"><i class="far fa-book-open" aria-hidden="true"></i></span>
+                        <strong>Lesson {{ $currentLessonNumber }} of {{ $totalLessonCount ?: $total }}</strong>
+                        <small><i class="far fa-clock" aria-hidden="true"></i> {{ MinuteFormat($lesson->duration) }}</small>
+                    </div>
                 </section>
                 @include(theme('partials.guided-instructor-player'))
-                <div class="lesson_content_text w-100">
+                <div class="lesson_content_text w-100 {{ $isEssentialKnowledge ? 'mupo-essential-knowledge' : '' }}">
+                    @if($isEssentialKnowledge)
+                        <div class="mupo-objectives-heading">
+                            <span><i class="fas fa-bullseye" aria-hidden="true"></i></span>
+                            <div><strong>Learning Objectives</strong><small>By the end of this lesson, you should be able to:</small></div>
+                        </div>
+                    @endif
                     {!! $lesson->editor !!}
                 </div>
             @endif
