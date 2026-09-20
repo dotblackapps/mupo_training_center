@@ -37,7 +37,7 @@
 
                 @if(permissionCheck('myCourses'))
                     <a href="{{ route('myCourses') }}" class="{{ (routeIs('myCourses') || request()->is('fullscreen-view/*')) ? 'active' : '' }}" title="My Courses">
-                        <i class="far fa-play-circle"></i><span>My Courses</span>
+                        <i class="fas fa-book-open"></i><span>My Courses</span>
                     </a>
                 @endif
 
@@ -99,7 +99,14 @@
                 </a>
             </div>
         </nav>
-
+        <div class="mupo-sidebar-bottom">
+            <a class="mupo-back-site" href="{{ url('/') }}">
+                <i class="far fa-compass" aria-hidden="true"></i><span>Back to MUPO Website</span>
+            </a>
+            <div class="mupo-sidebar-motto" aria-label="MUPO learner portal motto">
+                <span aria-hidden="true"></span><strong>EMPOWERING MINDS.<br>BUILDING FUTURES.</strong>
+            </div>
+        </div>
     </div>
 </nav>
 @endif
