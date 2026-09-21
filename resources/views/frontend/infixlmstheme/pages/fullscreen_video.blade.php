@@ -1247,9 +1247,20 @@
             .mupo-lesson-notification span{position:absolute;right:1px;top:0;min-width:17px;height:17px;border-radius:9px;background:var(--mupo-red);color:#fff;font-size:9px;display:grid;place-items:center;border:2px solid #fff}
             .mupo-lesson-profile{display:grid;grid-template-columns:42px minmax(85px,130px) 14px;grid-template-rows:1fr 1fr;column-gap:9px;align-items:center;color:var(--mupo-text)!important;text-decoration:none!important;min-width:150px;max-width:190px;flex:0 0 auto}
             .mupo-lesson-profile>span{grid-row:1/3;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--mupo-navy);color:#fff;font-size:12px;font-weight:800}
+            .mupo-lesson-profile>span img{width:100%;height:100%;object-fit:cover;border-radius:50%}
             .mupo-lesson-profile b{font-size:11px;align-self:end;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
             .mupo-lesson-profile small{font-size:9px;color:#7d8998;align-self:start}
             .mupo-lesson-profile>i{grid-column:3;grid-row:1/3;font-size:9px}
+            .mupo-lesson-profile-menu{position:relative;flex:0 0 auto;margin:0}
+            .mupo-lesson-profile-menu summary{list-style:none;cursor:pointer}
+            .mupo-lesson-profile-menu summary::-webkit-details-marker{display:none}
+            .mupo-lesson-profile-menu[open] .mupo-lesson-profile>i{transform:rotate(180deg)}
+            .mupo-lesson-profile-dropdown{position:absolute;top:51px;right:0;width:220px;background:#fff;border:1px solid var(--mupo-line);border-radius:9px;box-shadow:0 14px 35px rgba(6,27,58,.14);padding:7px;z-index:1200}
+            .mupo-lesson-profile-dropdown a{display:flex;align-items:center;gap:10px;padding:10px 11px;border-radius:6px;color:var(--mupo-text)!important;text-decoration:none!important;font-size:11px;font-weight:600}
+            .mupo-lesson-profile-dropdown a:hover{background:#f5f7fa;color:var(--mupo-red)!important}
+            .mupo-lesson-profile-dropdown i{width:17px;text-align:center}
+            .mupo-lesson-profile-divider{height:1px;background:var(--mupo-line);margin:5px 4px}
+            .mupo-lesson-profile-dropdown .mupo-logout-link{color:var(--mupo-red)!important}
             .mupo-focus-toggle{display:none!important}
             .course_fullview_wrapper{padding:24px 28px 36px!important}
             .mupo-lesson-context,.mupo-editor-heading,.lesson_content_text{max-width:1000px!important}
@@ -1318,9 +1329,9 @@
             .mupo-course-heading h4.headerTitle{flex:0 1 auto!important;font-size:13px!important;font-weight:800!important;overflow:hidden!important;text-overflow:ellipsis!important}
             .mupo-header-breadcrumb{display:flex!important;flex:1 1 auto!important;margin:0!important;font-size:10.5px!important;overflow:hidden!important}
             .mupo-course-heading h4.headerTitle:after{content:'›';color:#a0aabd;margin-left:10px;font-weight:500}
-            .mupo-lesson-profile{min-width:58px!important;width:58px!important;max-width:58px!important;grid-template-columns:42px 12px!important;column-gap:6px!important}
-            .mupo-lesson-profile b,.mupo-lesson-profile small{display:none!important}
-            .mupo-lesson-profile>i{grid-column:2!important}
+            .mupo-lesson-profile{min-width:158px!important;width:auto!important;max-width:190px!important;grid-template-columns:42px minmax(82px,124px) 12px!important;column-gap:9px!important}
+            .mupo-lesson-profile b,.mupo-lesson-profile small{display:block!important}
+            .mupo-lesson-profile>i{grid-column:3!important}
         }
         .course__play_warp.courseListPlayer{background:#f6f8fb!important}
         .play_warp_header{width:calc(100% - 24px)!important;margin:12px 12px 8px!important;border:1px solid var(--mupo-line)!important;border-radius:9px!important;box-shadow:0 5px 16px rgba(6,27,58,.045)!important;min-height:96px!important;padding:16px!important}
@@ -1470,7 +1481,7 @@
             .mupo-course-heading h4.headerTitle{font-size:12px!important;color:#09254a!important}
             .mupo-header-breadcrumb{font-size:11px!important;color:#657b98!important}
             .mupo-lesson-global-search{width:268px!important;flex-basis:268px!important;height:42px!important}
-            .mupo-lesson-profile{width:58px!important;min-width:58px!important;max-width:58px!important}
+            .mupo-lesson-profile{width:auto!important;min-width:158px!important;max-width:190px!important}
         }
 
         @media(min-width:1280px) and (max-width:1439.98px){
@@ -1566,7 +1577,16 @@
                     <div class="header__right"><div class="contact_wrap d-flex align-items-center">
                         <form class="mupo-lesson-global-search d-none d-xl-flex" action="{{ route('courses') }}" method="GET" role="search"><i class="fas fa-search"></i><input type="search" name="query" placeholder="Search lessons, topics..." aria-label="Search lessons and topics"></form>
                         <a href="{{ route('myNotification') }}" class="mupo-lesson-notification" aria-label="Notifications"><i class="far fa-bell"></i>@if(auth()->user()->unreadNotifications->count())<span>{{ auth()->user()->unreadNotifications->count() > 9 ? '9+' : auth()->user()->unreadNotifications->count() }}</span>@endif</a>
-                        <a href="{{ route('users.settings') }}" class="mupo-lesson-profile"><span>{{ strtoupper(substr(auth()->user()->name,0,1)) }}{{ strtoupper(substr(strrchr(' '.auth()->user()->name,' '),1,1)) }}</span><b>{{ auth()->user()->name }}</b><small>Learner</small><i class="fas fa-chevron-down"></i></a>
+                        <details class="mupo-lesson-profile-menu">
+                            <summary class="mupo-lesson-profile" aria-label="Open learner account menu"><span>@if(!empty(auth()->user()->image))<img src="{{ getProfileImage(auth()->user()->image, auth()->user()->name) }}" alt="{{ auth()->user()->name }}">@else{{ strtoupper(substr(auth()->user()->name,0,1)) }}{{ strtoupper(substr(strrchr(' '.auth()->user()->name,' '),1,1)) }}@endif</span><b>{{ auth()->user()->name }}</b><small>Learner</small><i class="fas fa-chevron-down"></i></summary>
+                            <div class="mupo-lesson-profile-dropdown">
+                                <a href="{{ route('users.settings') }}"><i class="far fa-user"></i><span>My Profile</span></a>
+                                <a href="{{ route('users.settings') }}"><i class="fas fa-cog"></i><span>Account Settings</span></a>
+                                <div class="mupo-lesson-profile-divider"></div>
+                                <a class="mupo-logout-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('mupo-lesson-logout-form').submit();"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a>
+                                <form id="mupo-lesson-logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                            </div>
+                        </details>
                         <button type="button" class="mupo-tool-btn mupo-focus-toggle d-none d-lg-flex" id="mupoFocusToggle" title="Focus Mode" aria-pressed="false"><i class="fas fa-expand-alt"></i><span>Focus</span></button>
                         <button type="button" class="mupo-tool-btn mupo-mobile-contents play_toggle_btn d-none" title="Course Content"><i class="fas fa-list"></i><span>Contents</span></button>
                     </div></div>
