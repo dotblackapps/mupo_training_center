@@ -1368,9 +1368,15 @@
             background:#f4f7fb!important;
         }
 
-        .mupo-lesson-context,
-        .mupo-editor-heading,
-        .lesson_content_text{max-width:1010px!important}
+        .course_fullview_wrapper .mupo-lesson-context,
+        .course_fullview_wrapper .mupo-editor-heading,
+        .course_fullview_wrapper .lesson_content_text{
+            width:100%!important;
+            max-width:1010px!important;
+            margin-left:auto!important;
+            margin-right:auto!important;
+            box-sizing:border-box!important;
+        }
 
         .mupo-lesson-context{
             min-height:82px!important;
@@ -1488,7 +1494,9 @@
             body.mupo-learning-portal-shell{--mupo-portal-sidebar:232px}
             :root{--mupo-side-expanded:286px;--mupo-side:286px;--mupo-reading:900px}
             .course_fullview_wrapper{padding:18px 22px 26px!important}
-            .mupo-lesson-context,.mupo-editor-heading,.lesson_content_text{max-width:900px!important}
+            .course_fullview_wrapper .mupo-lesson-context,
+            .course_fullview_wrapper .mupo-editor-heading,
+            .course_fullview_wrapper .lesson_content_text{max-width:900px!important}
             .mupo-lesson-global-search{width:210px!important;flex-basis:210px!important}
             .mupo-editor-heading h1{font-size:35px!important}
         }
