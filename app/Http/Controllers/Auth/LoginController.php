@@ -593,6 +593,10 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        // Preserve the user's role before the session is cleared so learner
+        // logouts consistently return to the login page from every portal view.
+        $isLearner = Auth::check() && (int) Auth::user()->role_id === 3;
+
         if (Auth::check()) {
             $login = UserLogin::where('user_id', Auth::id())->where('status', 1)->latest()->first();
             if ($login) {
@@ -617,7 +621,9 @@ class LoginController extends Controller
             Session::flush();
         }
 
-        return redirect()->route('frontendHomePage');
+        return $isLearner
+            ? redirect()->route('login')
+            : redirect()->route('frontendHomePage');
     }
 
     private function classAttendance($user)
