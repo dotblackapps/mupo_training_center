@@ -1376,6 +1376,7 @@
             margin-left:auto!important;
             margin-right:auto!important;
             box-sizing:border-box!important;
+            border-radius:10px!important;
         }
 
         .mupo-lesson-context{
