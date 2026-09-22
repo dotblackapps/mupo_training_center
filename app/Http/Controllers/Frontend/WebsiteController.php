@@ -415,7 +415,10 @@ class WebsiteController extends Controller
         $course = Course::find($course_id);
 
 
-        $lesson = Lesson::where('id', $lesson_id)->first();
+        // Keep the lesson and course relationship authoritative for access checks.
+        $lesson = Lesson::where('id', $lesson_id)
+            ->where('course_id', $course_id)
+            ->first();
 
         if (!$course || !$lesson) {
             abort('404');
@@ -755,6 +758,35 @@ class WebsiteController extends Controller
                     }
                 }
             }
+
+            $completedLessonIds = collect();
+            $firstIncompleteLessonId = null;
+            $sequentialLearningEnabled = !$isAdmin
+                && Auth::check()
+                && (int) $course->complete_order === 1;
+
+            if (Auth::check()) {
+                $completedLessonIds = LessonComplete::query()
+                    ->where('user_id', Auth::id())
+                    ->where('course_id', $course->id)
+                    ->where('status', 1)
+                    ->whereIn('lesson_id', $lesson_ids)
+                    ->pluck('lesson_id')
+                    ->map(static function ($id) {
+                        return (int) $id;
+                    })
+                    ->unique()
+                    ->values();
+
+                $completedLookup = array_fill_keys($completedLessonIds->all(), true);
+                foreach ($lesson_ids as $orderedLessonId) {
+                    if (!isset($completedLookup[(int) $orderedLessonId])) {
+                        $firstIncompleteLessonId = (int) $orderedLessonId;
+                        break;
+                    }
+                }
+            }
+
             if (!$isAdmin) {
                 if ($course->complete_order == 1) {
                     if (!Auth::check()) {
@@ -762,20 +794,28 @@ class WebsiteController extends Controller
                         return redirect()->to($returnUrl);
                     }
 
-                    $index = array_search($lesson_id, $lesson_ids);
+                    $orderedLessonIds = array_map('intval', $lesson_ids);
+                    $requestedIndex = array_search((int) $lesson_id, $orderedLessonIds, true);
+                    $firstIncompleteIndex = $firstIncompleteLessonId === null
+                        ? null
+                        : array_search($firstIncompleteLessonId, $orderedLessonIds, true);
 
+                    // Completed lessons can be revisited and the first incomplete
+                    // lesson is available. Every later lesson remains locked.
+                    if ($requestedIndex === false) {
+                        abort(404);
+                    }
 
-                    $previous = $lesson_ids[$index - 1] ?? null;
+                    if ($firstIncompleteIndex !== null && $requestedIndex > $firstIncompleteIndex) {
+                        Toastr::warning(
+                            'Complete the current lesson to unlock the next lesson.',
+                            'Lesson locked'
+                        );
 
-                    if ($previous) {
-                        $isComplete = DB::table('lesson_completes')->where(function ($q) use($lesson_id,$previous){
-                            $q->where('lesson_id', $previous)->orWhere('lesson_id', $lesson_id);
-                        })->where('user_id', Auth::id())->select('status')->first();
-
-                        if (!$isComplete || $isComplete->status != 1) {
-                            Toastr::error(trans('frontend.At First, You need to complete previous lesson'), trans('Failed'));
-                            return redirect()->to($returnUrl);
-                        }
+                        return redirect()->route('fullScreenView', [
+                            $course->id,
+                            $firstIncompleteLessonId,
+                        ]);
                     }
                 }
             }
@@ -822,7 +862,7 @@ class WebsiteController extends Controller
                 $data['topics'] = $query->first();
             }
             $data['lesson_questions'] = LessonQuestion::where('lesson_id', $lesson->id)->where('course_id', $course_id)->where('parent_id', 0)->where('status', 1)->with(['course', 'lesson', 'user'])->get();
-            return view(theme('pages.fullscreen_video'), $data, compact('quizPass', 'alreadyJoin', 'lesson_ids', 'result', 'preResult', 'quizSetup', 'chapters', 'reviewer_user_ids', 'percentage', 'isEnrolled', 'total', 'certificate', 'course', 'lesson', 'lessons'));
+            return view(theme('pages.fullscreen_video'), $data, compact('quizPass', 'alreadyJoin', 'lesson_ids', 'completedLessonIds', 'firstIncompleteLessonId', 'sequentialLearningEnabled', 'result', 'preResult', 'quizSetup', 'chapters', 'reviewer_user_ids', 'percentage', 'isEnrolled', 'total', 'certificate', 'course', 'lesson', 'lessons'));
 
         } catch (Exception $e) {
             GettingError($e->getMessage(), url()->current(), request()->ip(), request()->userAgent());
@@ -2183,13 +2223,95 @@ class WebsiteController extends Controller
         try {
             $newLessonComplete = false;
 
-            if (empty($request->user_id)) {
-                $user = Auth::user();
-            } else {
+            $request->validate([
+                'course_id' => ['required', 'integer'],
+                'lesson_id' => ['required', 'integer'],
+                'user_id' => ['nullable', 'integer'],
+            ]);
+
+            $authenticatedUser = Auth::user();
+            $user = $authenticatedUser;
+
+            // Only administrators may record progress for another user.
+            if (!empty($request->user_id) && (int) $authenticatedUser->role_id === 1) {
                 $user = User::find($request->user_id);
             }
 
-            $enrolled = CourseEnrolled::where('course_id', (int)$request->course_id)->where('user_id', (int)$user->id)->first();
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not found.'], 404);
+            }
+
+            $course = Course::find((int) $request->course_id);
+            $lessonRecord = Lesson::query()
+                ->where('id', (int) $request->lesson_id)
+                ->where('course_id', (int) $request->course_id)
+                ->first();
+
+            if (!$course || !$lessonRecord) {
+                return response()->json(['success' => false, 'message' => 'The selected lesson is invalid.'], 422);
+            }
+
+            $enrolled = CourseEnrolled::query()
+                ->where('course_id', $course->id)
+                ->where('user_id', $user->id)
+                ->where('status', 1)
+                ->first();
+
+            if ((int) $authenticatedUser->role_id !== 1 && !$enrolled) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You are not enrolled in this course.',
+                ], 403);
+            }
+
+            if ((int) $authenticatedUser->role_id !== 1 && (int) $course->complete_order === 1) {
+                $chapters = Chapter::query()
+                    ->where('course_id', $course->id)
+                    ->orderBy('position')
+                    ->with(['lessons' => function ($query) {
+                        $query->select(['id', 'course_id', 'chapter_id', 'position'])
+                            ->orderBy('position');
+                    }])
+                    ->get(['id', 'course_id', 'position']);
+
+                $orderedLessonIds = $chapters->flatMap(function ($chapter) {
+                    return $chapter->lessons->pluck('id');
+                })->map(static function ($id) {
+                    return (int) $id;
+                })->values()->all();
+
+                $completedIds = LessonComplete::query()
+                    ->where('user_id', $user->id)
+                    ->where('course_id', $course->id)
+                    ->where('status', 1)
+                    ->whereIn('lesson_id', $orderedLessonIds)
+                    ->pluck('lesson_id')
+                    ->map(static function ($id) {
+                        return (int) $id;
+                    })
+                    ->all();
+
+                $completedLookup = array_fill_keys($completedIds, true);
+                $firstIncompleteId = null;
+                foreach ($orderedLessonIds as $orderedLessonId) {
+                    if (!isset($completedLookup[$orderedLessonId])) {
+                        $firstIncompleteId = $orderedLessonId;
+                        break;
+                    }
+                }
+
+                $requestedIndex = array_search((int) $lessonRecord->id, $orderedLessonIds, true);
+                $firstIncompleteIndex = $firstIncompleteId === null
+                    ? null
+                    : array_search($firstIncompleteId, $orderedLessonIds, true);
+
+                if ($requestedIndex === false || ($firstIncompleteIndex !== null && $requestedIndex > $firstIncompleteIndex)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Complete the current lesson before continuing.',
+                    ], 403);
+                }
+            }
 
             $lesson = LessonComplete::query()
                 ->where('course_id', (int)$request->course_id)
@@ -2197,10 +2319,7 @@ class WebsiteController extends Controller
                 ->where('user_id', (int)$user->id)
                 ->first();
             if (!$lesson) {
-                $check = Lesson::find((int)$request->lesson_id);
-                if ($check) {
-                    checkGamification('each_unit_complete', '');
-                }
+                checkGamification('each_unit_complete', '');
 
                 $lesson = new LessonComplete();
                 $newLessonComplete = true;
@@ -2214,7 +2333,7 @@ class WebsiteController extends Controller
             $lesson->status = 1;
             $lesson->save();
 
-            $course = Course::withCount('lessons')->find((int)$request->course_id);
+            $course->loadCount('lessons');
             if ($course) {
                 $completeLessons = LessonComplete::where('user_id', (int)$user->id)->where('course_id', (int)$course->id)->where('status', 1)->count();
                 $totalLessons = $course->lessons;

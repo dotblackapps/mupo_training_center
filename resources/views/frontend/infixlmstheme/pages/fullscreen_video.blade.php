@@ -943,7 +943,7 @@
         .theme_according .accordion-body{padding:7px 10px 11px!important}
         .single_play_list{margin:0!important}
 
-        .single_play_list>a{
+        .single_play_list>.mupo-curriculum-lesson-link{
             min-height:48px!important;
             border:0!important;
             border-left:3px solid transparent!important;
@@ -957,6 +957,30 @@
         }
 
         .single_play_list>a:hover{background:#f7f9fb!important}
+
+        .single_play_list>.mupo-curriculum-lesson-link.is-locked{
+            background:#f7f9fc!important;
+            color:#8b99aa!important;
+            cursor:not-allowed!important;
+            opacity:.58;
+            user-select:none;
+        }
+
+        .single_play_list>.mupo-curriculum-lesson-link.is-locked .course_play_name>span,
+        .single_play_list>.mupo-curriculum-lesson-link.is-locked .quiz_name,
+        .single_play_list>.mupo-curriculum-lesson-link.is-locked .course_play_duration,
+        .single_play_list>.mupo-curriculum-lesson-link.is-locked i{
+            color:#8b99aa!important;
+            cursor:not-allowed!important;
+        }
+
+        .mupo-lesson-lock{
+            display:inline-flex!important;
+            align-items:center!important;
+            gap:6px!important;
+        }
+
+        .mupo-lesson-lock i{font-size:10px!important}
 
         .single_play_list>a.active{
             background:#fff1f2!important;
@@ -1447,7 +1471,7 @@
         .theme_according .accordion-button{padding:15px 18px!important;font-size:14px!important}
         .theme_according .accordion-button:not(.collapsed){background:#fff1f2!important;color:#ed1c24!important;border-left:4px solid #ed1c24!important;padding-left:14px!important}
         .theme_according .accordion-body{padding:6px 10px 10px!important}
-        .single_play_list>a{min-height:44px!important;padding:7px 9px!important;border-radius:7px!important}
+        .single_play_list>.mupo-curriculum-lesson-link{min-height:44px!important;padding:7px 9px!important;border-radius:7px!important}
         .course_play_name>span,.quiz_name{font-size:12px!important;line-height:1.3!important}
         .course_play_duration{font-size:11px!important}
         .single_play_list .primary_checkbox{min-width:20px!important}
@@ -1519,12 +1543,16 @@
         $currentLessonIndex = array_search($currentLessonId, array_map('intval', $lesson_ids ?? []), true);
         $previousLessonId = ($currentLessonIndex !== false && $currentLessonIndex > 0) ? (int) $lesson_ids[$currentLessonIndex - 1] : null;
         $nextLessonId = ($currentLessonIndex !== false && isset($lesson_ids[$currentLessonIndex + 1])) ? (int) $lesson_ids[$currentLessonIndex + 1] : null;
-        $isCurrentLessonComplete = auth()->check()
-            ? \App\LessonComplete::where('user_id', auth()->id())->where('course_id', $course->id)->where('lesson_id', $lesson->id)->where('status', 1)->exists()
-            : false;
-        $completedLessonCount = auth()->check()
-            ? \App\LessonComplete::where('user_id', auth()->id())->where('course_id', $course->id)->where('status', 1)->count()
-            : 0;
+        $completedLessonIds = collect($completedLessonIds ?? [])->map(function ($id) {
+            return (int) $id;
+        });
+        $completedLessonLookup = array_fill_keys($completedLessonIds->all(), true);
+        $isCurrentLessonComplete = isset($completedLessonLookup[$currentLessonId]);
+        $completedLessonCount = $completedLessonIds->count();
+        $orderedLessonIds = array_map('intval', $lesson_ids ?? []);
+        $firstIncompleteLessonIndex = $firstIncompleteLessonId === null
+            ? null
+            : array_search((int) $firstIncompleteLessonId, $orderedLessonIds, true);
         $currentLessonNumber = $currentLessonIndex !== false ? $currentLessonIndex + 1 : 1;
         $totalLessonCount = count($lesson_ids ?? []);
         $currentChapter = $chapters->firstWhere('id', $lesson->chapter_id);
@@ -2691,13 +2719,26 @@ if ($assign->questionBank->shuffle==1){
                                                         if ($singleLesson->is_assignment == 1 && !isModuleActive('Assignment')) {
                                                             continue;
                                                         }
+                                                        $sidebarLessonIndex = array_search((int) $singleLesson->id, $orderedLessonIds, true);
+                                                        $isLessonLocked = !empty($sequentialLearningEnabled)
+                                                            && $firstIncompleteLessonIndex !== null
+                                                            && $sidebarLessonIndex !== false
+                                                            && $sidebarLessonIndex > $firstIncompleteLessonIndex;
                                                     @endphp
                                                     <div class="single_play_list"
                                                          id="single_lesson_{{ $singleLesson->id }}">
-                                                        <a class="mupo-curriculum-lesson-link @if (showPicName(Request::url()) == $singleLesson->id) active @endif"
-                                                           data-lesson-id="{{ $singleLesson->id }}"
-                                                           @if(request()->route('lesson_id') == $singleLesson->id) aria-current="page" @endif
-                                                           href="{{ route('fullScreenView', [$course->id, $singleLesson->id]) }}">
+                                                        @if($isLessonLocked)
+                                                            <span class="mupo-curriculum-lesson-link is-locked"
+                                                                  data-lesson-id="{{ $singleLesson->id }}"
+                                                                  aria-disabled="true"
+                                                                  tabindex="-1"
+                                                                  title="Complete the current lesson to unlock this lesson">
+                                                        @else
+                                                            <a class="mupo-curriculum-lesson-link @if (showPicName(Request::url()) == $singleLesson->id) active @endif"
+                                                               data-lesson-id="{{ $singleLesson->id }}"
+                                                               @if(request()->route('lesson_id') == $singleLesson->id) aria-current="page" @endif
+                                                               href="{{ route('fullScreenView', [$course->id, $singleLesson->id]) }}">
+                                                        @endif
 
                                                             @if ($singleLesson->is_quiz == 1)
                                                                 <div class="course_play_name">
@@ -2718,6 +2759,11 @@ if ($assign->questionBank->shuffle==1){
                                                                         </span>
                                                                 </div>
                                                                 @endforeach
+                                                                @if($isLessonLocked)
+                                                                    <span class="course_play_duration nowrap mupo-lesson-lock">
+                                                                        <i class="fas fa-lock" aria-hidden="true"></i> Locked
+                                                                    </span>
+                                                                @endif
                                                             @else
                                                                 <div class="course_play_name">
                                                                     @if (request()->route('lesson_id') == $singleLesson->id)
@@ -2750,10 +2796,12 @@ if ($assign->questionBank->shuffle==1){
                                                                     <span>{{ $i }}.
                                                                     {{ $singleLesson->name }} </span>
                                                                 </div>
-                                                                <span
-                                                                    class="course_play_duration nowrap">{{ MinuteFormat($singleLesson->duration) }}</span>
+                                                                <span class="course_play_duration nowrap @if($isLessonLocked) mupo-lesson-lock @endif">
+                                                                    @if($isLessonLocked)<i class="fas fa-lock" aria-hidden="true"></i>@endif
+                                                                    {{ MinuteFormat($singleLesson->duration) }}
+                                                                </span>
                                                             @endif
-                                                        </a>
+                                                        @if($isLessonLocked)</span>@else</a>@endif
                                                     </div>
                                                     @php
                                                         $i++;
